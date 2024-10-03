@@ -1,35 +1,34 @@
 # Senai-Frequency-Control
 
-
 ## <span style="color: #8000FF;">Índice</span>
 
-- **<span style="color: #9A2EFE;">Introdução</span>**
+1. **<span style="color: #9A2EFE;">Introdução</span>**
+   - [Sobre a documentação](#sobre-a-documentação)
+   - [Problemática](#problemática)
+   - [Objetivos](#objetivos)
+   - [Justificativa](#justificativa)
 
-  - Sobre a documentação
-  - Problemática
-  - Objetivos
-  - Justificativa
+2. **<span style="color: #9A2EFE;">Metodologia</span>**
+   - [Ferramentas a serem utilizadas](#ferramentas-a-serem-utilizadas)
+   - [Linguagens de programação](#linguagens-de-programação)
+   - [Linguagens de marcação](#linguagens-de-marcação)
+   - [Linguagens de estilo](#linguagens-de-estilo)
+   - [Frameworks](#frameworks)
+   - [Banco de dados](#banco-de-dados)
+   - [Metodologia para desenvolvimento](#metodologia-para-desenvolvimento)
 
-- **<span style="color: #9A2EFE;">Metodologia</span>**
-  - Ferramentas a serem utilizadas
-  - Linguagens de programação
-  - Linguagens de marcação
-  - Linguagens de estilo
-  - Frameworks
-  - Banco de dados
-  - Metodologia para desenvolvimento
+3. **<span style="color: #9A2EFE;">Implementação</span>**
+   - [v0.0 - Configuração do ambiente de desenvolvimento](#v00---configuração-do-ambiente-de-desenvolvimento)
+   - [v0.1 - Criação do aplicativo](#v01---criação-do-aplicativo)
+   - [v0.2 - Criação das URLs e Views](#v02---criação-das-urls-e-views)
+   - [v1.0 - Início do desenvolvimento das funcionalidades](#v1.0---Início-do-desenvolvimento-das-páginas)
+   - [Temas claro e escuro](#temas-claro-e-escuro)
+   - [Elaboração das classes](#elaboração-das-classes)
+   - [Lógica de mostrar e esconder senha](#lógica-de-mostrar-e-esconder-senha)
 
-- **<span style="color: #9A2EFE;">Implementação<span>**
-  - v0.0 - Configuração do ambiente de desenvolvimento
-  - v0.1 - Criação do aplicativo
-  - v0.2 - Criação das URLs e Views
-  - v1.0 - Início do desenvolvimento das funcionalidades
-  - Temas claro e escuro
-  - Elaboração das classes
-  - Lógica de mostrar e esconder senha
+4. **<span style="color: #9A2EFE;">Manual do usuário</span>**
+   - [Iniciando](#iniciando)
 
-- **<span style="color: #9A2EFE;">Manual do usuário</span>**
-  - Iniciando
 ---
 
 ## <span style="color: #8000FF;">Introdução</span>
