@@ -31,18 +31,18 @@
 
 ---
 
-## <span style="color: #8000FF;">Introdução</span>
+## **<span style="color: #8000FF;">Introdução</span>**
 
-### <span style="color: #9A2EFE;">Sobre a documentação</span>
+### **<span style="color: #9A2EFE;">Sobre a documentação</span>**
 A presente documentação, realizada pelo grupo 03 do Curso Técnico de Desenvolvimento de Sistemas, da instituição SENAI Conde Alexandre Siciliano, da cidade de Jundiaí, visa explicar o funcionamento do Trabalho de Conclusão de Curso “Gestão de Frequência Automatizada: Simplificando a Rotina Administrativa”.
 
-### <span style="color: #9A2EFE;">Problemática</span>
+### **<span style="color: #9A2EFE;">Problemática</span>**
 Não há dúvidas de que o processo manual na averiguação de frequência dos alunos da instituição SENAI é um tanto cansativo, bem como um desperdício de tempo e esforço. Conforme alunos entram após o horário tolerável, o mesmo recebe um papel de autorização que deve ser assinado por um membro da gestão escolar, a fim de ser permitida a entrada do aluno em sua respectiva sala de aula. Ao entrar, deve-se entregar a autorização ao professor, que verificará a assinatura e, em seguida, guardará o papel.
 Levando em conta que uma quantidade considerável de alunos atrasam-se por dia, esse processo toma tempo e esforço dos profissionais envolvidos, bem como interfere no rendimento das aulas conforme o aluno causa a interrupção da explicação do instrutor para entregá-lo o papel.
 Não bastasse isso, o desperdício de papéis é outro fator a ser considerado, visto que após o uso, são guardados e, posteriormente, jogados fora.
 Os argumentos citados para essa problemática provam que a automação desse procedimento repetitivo é não só benéfica, como também imprescindível.
 
-### <span style="color: #9A2EFE;">Objetivos</span>
+### **<span style="color: #9A2EFE;">Objetivos</span>**
 O objetivo em solucionar este problema visa em automatizar os processos para o gerenciamento de atrasos e faltas de alunos, diminuindo assim o tempo gasto para gerenciá-los, reduzindo o esforço para o registro de falta ou presença, o consumo de papel que seriam gastos com a autorização para a entrada em sala de aula além de diminuir a interferência dos estudantes durante as orientações do instrutor.
 Ademais, no sistema, os coordenadores serão notificados caso o estudante atrasar três vezes ou mais, isto apenas caso a entrada seja superior a 10 minutos do horário da ingressão do aluno à instituição. Com isto, eles poderão tomar as devidas medidas necessárias para a resolução do problema com o aluno.
 Neste sistema, em cada sala de aula, constará uma lista dos alunos e o nome do responsável da turma, bem como a quantidade dos atrasos, faltas e frequências durante o semestre. Poderá ser gerado um relatório com uma visão geral dos atrasos e frequências durante o período de um ano do curso.
@@ -51,7 +51,7 @@ Como passo inicial para o desenvolvimento do projeto, a equipe teve como foco pe
 Além do objetivo principal de gerenciamento dos atrasos e faltas, foi implementada a lógica para a administração da frequência de alunos, utilizando dados de entrada e saída dos estudantes, estes que são capturados no momento em que sua carteirinha é lida pela catraca, para melhor visualização de seu desempenho de frequência escolar.
 Para a etapa de implementação, a primeira meta com maior importância era coletar os dados dos alunos como: nome, turma, id da carteirinha, que estivessem presentes em um documento de pertence da gestão escolar, para que fosse possível relacioná-los com os dados da catraca da instituição, que há informações como o id da matrícula do aluno. Todo este processo de maneira automatizada para que os dados fossem armazená-los em um banco de dados para serem visualizados de forma simplificada ao usuário diretamente no site. ****Todavia, devido às restrições impostas pela Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018), que tem como objetivo proteger os direitos fundamentais de liberdade, privacidade e o livre desenvolvimento da personalidade da pessoa natural, não foi possível o acesso a essas informações, impactando assim, com o cronograma dos desenvolvedores, tendo sido necessário o replanejamento do roteiro de desenvolvimento. Outro alvo que foi planejado para ser bem desenvolvido, foi colocar em prática as regras de negócio relacionadas à frequência.
 
-### <span style="color: #9A2EFE;">Justificativa</span>
+### **<span style="color: #9A2EFE;">Justificativa</span>**
 A falta de controle da frequência dos alunos tem sido uma preocupação recorrente relatada por professores e coordenadores da instituição SENAI. Muitos alunos atrasados entram no meio das aulas com a autorização da coordenação nas mãos, interrompendo as aulas e causando transtornos. Este problema não só prejudica a concentração e o andamento das aulas, mas também gera uma carga administrativa excessiva para os coordenadores, que precisam lidar com uma grande quantidade de papéis e autorizações manuais.
 A situação atual, onde alunos atrasados precisam de autorização manual para entrar na sala, provoca múltiplos problemas:
 1. **<span style="color: #4682B4;">Interrupção das Aulas</span>**: Cada vez que um aluno entra na sala atrasado, a aula é interrompida, afetando a concentração de todos e reduzindo o tempo útil de ensino;
@@ -61,12 +61,12 @@ A situação atual, onde alunos atrasados precisam de autorização manual para 
 5. **<span style="color: #4682B4;">Comunicação Ineficiente</span>**: Os responsáveis pelos alunos não são prontamente informados sobre a frequência de atrasos, dificultando o acompanhamento e a intervenção necessária para corrigir o comportamento dos estudantes.
 Este sistema permitirá que a gestão monitore os atrasos e a frequência dos alunos de maneira mais eficaz, diminuindo esforços manuais e simplificando a rotina administrativa. A implementação dessas estratégias melhorará significativamente a comunicação interna e a solução de problemas de forma eficiente.
 
-### <span style="color: #9A2EFE;">Observação</span>
+### **<span style="color: #9A2EFE;">Observação</span>**
 Durante as primeiras etapas de desenvolvimento, os desenvolvedores passaram por uma mudança de planos inesperada e fora de seu controle, vinda de um esclarecimento sobre o projeto com a Analista de Qualidade de Vida. O referido processo evidenciou as limitações organizacionais concernentes ao acesso e processamento dos dados referentes à movimentação dos estudantes no sistema de controle de acesso. Consequentemente, houve a reposição estratégica para dar continuidade ao projeto, fundamentando a abordagem nas modificações identificadas.
 
 ---
 
-## <span style="color: #8000FF;">Metodologia</span>
+## **<span style="color: #8000FF;">Metodologia</span>**
 
 ### **<span style="color: #9A2EFE;">Ferramentas utilizadas</span>**
 - **<span style="color: #4682B4;">Trello:</span>** É um aplicativo de gerenciamento de projeto baseado na web;
@@ -187,9 +187,236 @@ Traduzido do inglês, Scrum é uma estrutura ágil de colaboração em equipe co
 
 ---
 
-## <span style="color: #8000FF;">Implementação</span>
+## **<span style="color: #9A2EFE;">Levantamento de Requisitos</span>**
 
-### <span style="color: #AC58FA;">**v0.0 - Configuração do Ambiente de Desenvolvimento</span>**
+### **<span style="color: #AC58FA;">Requisitos Funcionais</span>**
+- **<span style="color: #8000FF;"> [RF001] - Acesso ao software onde constam os dados de cada catraca**</span> 
+    (informações de saída e entrada de alunos, data, horário e identificador único da carteirinha).
+    - **Prioridade:** Alta.
+    - **Descrição:** Permitir que os usuários autorizados acessem os dados das catracas, que registram as entradas e saídas dos alunos, com informações como data, horário e identificador único da carteirinha.
+    - **Regras de Negócio:** O acesso deve ser restrito a usuários autorizados.
+    - **Restrições Tecnológicas:** Deve ser compatível com o sistema de catracas existente.
+    
+- **<span style="color: #8000FF;">[RF002] - Exportação automática dos dados em horários determinados e unificação em um único banco de dados.**</span>
+    - **Prioridade:** Alta.
+    - **Descrição:** O sistema deve exportar automaticamente os dados das catracas em horários pré-definidos e consolidá-los em um banco de dados.
+    - **Regras de Negócio:** A exportação deve ocorrer sem intervenção manual.
+    - **Restrições Tecnológicas:** O sistema deve suportar agendamento de tarefas automáticas.
+    
+- **<span style="color: #8000FF;"> [RF003] - (Requisito descontinuado em 10/09) Acesso às informações da carteirinha de cada aluno para verificação de presença.** </span>
+    - **Prioridade:** Alta.
+    - **Descrição:** Permitir que os dados das carteirinhas dos alunos sejam utilizados
+    para verificar a presença com base nos registros das catracas.
+    - **Regras de Negócio:** A verificação deve ser precisa e em tempo real.
+    - **Restrições Tecnológicas:** Integração com o sistema de gestão de carteirinhas.
+
+- **<span style="color: #8000FF;">[RF004] - Notificação à gestão em caso de aluno com mais de 3 atrasos.**</span>
+    - **Prioridade:** Alta.
+    - **Descrição:** O sistema deve enviar notificações automáticas à gestão se algum aluno acumular mais de três atrasos.
+    - **Regras de Negócio:** A notificação deve ser enviada de forma automática e
+    imediata.
+    - **Restrições Tecnológicas:** O sistema deve ser capaz de gerar e enviar
+    notificações automáticas.
+
+- **<span style="color: #8000FF;"> [RF005] - Geração de relatórios sobre atrasos.**</span>
+    - **Prioridade:** Média.
+    - **Descrição:** O sistema deve gerar relatórios que indiquem os alunos com mais e menos atrasos e faltas, além da porcentagem em um período determinado.
+    - **Regras de Negócio:** Os relatórios devem ser precisos e acessíveis à gestão.
+    - **Restrições Tecnológicas:** Deve permitir a exportação dos relatórios em formato
+    PDF.
+    
+- **<span style="color: #8000FF;"> [RF006] - Ferramenta de busca de salas de aula e alunos.**</span>
+    - **Prioridade:** Média.
+    - **Descrição:** O sistema deve permitir a busca eficiente por salas de aula e alunos, exibindo dados relevantes como nome do estudante, instrutor responsável e quantidade de atrasos.
+    - **Regras de Negócio:** A ferramenta de busca deve ser rápida e responsiva.
+    - **Restrições Tecnológicas:** Integração com o banco de dados.
+    
+- **<span style="color: #8000FF;"> [RF007] - Lógica de autenticação e permissões.**</span>
+    - **Prioridade:** Alta.
+    - **Descrição:** Implementar uma lógica robusta de autenticação e autorização, permitindo que coordenadores adicionem, atualizem e excluam salas de aula e alunos.
+    - **Regras de Negócio:** Apenas usuários autorizados podem realizar alterações.
+    - **Restrições Tecnológicas:** Deve usar protocolos de segurança modernos.
+    
+- **<span style="color: #8000FF;"> [RF008] - Acesso às informações da carteirinha dos alunos do Grupo 03 (desenvolvedores) para demonstração de verificação de presença.**</span>
+    - **Prioridade:** Alta
+    - **Descrição:** Permitir que os dados das carteirinhas dos alunos sejam utilizados para verificar a presença com base nos registros das catracas.
+    - **Regras de Negócio:** A verificação deve ser precisa e em tempo real.
+    - **Restrições Tecnológicas:** Integração com o sistema de gestão de carteirinhas.
+    
+
+### **<span style="color: #9A2EFE;">Requisitos Não Funcionais</span>**
+
+- **<span style="color: #8000FF;"> [RNF001] - Acesso restrito à rede ADM (catraca).**</span>
+    - **Prioridade:** Alta
+    - **Descrição:** O sistema deve ser acessível apenas pela rede interna da instituição para garantir segurança e integridade dos dados.
+    - **Regras de Negócio:** O acesso fora da rede ADM deve ser bloqueado.
+    - **Restrições Tecnológicas:** Implementação de firewall e restrições de rede.
+
+- **<span style="color: #8000FF;"> [RNF002] - Segurança contra invasões e vazamento de dados.**</span>
+    - **Prioridade:** Alta
+    - **Descrição:** Implementar medidas de segurança avançadas para proteger o sistema contra-ataques e vazamentos de dados.
+    - **Regras de Negócio:** A segurança deve ser auditada regularmente.
+    - **Restrições Tecnológicas:** Implementação de criptografia de dados e monitoramento de segurança.
+
+- **<span style="color: #8000FF;"> [RNF003] - Design interativo e organizado.**</span>
+    - **Prioridade:** Média
+    - **Descrição:** O sistema deve ter uma interface amigável, com design interativo e bem-organizado, facilitando a navegação e uso pelos usuários.
+    - **Regras de Negócio:** O design deve seguir as diretrizes de usabilidade.
+    - **Restrições Tecnológicas:** Compatibilidade com diferentes dispositivos e navegadores.
+    
+- **<span style="color: #8000FF;"> [RNF004] - Código comentado e documentação.**</span>
+    - Prioridade: Média
+    - Descrição: O código do sistema deve ser bem comentado e acompanhado de documentação clara, facilitando a manutenção e futuras atualizações.
+    - Regras de Negócio: A documentação deve ser mantida atualizada com as mudanças no sistema.
+    - Restrições Tecnológicas: A documentação deve ser acessível a todos os
+    membros da equipe de desenvolvimento.
+
+### <span style="color: #9A2EFE;">**Diagrama de Caso de Uso**</span>
+![alt text](img/Diagrama_de_caso_de_uso.webp)
+No Diagrama de Caso de Uso apresentado, são representadas as interações entre diferentes atores (usuários do sistema) e as funcionalidades disponíveis no projeto desenvolvido, destacando a relação entre ações e dependências. A seguir, está uma descrição detalhada de cada elemento.
+
+### <span style="color: #AC58FA;">**Atores**</span>
+Os atores são os usuários que interagem com o sistema, podendo ser uma pessoa, uma organização ou um sistema externo que interage com seu aplicativo ou sistema. Eles devem ser objetos externos que produzam ou consumam dados. A seguir, está uma descrição dos atores presentes no Modelo de Caso de Uso.
+- **Coordenador:** Responsável por gerenciar usuários e realizar atividades relacionadas à frequência e atrasos dos alunos.
+- **Administrador:** Atua na administração geral do sistema, incluindo a criação e manutenção de usuários, cursos e alunos.
+- **Catraca (Sistema Automatizado):** Representa o sistema que fornece registros de entrada e saída dos alunos. Integra ferramentas como Selenium e Pandas para automação de processos.
+
+### <span style="color: #AC58FA;">**Relacionamentos**</span>
+Em um Diagrama de Casos de Uso, tanto a inclusão quanto a extensão e associação, são relacionamentos que descrevem como diferentes casos de uso interagem ou se relacionam entre si. A seguir, está a explicação de como cada interação funciona:
+- **Inclusão (include):** a inclusão é usada para mostrar que um caso de uso sempre incorpora ou "inclui" o comportamento de outro caso de uso. É como se o caso de uso principal delegasse parte de seu comportamento a um caso de uso incluído.
+- **Extensão (extend):** a extensão é usada para mostrar que um caso de uso estende o comportamento de outro caso de uso sob certas condições. Isso significa que o comportamento do caso de uso original pode ser expandido por outro caso de uso opcional, dependendo de uma condição específica.
+- **Associação:** uma associação é um relacionamento entre um ator e um caso de uso de negócios. Indica que um ator pode usar a funcionalidade do sistema de negócios. Ela é uma é representada como uma linha que liga os elementos a serem relacionados.
+
+### <span style="color: #AC58FA;">**Casos de Uso**</span>
+Os casos de uso, sendo apresentados de forma visual pelo formato oval na horizontal, representam os diferentes usos que um usuário pode ter, ou seja, são as funcionalidades do sistema. A seguir, será fornecida uma explicação de cada caso de uso, citando também quais usuários podem acessá-los:
+
+### <span style="color: #AC58FA;">**Casos de Uso do Coordenador e Administrador:**</span>
+- **Login:** permite que tanto o coordenador quanto o administrador acessem o sistema. O caso de uso possui uma relação de inclusão com o caso de uso “verificar a existência do usuário”, onde as credenciais fornecidas são verificadas. Se as credenciais corresponderem a um usuário cadastrado, o acesso é concedido; caso contrário, uma mensagem de erro é exibida.
+- **Criar, Editar e Excluir Curso ou Aluno:** tanto o coordenador quanto o administrador podem adicionar novos cursos e alunos ao sistema. Contudo, as funcionalidades de edição e exclusão é exclusiva ao administrador, podendo apenas ele, gerenciar tais funções, a fim de garantir um maior controle sobre as modificações.
+Além disso vale destacar que, para executar os processos mencionados, é realizada uma verificação prévia da existência do curso ou aluno em questão. Essa validação é feita pelos casos de uso “verificar se o curso já existe” e “verificar se o aluno já existe”.
+- **Visualizar Cursos:** tanto o coordenador quanto o administrador podem visualizar uma lista completa de todos os cursos cadastrados, contendo informações de nome, código da turma e responsável. Esse caso de uso, tem relações de extensão com os casos de visualização dos alunos, onde é apresentada as informações de cada um, e o de filtragem de resultados, sendo uma ferramenta de busca.
+- **Filtrar Resultados:** permite que tanto o coordenador quanto o administrador, filtrem a visualização de informações, sendo uma ferramenta de busca para pesquisar um determinado curso.
+- **Visualizar Informações dos Alunos:** apresenta ao coordenador uma lista detalhada de informações sobre os alunos, incluindo frequência, faltas e atrasos registrados, com base no caso de uso “calcular frequência, faltas e atrasos do aluno” e “filtrar os alunos por curso”, tendo uma relação de inclusão entre ambos.
+- **Calcular Frequência, Faltas e Atrasos:** é uma consulta no banco de dados para efetuar os cálculos relacionados ao desempenho de frequência dos alunos, baseando-se nos registros de entrada e saída e nas regras definidas para atrasos e faltas. Tal caso de uso tem um relacionamento do tipo extensão com o caso de uso de “notificações”, que notifica o coordenador e o administrador caso um aluno exceda a quantidade limite de atrasos.
+Além disso, ele tem uma relação de inclusão com os casos de uso de “visualização das informações dos alunos” e de “geração de relatório”, pois ambas as funcionalidades exigem o cálculo do desempenho acadêmico do estudante.
+- **Notificação:** envia alertas automáticos tanto ao coordenador quanto ao administrador quando um aluno excede o limite de atrasos. Esse recurso é um caso de uso opcional, sendo o relacionamento extensão, acionado em situações específicas.
+- **Filtrar os Alunos por Curso:** é uma funcionalidade cuja responsabilidade é de “filtrar os alunos por turma”.
+- **Gerar Relatórios:** tanto o coordenador quanto o administrador podem gerar documentos em formato PDF com informações sobre frequência, atrasos e faltas dos alunos com pior desempenho. Os relatórios são uma ferramenta essencial para as análises.
+- **Criar, Editar e Excluir Usuário:** somente o administrador possui acesso a essas funcionalidades, que ao efetuar alguma, ocorre a verificação se o usuário já existe ou não.
+Ademais, é importante destacar que a edição de informações só pode ser realizada através da rota “/admin”, pois o sistema não conta com uma lógica específica para permitir esse tipo de modificação. Além disso, para todos os casos de uso explicados anteriormente, é necessária a autenticação do usuário no sistema.
+
+### <span style="color: #AC58FA;">**Casos de Uso do Sistema Automatizado (Catraca):**</span>
+- **Criação de Registro de Entrada e Saída:** a integração com a catraca permite capturar registros de entrada e saída de alunos de forma automática. Isso inclui o uso de ferramentas como Selenium e PyAutoGUI para processar os dados rapidamente.
+- **Validação de Registros:** antes de armazenar as informações capturadas, o sistema valida os registros para garantir que estão completos e corretos. Essa validação previne erros que possam impactar relatórios ou cálculos. Além do mais, esse caso de uso está incluído ao de criação de registro de entrada e saída do estudante.
+
+Com o detalhamento do Diagrama de Caso de Uso apresentado, torna-se mais fácil a compreensão de como o sistema funciona de forma geral, proporcionando uma visão mais clara de suas funcionalidades e interações.
+
+---
+
+## <span style="color: #9A2EFE;">**Design do Sistema**</span>
+### <span style="color: #AC58FA;">**Casos de Uso do Sistema Automatizado (Catraca):**</span>
+A arquitetura MTV significa Model-Template-View, e é um padrão de design de software para projetos que utilizam o framework Django. A seguir, o diagrama representa visualmente o funcionamento da arquitetura deste framework:
+![alt text](img/Design%20do%20sistema.png)
+A seguir, está uma descrição de cada camada que estão presentes na arquitetura MTV:
+- **Model:** responsável pelo mapeamento do banco de dados, que possui uma comunicação direta com ele. As Models estão contidas no arquivo *models.py*.
+- **Template:** pasta que conterá os arquivos .html para as páginas do sistema. Receberá das Views os dados que aparecerão no front-end do sistema.
+- **View:** onde é feita a lógica de negócio. Receberá os dados do app da Model e mandará para os Templates. As Views são as funções presentes no arquivo *views.py*.
+As setas sólidas representam uma relação direta entre os componentes do diagrama, enquanto a seta pontilhada representa uma relação menos direta. Duas setas presentes no diagrama possuem duas pontas, o que significa uma comunicação entre os dois componentes.
+
+### <span style="color: #AC58FA;">**Diagrama de Classes**</span>
+Um Diagrama de Classes é uma representação gráfica amplamente utilizada na engenharia de software para descrever a estrutura estática de um sistema, representando suas classes, atributos, métodos e os relacionamentos entre elas. Este tipo de diagrama segue o padrão UML (Unified Modeling Language ou Linguagem de Modelagem Unificada), que é amplamente utilizado para a padronização de modelagem e documentação de sistemas de software. A seguir, o diagrama representa visualmente o funcionamento da estrutura do sistema:
+![alt text](img/Diagraama%20de%20Classes.png)
+No Diagrama de Classes apresentado, estão representadas as entidades fundamentais do sistema, destacando seus atributos, métodos e os tipos de relacionamento entre as classes, como associação, agregação, composição e herança.
+As classes são os elementos básicos de um Diagrama de Classes, representando abstrações de objetos do mundo real ou conceitos relacionados ao sistema. Cada classe é descrita com seus atributos (dados que ela armazena) e métodos (operações que ela realiza). A seguir, está uma descrição das classes presentes no diagrama:
+- **Usuario:** representa os usuários que possuem acesso ao sistema, como coordenadores e administradores. Inclui atributos como nome, sobrenome, username e cargo.
+- **Aluno:** representa os estudantes registrados no sistema. Seus atributos incluem informações como nome, id_carteirinha e id_curso.
+- **Frequencia:** representa a classe responsável por armazenar os registros vindos da catraca, com atributos como id, id_aluno, data, hora e identificador (1 ou 2, entrada ou saída, respectivamente).
+- **Curso:** representa os cursos disponíveis na instituição. Contém atributos como turma, nome_curso, horario_entrada, horario_saida, carga_horaria, responsavel, dias_funcionamento, data_inicio, data_fim, carga_horaria_intervalo e dias_letivos.
+Os relacionamentos entre classes em um Diagrama de Classes são fundamentais para entender a estrutura e as interações do sistema. Os principais tipos de relacionamentos presentes incluem:
+- **Relacionamento entre Aluno e Curso:** cada aluno está vinculado a apenas um curso, utilizando a chave estrangeira id_curso na classe Aluno para referenciar a classe Curso. Por outro lado, um curso pode estar associado a vários alunos (0..* para Aluno e 1 para Curso).
+- **Relacionamento entre Aluno e Frequência:** um aluno pode ter vários registros de frequência, mas cada registro está associado a um único aluno, representado pela chave estrangeira id_aluno na classe Frequência (1 para Aluno e 0..* para Frequência).
+
+## <span style="color: #9A2EFE;">**Páginas**</span>
+### <span style="color: #AC58FA;">**Página Inicial**</span>
+A página inicial conta com uma barra de navegação localizada no topo, onde a logo do SENAI está posicionada no lado esquerdo e, no lado direito, encontra-se um componente padrão: um botão para troca de tema, permitindo a alternância da coloração da página entre os temas claro e escuro. No conteúdo principal, há um texto com o título da página e um botão que redireciona o usuário para a página de Login.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/home- white.webp" alt="Homepage - white" width="45%">
+  <img src="img/paginas/home- dark.webp" alt="Homepage - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Página de Login**</span>
+Após o redirecionamento para a página de Login, o usuário deve inserir seus dados, como username e senha. Ao lado do campo de senha, há um ícone que permite exibir ou ocultar a senha, alterando sua aparência de acordo com a ação: um olho riscado quando a senha está visível e um olho aberto quando ela está oculta. Caso os dados sejam inseridos corretamente e o botão de Login seja clicado, o usuário será redirecionado para a página de Cursos. No entanto, se houver erro nos dados fornecidos, será exibida a mensagem: “Nome de usuário ou senha incorretos”.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/login- white.webp" alt="Login - white" width="45%">
+  <img src="img/paginas/login- dark.webp" alt="Login - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Página de Cursos**</span>
+Após a realização do Login, o usuário é redirecionado para a página de Cursos. A barra de navegação, presente em todas as páginas, passa a ser exibida. Após o Login, uma mensagem no formato “Olá, usuário”, onde o nome do usuário correspondente é mostrado. Além disso, é adicionado um novo componente que abre um Offcanvas, um elemento do Bootstrap que exibe uma barra lateral. Essa barra contém opções para Logout (saída), redirecionamento para as página de Cadastro, Criar Alunos, Criar Cursos e de Importação de Frequência. Os componentes de Cadastro, Aluno, Curso e Frequência são exibidos de forma exclusiva para o Administrador.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/offcanvas- white.webp" alt="Offcanvas - white" width="45%">
+  <img src="img/paginas/offcanvas- dark.webp" alt="Offcanvas - dark" width="45%">
+</p>
+A interface da página de Cursos apresenta, de forma centralizada, um texto com o nome da página. Logo abaixo, são exibidos ícones alinhados da esquerda para a direita: relatórios, que redireciona o usuário para a página de Relatórios; notificações, que leva à página de Notificações; e uma lupa de pesquisa, que é exibida uma barra onde o usuário pode realizar busca dos cursos. Para que a pesquisa funcione corretamente, é necessário digitar o nome do curso com as devidas acentuações. Após clicar no botão de pesquisa, serão exibidos apenas os cursos correspondentes ao nome buscado.
+No conteúdo principal da página, os cursos são listados em linhas, apresentando as seguintes informações de forma organizada: o nome do curso, o código (identificador único) da turma e o responsável pela turma.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/cursos- white.webp" alt="Cursos - white" width="45%">
+  <img src="img/paginas/cursos- dark.webp" alt="Cursos - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Página de Cadastro**</span>
+No Offcanvas, ao clicar no componente de Cadastro, o usuário Administrador é redirecionado para a página de Cadastro. Na parte superior da página, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
+O conteúdo principal exibe um formulário destinado ao cadastro de um novo usuário. Esse formulário solicita as seguintes informações: nome, sobrenome, nome de usuário e senha.
+É importante ressaltar que o novo usuário é salvo automaticamente como Coordenador ao concluir o cadastro de novo usuário.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/cadastro- white.webp" alt="cadastro - white" width="45%">
+  <img src="img/paginas/cadastro- dark.webp" alt="cadastro - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Página de Relátorios**</span>
+Na página de Cursos, ao clicar no ícone de relatórios, o usuário é redirecionado para a página de Relatórios. No topo, no canto esquerdo, há um botão que permite retornar à página anterior (página de Cursos).
+No centro da página, o conteúdo apresenta uma imagem ilustrativa e dois botões dispostos um abaixo do outro:
+- O primeiro botão exibe o texto: “Gerar relatório em PDF”, ao clicar, será feito o *download* de um documento contendo tabelas com os dados dos alunos com mais atrasos e dos alunos com mais faltas.
+- O segundo botão exibe uma modal na tela, ao clicar, abre-se uma *modal* que contém um texto curto informando ao usuário o que será feito ao clicar no botão acima e o objetivo para qual o documento baixado será utilizado.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/relatorio- white.webp" alt="relatorio - white" width="45%">
+  <img src="img/paginas/relatorio- dark.webp" alt="relatorio - dark" width="45%">
+</p>
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/sobre- white.webp" alt="sobre - white" width="45%">
+  <img src="img/paginas/sobre- dark.webp" alt="sobre - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Página de Notificações**</span>
+Na página de Cursos, ao clicar no ícone de notificações, o usuário é redirecionado para a página de Notificações. No canto superior esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
+No centro do conteúdo, a página exibe o título Notificações e, logo abaixo, uma lista dos alunos com 3 ou mais atrasos. As informações apresentadas incluem: o nome do aluno, a quantidade de atrasos e sua turma correspondente. Caso nenhum aluno atenda a esse critério, a lista permanecerá vazia.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/notificacao- white.webp" alt="notificacao - white" width="45%">
+  <img src="img/paginas/notificacao- dark.webp" alt="notificacao - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Páginas de Adição de Alunos, Cursos e Frequência**</span>
+Todas as páginas de adição seguem o mesmo layout, proporcionando uma experiência de usuário mais intuitiva. Nessa interface, o usuário pode carregar arquivos nos formatos apropriados para o sistema e realizar operações de cadastro ou atualização de dados. A página de criação de frequência foi desenvolvida especificamente para inserir dados fictícios dos alunos.
+- **Botão "Escolher arquivo"**: permite selecionar um arquivo armazenado no dispositivo.
+- **Indicação do nome do arquivo**: após a seleção, o nome do arquivo será exibido ao lado do botão.
+- **Botão "Enviar"**: submete o arquivo selecionado para processamento.
+Para o cadastro de alunos e cursos, o arquivo deve ser no formato CSV, enquanto para a criação de frequência, o arquivo deve ser no formato TXT.
+Em conclusão, este manual visa facilitar o uso do sistema, proporcionando uma navegação simples e eficiente para o usuário. Com as funcionalidades de upload de arquivos, o processo de cadastro e atualização de dados se torna rápido e prático. Caso surjam dúvidas ou dificuldades, a equipe de suporte estará disponível para garantir que sua experiência seja a mais tranquila possível.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/notificacao- white.webp" alt="notificacao - white" width="45%">
+  <img src="img/paginas/notificacao- dark.webp" alt="notificacao - dark" width="45%">
+</p>
+
+
+
+
+
+
+
+
+## <span style="color: #9A2EFE;">**Arquitetura Model-Template-View**</span>
+
+### <span style="color: #AC58FA;">**v0.0 - Configuração do Ambiente de Desenvolvimento**</span>
 A preparação do ambiente de desenvolvimento é iniciada com a criação do ambiente virtual (*venv*), instalando as dependências Django e Pillow e criando o projeto. Em seguida, fez-se a instalação do PostgreSQL localmente, definindo-o como banco de dados do projeto, através dos seguintes passos:
 Primeiramente, foi consultada a documentação oficial do [PostgreSQL](https://www.postgresql.org/download/) e, em seguida, para a página do instalador [EDB](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) na sessão de downloads, baixando a versão 16.4 para arquitetura Windows x86-64. Posteriormente, iniciou-se a pré-instalação e, quando solicitado para escolher os componentes, foi desmarcada a opção *Stack Builder*.
 Quando necessário, foi inserida a senha para o super usuário e foram aceitas as configurações padrão do instalador. Após o término da instalação, deu-se início à configuração do servidor.
