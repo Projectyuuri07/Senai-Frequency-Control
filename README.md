@@ -37,29 +37,26 @@
 A presente documentação, realizada pelo grupo 03 do Curso Técnico de Desenvolvimento de Sistemas, da instituição SENAI Conde Alexandre Siciliano, da cidade de Jundiaí, visa explicar o funcionamento do Trabalho de Conclusão de Curso “Gestão de Frequência Automatizada: Simplificando a Rotina Administrativa”.
 
 ### **<span style="color: #9A2EFE;">Problemática</span>**
-Não há dúvidas de que o processo manual na averiguação de frequência dos alunos da instituição SENAI é um tanto cansativo, bem como um desperdício de tempo e esforço. Conforme alunos entram após o horário tolerável, o mesmo recebe um papel de autorização que deve ser assinado por um membro da gestão escolar, a fim de ser permitida a entrada do aluno em sua respectiva sala de aula. Ao entrar, deve-se entregar a autorização ao professor, que verificará a assinatura e, em seguida, guardará o papel.
-Levando em conta que uma quantidade considerável de alunos atrasam-se por dia, esse processo toma tempo e esforço dos profissionais envolvidos, bem como interfere no rendimento das aulas conforme o aluno causa a interrupção da explicação do instrutor para entregá-lo o papel.
-Não bastasse isso, o desperdício de papéis é outro fator a ser considerado, visto que após o uso, são guardados e, posteriormente, jogados fora.
-Os argumentos citados para essa problemática provam que a automação desse procedimento repetitivo é não só benéfica, como também imprescindível.
+No cenário atual da instituição SENAI Conde Alexandre Siciliano, por exemplo, a gestão dos atrasos dos alunos é, sem dúvida, exaustivo e representa um desperdício de tempo e esforço devido a processos manuais em sua averiguação. Atualmente, quando um aluno chega após o horário tolerável, recebe um papel de autorização, que deve ser assinado por um membro da gestão escolar para permitir sua entrada em sala. Ao adentrar, o aluno entrega o papel ao professor, que o armazena por um tempo.
+A automação de processos consiste em realizar ou apoiar um fluxo de tarefas cotidianas por meio de recursos tecnológicos. Com isso, a implantação de ferramentas automatizadas nas escolas vai além de uma simples modernização, pois representa uma evolução da própria dinâmica educacional e administrativa, permitindo que coordenadores, professores e alunos estejam integrados em um sistema mais ágil e eficiente.
 
 ### **<span style="color: #9A2EFE;">Objetivos</span>**
-O objetivo em solucionar este problema visa em automatizar os processos para o gerenciamento de atrasos e faltas de alunos, diminuindo assim o tempo gasto para gerenciá-los, reduzindo o esforço para o registro de falta ou presença, o consumo de papel que seriam gastos com a autorização para a entrada em sala de aula além de diminuir a interferência dos estudantes durante as orientações do instrutor.
-Ademais, no sistema, os coordenadores serão notificados caso o estudante atrasar três vezes ou mais, isto apenas caso a entrada seja superior a 10 minutos do horário da ingressão do aluno à instituição. Com isto, eles poderão tomar as devidas medidas necessárias para a resolução do problema com o aluno.
-Neste sistema, em cada sala de aula, constará uma lista dos alunos e o nome do responsável da turma, bem como a quantidade dos atrasos, faltas e frequências durante o semestre. Poderá ser gerado um relatório com uma visão geral dos atrasos e frequências durante o período de um ano do curso.
-Por fim, consta no sistema uma ferramenta de busca para a pesquisa de salas de **aula e de alunos**, facilitando o acesso rápido e eficiente às informações necessárias para a gestão escolar.
-Como passo inicial para o desenvolvimento do projeto, a equipe teve como foco pesquisas relacionadas ao tema, como a geração de relatórios, cálculo de frequência dos alunos, integração do sistema com a catraca, para elaborar as regras de negócio e levantamento de requisitos para que assim, posteriormente, poderíamos desenvolver a etapa de design e desempenho com maior segurança.
-Além do objetivo principal de gerenciamento dos atrasos e faltas, foi implementada a lógica para a administração da frequência de alunos, utilizando dados de entrada e saída dos estudantes, estes que são capturados no momento em que sua carteirinha é lida pela catraca, para melhor visualização de seu desempenho de frequência escolar.
-Para a etapa de implementação, a primeira meta com maior importância era coletar os dados dos alunos como: nome, turma, id da carteirinha, que estivessem presentes em um documento de pertence da gestão escolar, para que fosse possível relacioná-los com os dados da catraca da instituição, que há informações como o id da matrícula do aluno. Todo este processo de maneira automatizada para que os dados fossem armazená-los em um banco de dados para serem visualizados de forma simplificada ao usuário diretamente no site. ****Todavia, devido às restrições impostas pela Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018), que tem como objetivo proteger os direitos fundamentais de liberdade, privacidade e o livre desenvolvimento da personalidade da pessoa natural, não foi possível o acesso a essas informações, impactando assim, com o cronograma dos desenvolvedores, tendo sido necessário o replanejamento do roteiro de desenvolvimento. Outro alvo que foi planejado para ser bem desenvolvido, foi colocar em prática as regras de negócio relacionadas à frequência.
+**Gerais**
+
+Diante desses pontos, a automação desse processo não é apenas benéfica, mas necessária. O objetivo é automatizar o gerenciamento dos atrasos, reduzindo o tempo gasto pelos profissionais da instituição.
+Ademais, o sistema notificará de forma automática os coordenadores após um estudante acumular três atrasos superiores a 10 minutos do horário da ingressão do aluno à instituição, permitindo que intervenham e tomem as medidas necessárias.
+
+**Específicos**
+
+O primeiro passo para o desenvolvimento do projeto será focar em pesquisas relacionadas à geração de relatórios, integração do sistema com a catraca e levantamento de requisitos de modo a desenvolver a etapa de design com segurança e clareza. Além do gerenciamento de atrasos, a plataforma incluirá uma lógica para controlar a frequência dos alunos, utilizando dados de entrada e saída para fornecer uma visão mais precisa do desempenho acadêmico.
+Para a etapa de implementação, a meta principal será automatizar a coleta de dados da catraca e armazená-los no banco de dados, exibindo-os de forma visual e simplificada para o usuário. Todavia, devido às restrições impostas pela Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018), que tem como objetivo proteger os direitos fundamentais de liberdade, privacidade e o livre desenvolvimento da personalidade da pessoa natural, não foi possível o acesso a essas informações, impactando assim, com o cronograma dos desenvolvedores, tendo sido necessário o replanejamento do roteiro de desenvolvimento. Outro alvo que se planeja desenvolver com maestria é colocar em prática as regras de negócio relacionadas à frequência, sendo a segunda maior prioridade do projeto.
 
 ### **<span style="color: #9A2EFE;">Justificativa</span>**
-A falta de controle da frequência dos alunos tem sido uma preocupação recorrente relatada por professores e coordenadores da instituição SENAI. Muitos alunos atrasados entram no meio das aulas com a autorização da coordenação nas mãos, interrompendo as aulas e causando transtornos. Este problema não só prejudica a concentração e o andamento das aulas, mas também gera uma carga administrativa excessiva para os coordenadores, que precisam lidar com uma grande quantidade de papéis e autorizações manuais.
-A situação atual, onde alunos atrasados precisam de autorização manual para entrar na sala, provoca múltiplos problemas:
-1. **<span style="color: #4682B4;">Interrupção das Aulas</span>**: Cada vez que um aluno entra na sala atrasado, a aula é interrompida, afetando a concentração de todos e reduzindo o tempo útil de ensino;
-2. **<span style="color: #4682B4;">Carga Administrativa</span>**: Coordenadores gastam um tempo significativo tendo que assinar autorizações para a entrada de alunos atrasados, tempo este que poderia ser dedicado a outras tarefas mais produtivas;
-3. **<span style="color: #4682B4;">3. Falta de Disciplina</span>**: A ausência de um sistema de controle eficaz incentiva a falta de disciplina entre os alunos, que não enfrentam consequências significativas por seus atrasos frequentes.
-4. **<span style="color: #4682B4;">Dificuldade de Monitoramento</span>**: Professores e coordenadores têm dificuldade em monitorar e registrar manualmente todas as ocorrências de atraso e faltas, o que pode levar a uma subestimação do problema e à falta de ações corretivas.
-5. **<span style="color: #4682B4;">Comunicação Ineficiente</span>**: Os responsáveis pelos alunos não são prontamente informados sobre a frequência de atrasos, dificultando o acompanhamento e a intervenção necessária para corrigir o comportamento dos estudantes.
-Este sistema permitirá que a gestão monitore os atrasos e a frequência dos alunos de maneira mais eficaz, diminuindo esforços manuais e simplificando a rotina administrativa. A implementação dessas estratégias melhorará significativamente a comunicação interna e a solução de problemas de forma eficiente.
+A falta de controle da frequência dos alunos tem sido uma preocupação recorrente relatada por professores e coordenadores do SENAI. Muitos alunos chegam atrasados e entram no meio das aulas com um papel assinado pela coordenação, interrompendo as aulas e causando transtornos, sendo um problema que não só prejudica a concentração dos estudantes e o andamento das aulas, como também gera uma carga administrativa excessiva para os coordenadores, que precisam lidar com uma grande quantidade de papéis e autorizações manuais.
+
+Ademais, as consequências da situação atual provocam vários problemas como a falta de disciplina por parte dos estudantes, uma vez que a ausência de um sistema de controle eficaz incentiva tal comportamento por não enfrentarem consequências significativas por seus atrasos frequentes; a dificuldade de monitorar e registrar manualmente todas as ocorrências de atraso; e uma comunicação ineficiente com os responsáveis e alunos, que não são informados sobre a frequência de atrasos, o que dificulta o acompanhamento e ações necessárias para corrigir o comportamento dos estudantes.
+
+Portanto, este sistema permitirá que a gestão monitore os atrasos e a frequência dos alunos de maneira mais eficaz, diminuindo esforços manuais e simplificando a rotina administrativa, melhorando assim, a comunicação interna e a solução de problemas de forma eficiente.
 
 ### **<span style="color: #9A2EFE;">Observação</span>**
 Durante as primeiras etapas de desenvolvimento, os desenvolvedores passaram por uma mudança de planos inesperada e fora de seu controle, vinda de um esclarecimento sobre o projeto com a Analista de Qualidade de Vida. O referido processo evidenciou as limitações organizacionais concernentes ao acesso e processamento dos dados referentes à movimentação dos estudantes no sistema de controle de acesso. Consequentemente, houve a reposição estratégica para dar continuidade ao projeto, fundamentando a abordagem nas modificações identificadas.
@@ -69,58 +66,63 @@ Durante as primeiras etapas de desenvolvimento, os desenvolvedores passaram por 
 ## **<span style="color: #8000FF;">Metodologia</span>**
 
 ### **<span style="color: #9A2EFE;">Ferramentas utilizadas</span>**
-- **<span style="color: #4682B4;">Trello:</span>** É um aplicativo de gerenciamento de projeto baseado na web;
-- **<span style="color: #4682B4;">Visual Studio Code:</span>** É um editor de código-fonte desenvolvido pela Microsoft para Windows, Linux e macOS. Ele inclui suporte para depuração, controle de versionamento Git incorporado, realce de sintaxe, complementação inteligente de código, snippets e refatoração de código. Utilizamos a versão 1.91.1-x64;
-- **<span style="color: #4682B4;">Git:</span>** É um sistema de controle de versões distribuído, usado principalmente no desenvolvimento de software, mas pode ser usado para registrar o histórico de edições de qualquer tipo de arquivo. Utilizamos a versão 2.46.0-x64;
-- **<span style="color: #4682B4;">HostGator:</span>** É um provedor de hospedagem compartilhada, revendedor, virtual privado e hospedagem dedicada;
-- **<span style="color: #4682B4;">Figma:</span>** É um editor gráfico de vetor e prototipagem de projetos de design baseado principalmente no navegador web, com ferramentas offline adicionais para aplicações desktop para GNU/Linux, macOS e Windows.
+- **<span style="color: #4682B4;">Trello:</span>**  é um aplicativo de gerenciamento de projeto baseado na web. Foi utilizado para gerenciar o Product Backlog, distribuição de tasks para cada desenvolvedor do grupo e melhor organização para a produção e desenvolvimento;
+- **<span style="color: #4682B4;">Visual Studio Code:</span>**  é um editor de código-fonte desenvolvido pela Microsoft para Windows, Linux e macOS. Ele inclui suporte para depuração, controle de versionamento Git incorporado, realce de sintaxe, complementação inteligente de código, snippets e refatoração de código. No desenvolvimento do sistema, foi utilizada a versão 1.91.1-x64;
+- **<span style="color: #4682B4;">Git:</span>**  é um sistema de controle de versões distribuído, usado principalmente no desenvolvimento de software, mas pode ser usado para registrar o histórico de edições de qualquer tipo de arquivo. No desenvolvimento do sistema, foi utilizada a versão 2.46.0-x64;
+- **<span style="color: #4682B4;">Figma:</span>** é um editor gráfico de vetor e prototipagem de projetos de design baseado principalmente no navegador web, com ferramentas offline adicionais para aplicações desktop para GNU/Linux, macOS e Windows. Foi utilizado para realizar a prototipagem do sistema em relação às páginas.
 
 ### **<span style="color: #9A2EFE;">Linguagens de Programação</span>**
 
 ### **<span style="color: #9A2EFE;">Python v3.12.3</span>**
-Python é uma linguagem de programação versátil, conhecida por sua simplicidade e facilidade de aprendizado. Ela é interpretada, ou seja, o código é executado linha por linha, o que facilita o teste e a depuração. Além disso, a linguagem é orientada a objetos, o que permite uma melhor organização do código em estruturas reutilizáveis. 
-A linguagem é uma das mais populares do mundo e é amplamente utilizada em diversos setores, como desenvolvimento web, ciência de dados e inteligência artificial, garantindo uma variedade de recursos - incluindo documentação, tutoriais e fóruns – que ajudam a aprimorar as habilidades dos desenvolvedores.
-No nosso sistema, Python foi essencial para construir o back-end (parte interna de uma aplicação) utilizando Django, um framework que facilitou o desenvolvimento das lógicas de cadastro e login de coordenadores, uploads de dados de frequência, alunos e dos cursos fornecidos pela instituição, bem como a implementação das funcionalidades de notificação automática. Além disso, a linguagem foi utilizada para a coleta de informações do banco de dados para a listagem dos alunos e cursos, por exemplo, nas páginas de visualização.
+Python é uma linguagem de programação versátil, conhecida por sua simplicidade e facilidade de aprendizado. Ela é interpretada, ou seja, o código é executado linha por linha, o que facilita o teste e a depuração do código. Além disso, a linguagem é orientada a objetos, o que permite uma melhor organização do código em estruturas reutilizáveis. 
+
+A linguagem é uma das mais populares do mundo e é amplamente utilizada em diversos setores, como desenvolvimento web, ciência de dados e inteligência artificial, garantindo uma variedade de recursos — incluindo documentação, tutoriais e fóruns — que ajudam a aprimorar as habilidades dos desenvolvedores.
+
+No sistema, o Python foi essencial para construir o back-end (parte interna de uma aplicação) utilizando Django, um framework que facilitou o desenvolvimento das lógicas de cadastro e login de coordenadores, uploads de dados de frequência, alunos e dos cursos fornecidos pela instituição, bem como a implementação das funcionalidades de notificação automática. Além disso, a linguagem foi utilizada para a coleta de informações do banco de dados para a listagem dos alunos e cursos, por exemplo, nas páginas de visualização.
 
 ### **<span style="color: #9A2EFE;">JavaScript</span>**
 JavaScript é uma linguagem de programação interpretada e orientada a objetos, frequentemente usada para desenvolver interatividade em páginas web. Ela permite que os desenvolvedores controlem o comportamento dos elementos na tela, respondendo a eventos como cliques e movimentos do mouse. Suas capacidades dinâmicas incluem a criação de objetos em tempo real e a manipulação de funções.
 A linguagem é executada no cliente web ou pode ser usada para projetar e/ou programar o comportamento de páginas web quando ocorrem eventos.
-Neste projeto, o JavaScript foi utilizado para implementar mudanças de estado, como a alternância entre temas claro e escuro, amostragem e ocultação de senhas em formulários, e a funcionalidade da barra de pesquisa, proporcionando uma experiência mais interativa e amigável ao usuário.
+Neste projeto, o JavaScript foi utilizado para implementar mudanças de estado, como a alternância entre temas claro e escuro, amostragem e ocultação de senhas em formulários, e a funcionalidade da barra de pesquisa, proporcionando uma experiência mais interativa e conversacional ao usuário.
 
 ### **<span style="color: #9A2EFE;">Linguagens de Marcação</span>**
 
 #### **<span style="color: #AC58FA;">HTML 5</span>**
-A Linguagem de Marcação de Hipertexto (HTML) é uma linguagem utilizada na construção de páginas na Web, podendo ser interpretada por navegadores. O HTML não é considerado uma linguagem de programação, já que ele não pode criar funcionalidades dinâmicas. Ao invés disso, com o HTML, os usuários podem criar e estruturar seções, parágrafos e links usando elementos, tags e atributos. No projeto, ela foi utilizada em todo o front-end (parte visual do site) para a estruturação das páginas web.
+A Linguagem de Marcação de Hipertexto (HTML) é uma linguagem utilizada na construção de páginas na web, podendo ser interpretada por navegadores. O HTML não é considerado uma linguagem de programação, já que ele não pode criar funcionalidades dinâmicas. Ao invés disso, com o HTML, os usuários podem criar e estruturar seções, parágrafos e links usando elementos, tags e atributos. No projeto, essa linguagem foi utilizada em todo o front-end (parte visual de um sistema) para a estruturação das páginas web.
 
 ### **<span style="color: #9A2EFE;">Linguagens de Estilo</span>**
 
-#### **<span style="color: #AC58FA;">CSS</span>**
-Cascading Style Sheets ou Folhas de Estilo em Cascata, é um mecanismo para adicionar estilos a uma página web, aplicado diretamente nas tags HTML ou ficar contido dentro das tags `<style>`. Também é possível adicionar estilos adicionando um link para um arquivo CSS que contém os estilos.
+#### **<span style="color: #AC58FA;">CSS 3</span>**
+Cascading Style Sheets ou Folhas de Estilo em Cascata (CSS), é um mecanismo para adicionar estilos a uma página web, aplicado diretamente nas tags HTML ou contido dentro das tags style. Também é possível adicionar estilos adicionando um link para um arquivo CSS que contém os estilos. O CSS foi utilizado para toda a estilização de cada página do nosso sistema, juntamente com o framework Bootstrap.
 
 ### **<span style="color: #9A2EFE;">Frameworks</span>**
 
-#### **<span style="color: #AC58FA;">Bootstrap</span>**
-O Bootstrap é um framework front-end e de código-fonte aberto, que disponibiliza componentes prontos para utilização, ganhando muita produtividade no desenvolvimento. Ele oferece uma coleção de elementos prontos, como botões, tabelas e formulários, que podem ser facilmente utilizados e personalizados. O framework segue os princípios de usabilidade e tendências de design para interfaces. Além disso, sua padronização permite que os sites obtenham uma aparência atraente.
+#### **<span style="color: #AC58FA;">Bootstrap v5.3.3</span>**
+O Bootstrap é um framework front-end e de código-fonte aberto, que disponibiliza componentes prontos para utilização, ganhando muita produtividade no desenvolvimento. Ele oferece uma coleção de elementos prontos, como botões, tabelas e formulários, que podem ser facilmente utilizados e personalizados. O framework segue os princípios de usabilidade e tendências de design para interfaces. Além disso, sua padronização permite que os sites obtenham uma aparência atraente e de boa visualização.
 
-#### **<span style="color: #AC58FA;">Django</span>**
-O Django é um framework web Python de código aberto, no qual destaca-se por oferecer um ambiente simplificado para a criação de soluções web escaláveis, além proporcionar ferramentas robustas e eficientes aos desenvolvedores, dispensando a necessidade de reescrever códigos comuns a todos os projetos web em Python. Ele disponibiliza, portanto, uma estrutura pré-configurada e bibliotecas com código pronto, melhorando a produtividade e organização do desenvolvimento.
-O framework utiliza a arquitetura  MVT *(Model-View-Template)*, representando respectivamente, a lógica de negócios, a lógica de rederização e a de exibição da interface do usuário, facilitando a criação de aplicações e promovendo a separação das atividades e reutilização de partes do código. Essa abordagem é uma variação do tradicional padrão MVC *(Model-View-Controller)*, amplamente adotada em diversos frameworks e sistemas.
-Além disso, esta estrutura prioriza a segurança, oferecendo recursos projetados para impedir ameaças como CSRF, XSS e SQL Injections. Também conta com proteções como validação automática de formulários e gerenciamento de autenticação, entre outros serviços.
-Com a implementação do mapeamento “Objeto-Relacional”, o Django permite a interação do banco de dados através de classes e objetos Python, eliminando a necessidade de escrita SQL direta. Isso não apenas simplifica o acesso aos dados, mas também reduz os riscos de segurança e, ao mesmo tempo, melhora a legibilidade do código. Além disso, a estrutura facilita o mapeamento de URLs, vinculando *URLs* específicos às suas *View* correspondentes dentro dos aplicativos. Essa abordagem organizada direciona as solicitações do usuário para as seções apropriadas do código e agiliza a criação de URLs que são semânticos e fáceis de usar, melhorando, em última análise, a experiência do usuário e otimizando o desempenho do mecanismo de pesquisa.
+#### **<span style="color: #AC58FA;">Django 5.1.3</span>**
+O Django é um framework web Python de código aberto, no qual destaca-se por oferecer um ambiente simplificado para a criação de soluções web escaláveis, além de proporcionar ferramentas robustas e eficientes aos desenvolvedores, dispensando a necessidade de reescrever códigos comuns a todos os projetos web em Python. Ele disponibiliza, portanto, uma estrutura pré-configurada e bibliotecas com código pronto, melhorando a produtividade e organização do desenvolvimento.
+
+O framework utiliza a arquitetura  MVT *(Model-View-Template)*, representando, respectivamente, a lógica de negócios, a lógica de renderização e a de exibição da interface do usuário, facilitando a criação de aplicações e promovendo a separação das atividades e reutilização de partes do código. Essa abordagem é uma variação do tradicional padrão MVC *(Model-View-Controller)*, amplamente adotada em diversos frameworks e sistemas.
+Além disso, essa estrutura prioriza a segurança, oferecendo recursos projetados para impedir ameaças como CSRF, XSS e SQL Injections. Também conta com proteções como validação automática de formulários e gerenciamento de autenticação, entre outros serviços.
+
+Com a implementação do mapeamento “Objeto-Relacional”, o Django permite a interação do banco de dados através de classes e objetos Python, eliminando a necessidade de escrita SQL direta. Isso não apenas simplifica o acesso aos dados, mas também reduz os riscos de segurança e, ao mesmo tempo, melhora a legibilidade do código. Além disso, a estrutura facilita o mapeamento de URLs, vinculando *URLs* específicas às suas *View* correspondentes. Essa abordagem organizada direciona as solicitações do usuário para as seções apropriadas do código e agiliza a criação de URLs que são semânticas e fáceis de usar, melhorando, em última análise, a experiência do usuário e otimizando o desempenho do mecanismo de pesquisa.
 O Django disponibiliza um painel administrativo pronto para uso, facilitando o gerenciamento de dados da aplicação, sendo gerado de forma automática a partir dos modelos definidos no projeto, além de vários outros recursos, sendo um framework completo sem a necessidade de recorrer a soluções externas.
 
 ### **<span style="color: #9A2EFE;">Bibliotecas</span>**
 
-#### **<span style="color: #AC58FA;">Selenium</span>**
-O Selenium é uma ferramenta para automatizar navegadores, usada especialmente para testes e aplicações web, permitindo a simulação de interações de usuários, como cliques e 18 preenchimento de formulários, garantindo que funcionalidades funcionem corretamente em diferentes navegadores e plataformas.
+#### **<span style="color: #AC58FA;">Selenium v4.0</span>**
+O Selenium é uma ferramenta para automatizar navegadores, usada especialmente para testes e aplicações web, permitindo a simulação de interações de usuários, como cliques e preenchimento de formulários, garantindo que funcionalidades atuem corretamente em diferentes navegadores e plataformas.
+
 A biblioteca facilita a execução de testes repetitivos e de regressão, garantindo que novas alterações não afetem funcionalidades existentes.
 Neste sistema, a biblioteca foi utilizada para o desenvolvimento da lógica para automatização da extração dos dados da catraca para serem salvos no banco de dados PostgreSQL, evitando erros manuais e economizando tempo.
 
-#### **<span style="color: #AC58FA;">PyAUtoGUI</span>**
-O PyAutoGUI é uma biblioteca Python que permite automatizar a interação com a Graphical User Interface, ou Interface Gráfica do Usuário em português (GUI) do seu computador, podendo controlar o mouse, teclado, entre outros elementos visuais da tela, diferente do Selenium, que é focado exclusivamente em navegadores web.
+#### **<span style="color: #AC58FA;">PyAutoGui v0.9.54</span>**
+O PyAutoGUI é uma biblioteca Python que permite automatizar a interação com a Graphical User Interface, ou Interface Gráfica do Usuário (GUI), do seu computador, podendo controlar o mouse, teclado, entre outros elementos visuais da tela, diferente do Selenium, que é focado exclusivamente em navegadores web.
 
-O Selenium e o PyAutoGUI foram utilizados em conjunto para automatizar a coleta de dados da catraca e armazená-los no banco de dados PostgreSQL. Enquanto o Selenium focou na extração automatizada de dados por meio de navegação web, o PyAutoGUI foi essencial para interagir com a interface gráfica da máquina, controlando elementos visuais fora do navegador, como ações que não poderiam ser realizadas apenas via web. Essa combinação permitiu uma integração completa, eliminando erros manuais e garantindo a precisão dos dados coletados e armazenados.
-#### **<span style="color: #AC58FA;">ReportLab</span>**
+O Selenium e o PyAutoGUI foram utilizados em conjunto para automatizar a coleta de dados da catraca e armazená-los no banco de dados PostgreSQL. Enquanto o Selenium foca na extração automatizada de dados por meio de navegação web, o PyAutoGUI foi essencial para interagir com a interface gráfica da máquina, controlando elementos visuais fora do navegador, como ações que não poderiam ser realizadas apenas via web. Essa combinação permitiu uma integração completa, eliminando erros manuais e garantindo a precisão dos dados coletados e armazenados.
+
+#### **<span style="color: #AC58FA;">ReportLab v4.2.5</span>**
 ReportLab é uma biblioteca para softwares que permite criar e gerar relatórios no formato desenvolvido pela empresa Adobe Incorporated conhecido como PDF (Portable Document Format). A biblioteca foi planejada para ser executada especialmente na linguagem Python, usando as fontes disponibilizadas pelas Fontes TrueType, disponibilizadas pela Apple Computer, em parceria com a Microsoft.
 
 O uso da biblioteca ReportLab foi de extrema importância para a lógica de geração de relatórios referentes aos maiores atrasos e faltas do sistema, uma vez que disponibiliza diversas funções para estilização e estruturação de documentos em PDF.
@@ -136,10 +138,15 @@ Pandas é uma biblioteca de manipulação e análise de dados, criada especialme
 
 #### **<span style="color: #AC58FA;">PostgreSQL</span>**
 Escolher o PostgreSQL como banco de dados para este sistema de gerenciamento de atrasos e frequência traz diversas vantagens que garantem a eficiência e a robustez do projeto.
+
 Primeiramente, o PostgreSQL é conhecido por seu alto desempenho e escalabilidade, o que é essencial para lidar com o grande volume de dados gerados pelo sistema, incluindo registros de entrada e saída dos alunos, onde o banco de dados cresce juntamente com o aumento da quantidade de alunos ou de informações armazenadas, sem comprometer a performance.
+
 Além disso, o PostgreSQL oferece suporte a uma ampla gama de tipos de dados, o que permite a realização de consultas complexas, possibilitando a criação de relatórios detalhados e análises aprofundadas do comportamento dos alunos, algo crucial para o acompanhamento de frequência e atrasos.
+
 Outro ponto forte é a conformidade do PostgreSQL com o modelo ACID (Atomicidade, Consistência, Isolamento, Durabilidade), garantindo a integridade e segurança dos dados, protegendo informações sensíveis.
+
 Por fim, a integração nativa com Django, o framework utilizado no desenvolvimento do projeto, facilita a implementação do PostgreSQL, aproveitando ao máximo suas funcionalidades avançadas.
+
 Essas características fazem do PostgreSQL uma escolha sólida e eficiente para o sistema de gerenciamento de atrasos, oferecendo uma base confiável e segura para o projeto.
 
 ### **<span style="color: #9A2EFE;">Outras Ferramentas</span>**
@@ -183,6 +190,7 @@ wsproto==1.2.0
 ```
 
 ### **<span style="color: #9A2EFE;">Metodologia para o Desenvolvimento</span>**
+
 Traduzido do inglês, Scrum é uma estrutura ágil de colaboração em equipe comumente usada no desenvolvimento de software e em outros setores. O Scrum prescreve que as equipes dividam o trabalho em metas a serem concluídas dentro de iterações com limite de tempo, chamadas sprints. Para desenvolver o projeto, fizemos a utilização da metodologia ágil Scrum, que nos permitiu organizar o trabalho em sprints curtos e interativos, garantindo entregas contínuas e adaptáveis.
 
 ---
@@ -272,25 +280,31 @@ Traduzido do inglês, Scrum é uma estrutura ágil de colaboração em equipe co
     membros da equipe de desenvolvimento.
 
 ### <span style="color: #9A2EFE;">**Diagrama de Caso de Uso**</span>
+
 ![alt text](img/Diagrama_de_caso_de_uso.webp)
+
 No Diagrama de Caso de Uso apresentado, são representadas as interações entre diferentes atores (usuários do sistema) e as funcionalidades disponíveis no projeto desenvolvido, destacando a relação entre ações e dependências. A seguir, está uma descrição detalhada de cada elemento.
 
 ### <span style="color: #AC58FA;">**Atores**</span>
+
 Os atores são os usuários que interagem com o sistema, podendo ser uma pessoa, uma organização ou um sistema externo que interage com seu aplicativo ou sistema. Eles devem ser objetos externos que produzam ou consumam dados. A seguir, está uma descrição dos atores presentes no Modelo de Caso de Uso.
 - **Coordenador:** Responsável por gerenciar usuários e realizar atividades relacionadas à frequência e atrasos dos alunos.
 - **Administrador:** Atua na administração geral do sistema, incluindo a criação e manutenção de usuários, cursos e alunos.
 - **Catraca (Sistema Automatizado):** Representa o sistema que fornece registros de entrada e saída dos alunos. Integra ferramentas como Selenium e Pandas para automação de processos.
 
 ### <span style="color: #AC58FA;">**Relacionamentos**</span>
+
 Em um Diagrama de Casos de Uso, tanto a inclusão quanto a extensão e associação, são relacionamentos que descrevem como diferentes casos de uso interagem ou se relacionam entre si. A seguir, está a explicação de como cada interação funciona:
 - **Inclusão (include):** a inclusão é usada para mostrar que um caso de uso sempre incorpora ou "inclui" o comportamento de outro caso de uso. É como se o caso de uso principal delegasse parte de seu comportamento a um caso de uso incluído.
 - **Extensão (extend):** a extensão é usada para mostrar que um caso de uso estende o comportamento de outro caso de uso sob certas condições. Isso significa que o comportamento do caso de uso original pode ser expandido por outro caso de uso opcional, dependendo de uma condição específica.
 - **Associação:** uma associação é um relacionamento entre um ator e um caso de uso de negócios. Indica que um ator pode usar a funcionalidade do sistema de negócios. Ela é uma é representada como uma linha que liga os elementos a serem relacionados.
 
 ### <span style="color: #AC58FA;">**Casos de Uso**</span>
+
 Os casos de uso, sendo apresentados de forma visual pelo formato oval na horizontal, representam os diferentes usos que um usuário pode ter, ou seja, são as funcionalidades do sistema. A seguir, será fornecida uma explicação de cada caso de uso, citando também quais usuários podem acessá-los:
 
 ### <span style="color: #AC58FA;">**Casos de Uso do Coordenador e Administrador:**</span>
+
 - **Login:** permite que tanto o coordenador quanto o administrador acessem o sistema. O caso de uso possui uma relação de inclusão com o caso de uso “verificar a existência do usuário”, onde as credenciais fornecidas são verificadas. Se as credenciais corresponderem a um usuário cadastrado, o acesso é concedido; caso contrário, uma mensagem de erro é exibida.
 - **Criar, Editar e Excluir Curso ou Aluno:** tanto o coordenador quanto o administrador podem adicionar novos cursos e alunos ao sistema. Contudo, as funcionalidades de edição e exclusão é exclusiva ao administrador, podendo apenas ele, gerenciar tais funções, a fim de garantir um maior controle sobre as modificações.
 Além disso vale destacar que, para executar os processos mencionados, é realizada uma verificação prévia da existência do curso ou aluno em questão. Essa validação é feita pelos casos de uso “verificar se o curso já existe” e “verificar se o aluno já existe”.
@@ -306,6 +320,7 @@ Além disso, ele tem uma relação de inclusão com os casos de uso de “visual
 Ademais, é importante destacar que a edição de informações só pode ser realizada através da rota “/admin”, pois o sistema não conta com uma lógica específica para permitir esse tipo de modificação. Além disso, para todos os casos de uso explicados anteriormente, é necessária a autenticação do usuário no sistema.
 
 ### <span style="color: #AC58FA;">**Casos de Uso do Sistema Automatizado (Catraca):**</span>
+
 - **Criação de Registro de Entrada e Saída:** a integração com a catraca permite capturar registros de entrada e saída de alunos de forma automática. Isso inclui o uso de ferramentas como Selenium e PyAutoGUI para processar os dados rapidamente.
 - **Validação de Registros:** antes de armazenar as informações capturadas, o sistema valida os registros para garantir que estão completos e corretos. Essa validação previne erros que possam impactar relatórios ou cálculos. Além do mais, esse caso de uso está incluído ao de criação de registro de entrada e saída do estudante.
 
@@ -315,8 +330,11 @@ Com o detalhamento do Diagrama de Caso de Uso apresentado, torna-se mais fácil 
 
 ## <span style="color: #9A2EFE;">**Design do Sistema**</span>
 ### <span style="color: #AC58FA;">**Casos de Uso do Sistema Automatizado (Catraca):**</span>
+
 A arquitetura MTV significa Model-Template-View, e é um padrão de design de software para projetos que utilizam o framework Django. A seguir, o diagrama representa visualmente o funcionamento da arquitetura deste framework:
+
 ![alt text](img/Design%20do%20sistema.png)
+
 A seguir, está uma descrição de cada camada que estão presentes na arquitetura MTV:
 - **Model:** responsável pelo mapeamento do banco de dados, que possui uma comunicação direta com ele. As Models estão contidas no arquivo *models.py*.
 - **Template:** pasta que conterá os arquivos .html para as páginas do sistema. Receberá das Views os dados que aparecerão no front-end do sistema.
@@ -325,7 +343,9 @@ As setas sólidas representam uma relação direta entre os componentes do diagr
 
 ### <span style="color: #AC58FA;">**Diagrama de Classes**</span>
 Um Diagrama de Classes é uma representação gráfica amplamente utilizada na engenharia de software para descrever a estrutura estática de um sistema, representando suas classes, atributos, métodos e os relacionamentos entre elas. Este tipo de diagrama segue o padrão UML (Unified Modeling Language ou Linguagem de Modelagem Unificada), que é amplamente utilizado para a padronização de modelagem e documentação de sistemas de software. A seguir, o diagrama representa visualmente o funcionamento da estrutura do sistema:
+
 ![alt text](img/Diagraama%20de%20Classes.png)
+
 No Diagrama de Classes apresentado, estão representadas as entidades fundamentais do sistema, destacando seus atributos, métodos e os tipos de relacionamento entre as classes, como associação, agregação, composição e herança.
 As classes são os elementos básicos de um Diagrama de Classes, representando abstrações de objetos do mundo real ou conceitos relacionados ao sistema. Cada classe é descrita com seus atributos (dados que ela armazena) e métodos (operações que ela realiza). A seguir, está uma descrição das classes presentes no diagrama:
 - **Usuario:** representa os usuários que possuem acesso ao sistema, como coordenadores e administradores. Inclui atributos como nome, sobrenome, username e cargo.
@@ -336,8 +356,11 @@ Os relacionamentos entre classes em um Diagrama de Classes são fundamentais par
 - **Relacionamento entre Aluno e Curso:** cada aluno está vinculado a apenas um curso, utilizando a chave estrangeira id_curso na classe Aluno para referenciar a classe Curso. Por outro lado, um curso pode estar associado a vários alunos (0..* para Aluno e 1 para Curso).
 - **Relacionamento entre Aluno e Frequência:** um aluno pode ter vários registros de frequência, mas cada registro está associado a um único aluno, representado pela chave estrangeira id_aluno na classe Frequência (1 para Aluno e 0..* para Frequência).
 
+---
+
 ## <span style="color: #9A2EFE;">**Páginas**</span>
 ### <span style="color: #AC58FA;">**Página Inicial**</span>
+
 A página inicial conta com uma barra de navegação localizada no topo, onde a logo do SENAI está posicionada no lado esquerdo e, no lado direito, encontra-se um componente padrão: um botão para troca de tema, permitindo a alternância da coloração da página entre os temas claro e escuro. No conteúdo principal, há um texto com o título da página e um botão que redireciona o usuário para a página de Login.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
   <img src="img/paginas/home- white.webp" alt="Homepage - white" width="45%">
@@ -345,6 +368,7 @@ A página inicial conta com uma barra de navegação localizada no topo, onde a 
 </p>
 
 ### <span style="color: #AC58FA;">**Página de Login**</span>
+
 Após o redirecionamento para a página de Login, o usuário deve inserir seus dados, como username e senha. Ao lado do campo de senha, há um ícone que permite exibir ou ocultar a senha, alterando sua aparência de acordo com a ação: um olho riscado quando a senha está visível e um olho aberto quando ela está oculta. Caso os dados sejam inseridos corretamente e o botão de Login seja clicado, o usuário será redirecionado para a página de Cursos. No entanto, se houver erro nos dados fornecidos, será exibida a mensagem: “Nome de usuário ou senha incorretos”.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
   <img src="img/paginas/login- white.webp" alt="Login - white" width="45%">
@@ -352,6 +376,7 @@ Após o redirecionamento para a página de Login, o usuário deve inserir seus d
 </p>
 
 ### <span style="color: #AC58FA;">**Página de Cursos**</span>
+
 Após a realização do Login, o usuário é redirecionado para a página de Cursos. A barra de navegação, presente em todas as páginas, passa a ser exibida. Após o Login, uma mensagem no formato “Olá, usuário”, onde o nome do usuário correspondente é mostrado. Além disso, é adicionado um novo componente que abre um Offcanvas, um elemento do Bootstrap que exibe uma barra lateral. Essa barra contém opções para Logout (saída), redirecionamento para as página de Cadastro, Criar Alunos, Criar Cursos e de Importação de Frequência. Os componentes de Cadastro, Aluno, Curso e Frequência são exibidos de forma exclusiva para o Administrador.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
   <img src="img/paginas/offcanvas- white.webp" alt="Offcanvas - white" width="45%">
@@ -365,6 +390,7 @@ No conteúdo principal da página, os cursos são listados em linhas, apresentan
 </p>
 
 ### <span style="color: #AC58FA;">**Página de Cadastro**</span>
+
 No Offcanvas, ao clicar no componente de Cadastro, o usuário Administrador é redirecionado para a página de Cadastro. Na parte superior da página, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
 O conteúdo principal exibe um formulário destinado ao cadastro de um novo usuário. Esse formulário solicita as seguintes informações: nome, sobrenome, nome de usuário e senha.
 É importante ressaltar que o novo usuário é salvo automaticamente como Coordenador ao concluir o cadastro de novo usuário.
@@ -374,6 +400,7 @@ O conteúdo principal exibe um formulário destinado ao cadastro de um novo usu�
 </p>
 
 ### <span style="color: #AC58FA;">**Página de Relátorios**</span>
+
 Na página de Cursos, ao clicar no ícone de relatórios, o usuário é redirecionado para a página de Relatórios. No topo, no canto esquerdo, há um botão que permite retornar à página anterior (página de Cursos).
 No centro da página, o conteúdo apresenta uma imagem ilustrativa e dois botões dispostos um abaixo do outro:
 - O primeiro botão exibe o texto: “Gerar relatório em PDF”, ao clicar, será feito o *download* de um documento contendo tabelas com os dados dos alunos com mais atrasos e dos alunos com mais faltas.
@@ -388,6 +415,7 @@ No centro da página, o conteúdo apresenta uma imagem ilustrativa e dois botõe
 </p>
 
 ### <span style="color: #AC58FA;">**Página de Notificações**</span>
+
 Na página de Cursos, ao clicar no ícone de notificações, o usuário é redirecionado para a página de Notificações. No canto superior esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
 No centro do conteúdo, a página exibe o título Notificações e, logo abaixo, uma lista dos alunos com 3 ou mais atrasos. As informações apresentadas incluem: o nome do aluno, a quantidade de atrasos e sua turma correspondente. Caso nenhum aluno atenda a esse critério, a lista permanecerá vazia.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
@@ -396,6 +424,7 @@ No centro do conteúdo, a página exibe o título Notificações e, logo abaixo,
 </p>
 
 ### <span style="color: #AC58FA;">**Páginas de Adição de Alunos, Cursos e Frequência**</span>
+
 Todas as páginas de adição seguem o mesmo layout, proporcionando uma experiência de usuário mais intuitiva. Nessa interface, o usuário pode carregar arquivos nos formatos apropriados para o sistema e realizar operações de cadastro ou atualização de dados. A página de criação de frequência foi desenvolvida especificamente para inserir dados fictícios dos alunos.
 - **Botão "Escolher arquivo"**: permite selecionar um arquivo armazenado no dispositivo.
 - **Indicação do nome do arquivo**: após a seleção, o nome do arquivo será exibido ao lado do botão.
@@ -407,30 +436,73 @@ Em conclusão, este manual visa facilitar o uso do sistema, proporcionando uma n
   <img src="img/paginas/notificacao- dark.webp" alt="notificacao - dark" width="45%">
 </p>
 
+### <span style="color: #AC58FA;">**Página de Alunos**</span>
 
+Na página de Cursos, ao clicar em qualquer um dos cursos listados no conteúdo principal, o usuário é redirecionado para a página de Alunos, onde são exibidos os alunos específicos do curso selecionado.
+No topo, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
+No conteúdo da página de Alunos, é exibido uma lista dos alunos, onde é informado dados sobre eles, como: nome do aluno, quantidade de atrasos, porcentagem de frequência e quantidade de faltas. Vale ressaltar que, acessando pelo perfil de Administrador, é exibido uma opção de excluir o aluno, utilizada em casos de desistência.
+Ao lado da lista de alunos, é exibido informações sobre o curso, como: o responsável pela turma, código do curso e o seu horário de funcionamento. Adicionalmente, para o perfil de Administrador, há um botão que permite excluir o curso.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/alunos- white.webp" alt="alunos - white" width="45%">
+  <img src="img/paginas/alunos- dark.webp" alt="alunos - dark" width="45%">
+</p>
 
+## <span style="color: #9A2EFE;">**Diagrama de Entidade-Relacionamento**</span>
 
+O Diagrama de Entidade-Relacionamento (DER) é uma representação gráfica amplamente utilizada para descrever a estrutura lógica de um banco de dados, representando suas entidades, atributos e os relacionamentos entre elas. Ele é essencial para planejar e visualizar como os dados são organizados e como as diferentes entidades do sistema interagem.
 
+![alt text](img/Diagrama%20de%20entidade%20e%20relacionamento.webp)
 
+**Relacionamentos e Simbologias das Entidades do Sistema:**
 
+- ***auth_user*** e ***web_usuario*:** cada usuário em auth_user possui uma associação obrigatória e única com um registro em web_usuario. Isso indica um relacionamento 1:1.
+    - Representação:
+        - Traços duplos indicam que o relacionamento é obrigatório e único.
+        - Cada registro em auth_user está associado diretamente a um registro correspondente em web_usuario.
+    - Implementação no Banco de Dados:
+        - A tabela web_usuario possui um campo username, que é a chave primária e uma chave estrangeira que referencia o campo username de auth_user, respectivamente.
 
-## <span style="color: #9A2EFE;">**Arquitetura Model-Template-View**</span>
+- ***web_aluno*** e ***web_frequencia*:** um aluno em web_aluno pode estar associado a várias frequências registradas em web_frequencia. O relacionamento é do tipo 1:N.
+    - Representação:
+        - No lado de web_aluno, os dois traços verticais indicam que uma frequência está obrigatoriamente vinculada a um aluno.
+        - No lado de web_frequencia, o pé de galinha indica que um aluno pode ter várias frequências registradas.
+    - Implementação no Banco de Dados:
+        - A tabela web_frequencia possui o campo id_aluno_id como chave estrangeira, que referencia o campo id_carteirinha da tabela web_aluno.
 
+- ***web_aluno*** e ***web_curso*:** um aluno em web_aluno está associado a exatamente um curso em web_curso. O relacionamento é do tipo N:1, onde vários alunos podem estar vinculados a um único curso.
+    - Representação:
+        - No lado de web_aluno, o pé de galinha indica que vários alunos podem estar associados ao mesmo curso.
+        - No lado de web_curso, os dois traços verticais indicam que o relacionamento é obrigatório e único para cada aluno.
+    - Implementação no Banco de Dados:
+        - A tabela web_aluno possui o campo id_curso como chave estrangeira, que referencia o campo turma da tabela web_curso.
+
+---
+
+## <span style="color: #9A2EFE;">**Implementação**</span>
 ### <span style="color: #AC58FA;">**v0.0 - Configuração do Ambiente de Desenvolvimento**</span>
-A preparação do ambiente de desenvolvimento é iniciada com a criação do ambiente virtual (*venv*), instalando as dependências Django e Pillow e criando o projeto. Em seguida, fez-se a instalação do PostgreSQL localmente, definindo-o como banco de dados do projeto, através dos seguintes passos:
-Primeiramente, foi consultada a documentação oficial do [PostgreSQL](https://www.postgresql.org/download/) e, em seguida, para a página do instalador [EDB](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) na sessão de downloads, baixando a versão 16.4 para arquitetura Windows x86-64. Posteriormente, iniciou-se a pré-instalação e, quando solicitado para escolher os componentes, foi desmarcada a opção *Stack Builder*.
-Quando necessário, foi inserida a senha para o super usuário e foram aceitas as configurações padrão do instalador. Após o término da instalação, deu-se início à configuração do servidor.
-Na barra de pesquisa do Windows, ocorreu a busca por pgAdmin 4, que é uma aplicação instalada em conjunto com o PostgreSQL, permitindo a configuração e interação com o banco de dados com uma aparência amigável para o usuário.
-Para registrar o servidor, foi escolhida a opção *Service* e clicar com o botão direito sobre ela, selecionando, em seguida, a opção *Register* e *Server*.
-Na aba *General*, na opção de nome, foi inserido o nome do servidor. Em seguida, na aba de *Connection*, no campo *Host name/address*, foi digitado o nome do host, e posteriormente, a senha definida na pré-instalação do PostgreSQL. Por fim, foi executada a opção chamada de *Save password, depois* *Save*.
-Para criar uma base de dados, com o botão direito, foi selecionada a opção de no nome do servidor e, depois, Create e Database. Na caixa de diálogo que é posteriormente aberta, inseriu-se o nome para o banco de dados, sendo salvo em seguida.  A base de dados já havia sido criada com as tabelas padrão do Django. Com ela criada, o último passo é configurar os arquivos do framework.
-Com o ambiente de desenvolvimento já criado e o ambiente virtual (venv) ativado, foram instalados os pacotes *psycopg2* e *python-decouple, através dos* seguintes comandos no terminal:
+
+A preparação do ambiente de desenvolvimento é iniciada com a criação do ambiente virtual (*venv*), instalando as dependências Django e Pillow, criando o projeto. Em seguida, fez-se a instalação do PostgreSQL localmente, definindo-o como banco de dados do sistema, através dos seguintes passos:
+
+Primeiramente, foi consultada a documentação oficial do [*PostgreSQL*](https://www.postgresql.org/download/) e, em seguida, para a página do instalador [*EDB*](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads), na sessão de downloads, é baixado a versão 16.4 para a arquitetura Windows x86-64. Posteriormente, iniciou-se a pré-instalação e, quando solicitado para escolher os componentes, foi desmarcada a opção *Stack Builder*.
+
+Após isto, foi inserida a senha para o super usuário e foram aceitas as configurações padrão do instalador. Ao término da instalação, deu-se início à configuração do servidor.
+
+Na barra de pesquisa do Windows, foi feita a busca por pgAdmin 4, que é uma aplicação instalada em conjunto com o PostgreSQL, permitindo a configuração e interação com o banco de dados com uma aparência interativa para o usuário.
+
+Para registrar o servidor, foi escolhida a opção *Service* e foi clicado o botão direito sobre ela, selecionando, em seguida, a opção *Register* e *Server*.
+
+Na aba *General*, na opção de nome, foi inserido o nome do servidor. Em seguida, na aba de *Connection*, no campo *Host name/address*, foi digitado o nome do host e, posteriormente, a senha definida na pré-instalação do PostgreSQL. Por fim, foi executada a opção chamada *Save password,* depois *Save*.
+
+Para criar uma base de dados, foi selecionada a opção, com o botão direito, o nome do servidor e, depois, Create e Database. Na caixa de diálogo que é posteriormente aberta, inseriu-se o nome para o Banco de Dados, sendo salvo em seguida.  A base de dados já havia sido criada com as tabelas padrões do Django. Com ela criada, o último passo é configurar os arquivos do framework.
+
+Com o ambiente de desenvolvimento criado e o ambiente virtual (venv) ativado, foram instalados os pacotes *psycopg2* e *python-decouple, através dos* seguintes comandos no terminal:
 
 ```python
 pip install psycopg2
 pip install python-decouple
 ```
 No arquivo _[settings.py](http://settings.py)_, já incluído na pasta do projeto, importamos a configuração do pacote _double_ e nas configurações do banco de dados, substituímos as configurações padrão do SQLite.
+
 ```python
 DATABASES = {
     'default': {
@@ -443,17 +515,21 @@ DATABASES = {
     }
 }
 ```
+
 Em seguida, um arquivo .env foi criado, contendo as informações (nome, usuário, senha, host e porta) do banco de dados que não serão exibidas na documentação por motivos de segurança. Por fim, foram gravadas as configurações da base de dados, criando-se então o super usuário.
 
 ### <span style="color: #AC58FA;">v0.1 - Criação do Aplicativo</span>
 Após a criação do projeto e as configurações iniciais do ambiente, foi criado o aplicativo (ou módulo) dentro do diretório do projeto.
 
 #### <span style="color: #AC58FA;">**Um projeto em Django?**</span>
+
 O projeto é a estrutura que comportará nossos módulos e todos os demais arquivos da aplicação.
+
 #### <span style="color: #AC58FA;">**Um módulo em Django?**</span>
+
 Pode-se facilmente exemplificar comparando-o com um e-commerce que tenha um blog. Um dos módulos seria o e-commerce e o outro o blog, sendo assim nesta estrutura um projeto e dois módulos. Em outras palavras, são aplicações que não interagem umas com as outras, mas fazem parte de um mesmo projeto.
 
-Posteriormente, criamos as pastas _Templates_ e _Static_, contendo os arquivos HTMl e subpastas que terá os arquivos de imagem, estilização e _JavaScript_, respectivamente. A estrutura do projeto ficou assim:
+Posteriormente, criamos as pastas Templates e Static, contendo os arquivos HTML e subpastas que terão os arquivos de imagem, estilização e JavaScript, respectivamente. A estrutura do projeto se encontra desta forma:
 
 ```python
 frequency_management/
@@ -474,11 +550,14 @@ frequency_management/
     manage.py
 ```
 
-Com a estrutura pronta, demos início à criação das Urls e Views.
+Com a estrutura pronta, deu-se início à criação das URLs e Views.
 
 ### <span style="color: #AC58FA;">v0.2 - Criação das URLs e Views</span>
-Com o módulo criado, houve a criação das URLs. Para isso, foram realizados alguns procedimentos para configurar o projeto com o novo aplicativo, a fim de deixá-lo apto a recebê-las. Primeiro, o grupo registrou o módulo no arquivo settings.py. É importante ressaltar que todo aplicativo criado deve ser registrado para que a aplicação reconheça-o.
-No arquivo `frequency_management/settings.py` :
+
+Com o módulo criado, houve a criação das *URLs*. Para isso, foram realizados alguns procedimentos para configurar o projeto com o novo aplicativo, a fim de deixá-lo apto a recebê-las. Primeiro, o grupo registrou o módulo no arquivo *settings.py*. É importante ressaltar que todo o aplicativo criado deve ser registrado para que a aplicação o reconheça.
+
+No arquivo **`*frequency_management/settings.py*`**:
+
 ```python
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -490,7 +569,8 @@ INSTALLED_APPS = [
     'web',
 ]
 ```
-Depois, foi criado um arquivo chamado urls.py dentro da pasta “web”, e neste arquivo, os desenvolvedores inseriram o seguinte código:
+No arquivo urls.py dentro da pasta “web”, os desenvolvedores inseriram o seguinte código:
+
 ```python
 from django.urls import path
 from . import views
@@ -512,11 +592,14 @@ urlpatterns = [
 ]
 
 handler404 = 'django.views.defaults.page_not_found'
-]
+
 ```
-Este arquivo conterá todas as *urls* do aplicativo. Nota-se que houve a importação de uma *view*, chamada homepage, que posteriormente, foi criada.
-Logo após isso, no arquivo de urls principal, foram registradas as rotas do módulo criado.
-No arquivo `frequency_management/web/urls.py`:
+Neste arquivo conterá todas as *urls* do aplicativo. Nota-se que houve a importação de uma *view*, chamada homepage.
+
+Logo após isso, no arquivo de *urls* principal, foram registradas as rotas do módulo criado.
+
+No arquivo **`*frequency_management/web/urls.py*`**:
+
 ```python
 from django.contrib import admin
 from django.urls import path, include
@@ -529,16 +612,21 @@ urlpatterns = [
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
+
 Primeiramente, são importados alguns componentes:
 - **<span style="color: #4682B4;">admin:</span>**  é uma interface de administração automática que fornece uma interface poderosa para produção para adicionar conteúdo ao site
 - **<span style="color: #4682B4;">path:</span>** este método cria as _urls_, recebe parâmetros como o próprio path e a _view_ ou conjunto de _views_ que serão acessadas;
 - **<span style="color: #4682B4;">include:</span>** serve para incluir um conjunto de views, como é feito nas do módulo;
-- **<span style="color: #4682B4;">static:</span>**static: usado para lidar com arquivos estáticos e de mídia durante o desenvolvimento.
+- **<span style="color: #4682B4;">static:</span>** usado para lidar com arquivos estáticos e de mídia durante o desenvolvimento.
+
 Este arquivo representa todas as _rotas_ do projeto (todas as criadas no módulo), onde serão importadas para o projeto a partir da linha:
+
 ```
 path('', include('web.urls'))
 ```
-A elaboração das classes foi realizada no arquivo models.py, conforme é solicitado na documentação do Django.
+
+A elaboração das classes foi realizada no arquivo models.py, conforme é solicitado na documentação do Django:
+
 ```python
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -622,7 +710,7 @@ Representa as informações sobre um curso oferecido.
     - `dias_funcionamento`: Lista de dias da semana em que o curso ocorre, utilizando o campo `ArrayField` para armazenar múltiplos valores.
     - `data_inicio`: Data de início do curso.
     - `data_fim`: Data de término do curso.
-    - `carga_horaria_intervalo`: Tempo do intervalo.
+    - `carga_horaria_intervalo`: Carga horária total do intervalo;
     - `dias_letivos`: Número total de dias letivos no curso.
 - **Método**:
     - `__str__`: Retorna o nome do curso como representação textual do objeto.
@@ -643,7 +731,7 @@ Registra a frequência de um aluno.
     - `id_aluno`: Chave estrangeira referenciando o aluno cuja frequência está sendo registrada.
     - `data`: Data do registro de frequência.
     - `hora`: Hora do registro de frequência.
-    - `identificador`: Inteiro que pode ser usado para marcar diferentes estados, como entrada (1) ou saída (2).
+    - `identificador`: Identificador que pode ser usado para marcar diferentes estados, como entrada (1) ou saída (2).
 - **Método**:
     - `__str__`: Retorna uma descrição textual contendo o nome do aluno e a data do registro de frequência.
 
@@ -1385,8 +1473,6 @@ O código apresentado é um **template do Django** que extende um arquivo `index
 
 #### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
 ```html
-django
-Copiar código
 {% load static %}
 
 ```
@@ -1395,8 +1481,6 @@ Copiar código
 
 #### **<span style="color: #AC58FA;">3. Bloco title</span>**
 ```
-django
-Copiar código
 {% block title %}
 Homepage
 {% endblock %}
@@ -1408,8 +1492,6 @@ Homepage
 
 #### **<span style="color: #AC58FA;">4. Bloco head</span>**
 ```
-django
-Copiar código
 {% block head %}
 {% endblock %}
 
@@ -1419,8 +1501,6 @@ Copiar código
 
 #### **<span style="color: #AC58FA;">5. Bloco body</span>**
 ```
-django
-Copiar código
 {% block body %}
 <div class="bg_Home animate downUp-1">
     <div class="main">
@@ -1548,8 +1628,6 @@ O código CSS apresentado aplica estilos a diversos elementos de uma página ini
 
 #### **<span style="color: #AC58FA;">1. Estilo para o Fundo da Página (.bg_Home)</span>**
 ```css
-css
-Copiar código
 .bg_Home {
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -1582,8 +1660,6 @@ Copiar código
 
 #### **<span style="color: #AC58FA;">2. Estilo para Botões</span>**
 ```css
-css
-Copiar código
 button {
     border: none;
     padding: 10px 20px;
@@ -1606,8 +1682,6 @@ button:hover {
 
 #### **<span style="color: #AC58FA;">3. Estilo para a Seção Principal (.main)</span>**
 ```css
-css
-Copiar código
 .main {
     text-align: center;
     width: 100%;
@@ -1626,8 +1700,6 @@ Copiar código
 
 #### **<span style="color: #AC58FA;">4. Estilo para as Imagens (.imag)</span>**
 ```css
-css
-Copiar código
 .imag {
     width: 100%;
     max-width: 400px;
@@ -1652,8 +1724,6 @@ Copiar código
 
 #### **<span style="color: #AC58FA;">5. Estilo para o Título (.titulo)</span>**
 ```css
-css
-Copiar código
 .titulo {
     color: var(--title-color);
     font-size: 2.5rem;
@@ -1733,7 +1803,2448 @@ Copiar código
     - **`transform: scale(1.1)`**: Aumenta ligeiramente o tamanho do ícone quando o mouse passa sobre ele.
 
 ### <span style="color: #AC58FA;">Página de Login</span>
-### Lógica de mostrar e esconder senha
+**Login.html**
+```html 
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="bg_Login animate downUp-1">
+    <div class="main">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <h2 class="titulo">Fazer Login</h2>
+                <label for="username" class="form-label">Nome de Usuário</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.username }}
+                </div>
+            </div>
+            <!-- INPUT DA SENHA -->
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-key icone"></i>
+                    </span>
+                    {{ form.senha }}
+                    <i class="bi bi-eye-slash esconder_senha" onclick="mostrar()" id="btnSenha"></i>
+                </div>
+            </div>
+            {% if messages %}
+            <div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+                {% for mensagem in messages %}
+                {{ mensagem }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <button class="button" style="color: #40010D" type="submit">Entrar</button>
+        </form>
+    </div>
+    <div class="imag">
+        <img src="{% static 'img/img_login.webp' %}" alt="Imagem">
+    </div>
+</div>
+{% endblock %}
+```
+Detalhes do código:
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+```html
+{% extends 'index.html' %}
+```
+- O template **herda** o conteúdo de `index.html`, o que significa que ele usará a estrutura básica (cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Login
+{% endblock %}
+```
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podenso sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+<div class="bg_Login animate downUp-1">
+    <div class="main">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <h2 class="titulo">Fazer Login</h2>
+                <label for="username" class="form-label">Nome de Usuário</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.username }}
+                </div>
+            </div>
+            <!-- INPUT DA SENHA -->
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-key icone"></i>
+                    </span>
+                    {{ form.senha }}
+                    <i class="bi bi-eye-slash esconder_senha" onclick="mostrar()" id="btnSenha"></i>
+                </div>
+            </div>
+            {% if messages %}
+            <div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+                {% for mensagem in messages %}
+                {{ mensagem }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <button class="button" style="color: #40010D" type="submit">Entrar</button>
+        </form>
+    </div>
+    <div class="imag">
+        <img src="{% static 'img/img_login.webp' %}" alt="Imagem">
+    </div>
+</div>
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe `*bg_Login*` e Animação**:
+    - A **`*<div>*`** com a classe **`*bg_Login*`** serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de **deslocamento** ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Formulário de Login:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - O título da página, **"Fazer Login"**, é exibido dentro de um **`*<h2>*`** com a classe **`*.titulo*`**.
+        - A **`*label`*** nome de usuário é onde será inserido o **`*username`*** do usuário. A classe utilizada para a estilização da cor do texto da **`*label`*** é a **`*form-label*`** , ademais, por meio de um componente **`*span*`** exibe um ícone referente aos dados que serão inseridos.
+        - A **`*label`*** senha é onde será inserido a **`*senha*`** do usuário. A classe utilizada para a estilização da cor do texto da **`*label*`** é a **`*form-label*`** , ademais, por meio de um componente **`*span*`** exibe um ícone referente aos dados que serão inseridos.
+        - No campo de inserção da senha, é possível alterar a exibição da senha, escondendo ou exibindo-a por meio do icone **`*bi bi-eye-slash*`** que é ativada com o evento **`*onclick="mostrar()"*`** .
+        
+    - **Mensagem de Erro:**
+        ```html
+        {% if messages %}
+        	<div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+        	    {% for mensagem in messages %}
+        	    {{ mensagem }}
+        	    {% endfor %}
+        	</div>
+        {% endif %}
+        ```
+        Caso algum dos dados inseridos pelo usuário esteja incorreto, ou seja, não está registrado nas informações do banco de dados, onde se encontram as informações dos usuários, será exibido uma  **`*<div>*`** alertando que alguma das informações estão incorretas.
+        
+- **Imagem de Fundo**:
+    - Dentro de **`*<div class="imag">*`**, uma imagem de fundo é carregada com a tag **`*<img>*`**, utilizando o arquivo de imagem estática **`*img_login.webp*`** (com o caminho definido pelo **`*{% static 'img/img_login.webp' %}*`**).
+    - A imagem tem largura de **400px** e altura de **300px**.
+
+**login.css**
+
+```css
+* {
+    font-family: "Kumbh Sans";
+}
+
+.bg_Login {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 0 10%;
+}
+
+.button {
+    color: #40010D;
+    background-color: #FFFAFB;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.button:hover {
+    background-color: #f2f2f2;
+    color: #40010D;
+}
+
+.main {
+    padding: 40px;
+    background: var(--background);
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    align-content: center;
+}
+
+.imag {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+}
+
+.imag img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.titulo {
+    color: #FFFAFB;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form {
+    border: none;
+    background: var(--input-bg);
+    color: #FFFAFB;
+}
+
+.form::placeholder {
+    color: #FFFAFB;
+    font-size: 13px;
+}
+
+.form:focus {
+    border: none;
+    background: var(--input-bg);
+    color: #FFFAFB;
+}
+
+.form-label {
+    color: #FFFAFB;
+}
+
+.icone {
+    color: #FFFAFB;
+}
+
+.input-group {
+    border: none;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--input-bg);
+    padding: 1px;
+}
+
+.input-group .form-control {
+    border: none;
+    border-radius: 0;
+}
+
+.input-group-text {
+    background-color: var(--input-bg);
+    border: none;
+    color: #FFFAFB;
+}
+
+.esconder_senha {
+    color: #FFFAFB;
+    cursor: pointer;
+    position: absolute;
+    right: 5%;
+    top: 20%;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-out-hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, height 0s 0.5s;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .bg_Login {
+        justify-content: space-between;
+    }
+
+    .main {
+        text-align: left;
+    }
+
+    .titulo {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .titulo {
+        font-size: 1.5rem;
+    }
+}
+```
+Detalhes do código:
+
+### <span style="color: #AC58FA;">Página de Cursos</span>
+**cursos.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Cursos
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cursos.css' %}">
+{% endblock %}
+
+{% block body %}
+
+{% if messages %}
+<div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+    {% for mensagem in messages %}
+    {{ mensagem }}
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <h2 class="titulo">Cursos</h2>
+        <div class="opcoes">
+            <span>Cursos |</span>
+            <a href="{% url 'relatorio' %}">
+                <i class="bi bi-file-earmark-arrow-down pagina" aria-label="Baixar relatório"></i>
+            </a>
+            <span> | </span>
+            <a href="{% url 'notificacoes' %}">
+                <i class="notificacao bi {% if tem_notificacoes %}bi-envelope-paper{% else %}bi-envelope{% endif %} custom-icon"
+                    aria-label="Ver notificações"></i>
+            </a>
+            <span> | </span>
+            <i class="bi bi-search lupa" id="search-icon" aria-label="Pesquisar"></i>
+            <div class="search-container" id="search-container">
+                <form id="search-form" method="GET" action="{% url 'cursos' %}">
+                    {{ form.search }}
+                    <button type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-cursos">
+        <div class="ident">
+            <h3 class="cabecalho">Curso</h3>
+            <h3 class="cabecalho">Turma</h3>
+            <h3 class="cabecalho">Responsável</h3>
+        </div>
+        <div class="fundo-curso" id="results-container">
+            {% for curso in cursos %}
+            <a href="{% url 'alunos' curso.turma %}">
+                <div class="curso">
+                    <h4 class="titulo-curso">{{ curso.nome_curso }}</h4>
+                    <h4 class="titulo-curso">{{ curso.turma }}</h4>
+                    <h4 class="titulo-curso">{{ curso.responsavel }}</h4>
+                </div>
+            </a>
+            {% empty %}
+            <p>Nenhum curso encontrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+Detalhes do código:
+
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+```html
+{% extends 'index.html' %}
+```
+
+- O template **herda** o conteúdo de `index.html`, o que significa que ele usará a estrutura básica (cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Cursos
+{% endblock %}
+```
+
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podenso sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+
+{% if messages %}
+<div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+    {% for mensagem in messages %}
+    {{ mensagem }}
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <h2 class="titulo">Cursos</h2>
+        <div class="opcoes">
+            <span>Cursos |</span>
+            <a href="{% url 'relatorio' %}">
+                <i class="bi bi-file-earmark-arrow-down pagina" aria-label="Baixar relatório"></i>
+            </a>
+            <span> | </span>
+            <a href="{% url 'notificacoes' %}">
+                <i class="notificacao bi {% if tem_notificacoes %}bi-envelope-paper{% else %}bi-envelope{% endif %} custom-icon"
+                    aria-label="Ver notificações"></i>
+            </a>
+            <span> | </span>
+            <i class="bi bi-search lupa" id="search-icon" aria-label="Pesquisar"></i>
+            <div class="search-container" id="search-container">
+                <form id="search-form" method="GET" action="{% url 'cursos' %}">
+                    {{ form.search }}
+                    <button type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-cursos">
+        <div class="ident">
+            <h3 class="cabecalho">Curso</h3>
+            <h3 class="cabecalho">Turma</h3>
+            <h3 class="cabecalho">Responsável</h3>
+        </div>
+        <div class="fundo-curso" id="results-container">
+            {% for curso in cursos %}
+            <a href="{% url 'alunos' curso.turma %}">
+                <div class="curso">
+                    <h4 class="titulo-curso">{{ curso.nome_curso }}</h4>
+                    <h4 class="titulo-curso">{{ curso.turma }}</h4>
+                    <h4 class="titulo-curso">{{ curso.responsavel }}</h4>
+                </div>
+            </a>
+            {% empty %}
+            <p>Nenhum curso encontrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe `container-conteudo` e Animação**:
+    - A **`<div>`** com a classe `container-conteudo` serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de deslocamento ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Listagem dos Cursos:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - O título da página, **"Cursos"**, é exibido dentro de um **`*<h2>*`** com a classe **`*.titulo*`**.
+        - Na `<div class="alert-container">` há uma notificação que é exibida em caso de não existir cursos.
+        - Na `<div>` com a classe de `opções`  ******é listado diversos ícones que redireciona o usuário para outras páginas, como a de notificações e relatórios e um botão para pesquisa de cursos específicos.
+        - Na `<div class="container-curso">` é gerado os títulos da lista em um `<h3>` com a classe `cabecalho`
+        - Para a geração da lista é importado os dados dos cursos por meio da `{% for curso in cursos %}` e suas informações são buscadas e exibidas nas `<h4>` com a classe `titulo-cursos` e em caso de não existir alunos será exibido um texto alertando, “Nenhum curso encontrado”.
+        - Possui um botão que redireciona o usuário para a página de aluno pelo `{% url 'alunos' curso.turma %}`, quando o componente que contem o aluno for clicado, buscando os dados das turmas dos cursos.
+
+**cursos.css**
+
+```css
+.container-conteudo {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 60px;
+    box-sizing: border-box;
+}
+
+.container-cursos {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 10px;
+    color: #260104;
+}
+
+.curso {
+    padding: 18px;
+    border-radius: 20px;
+    background: var(--list-bg-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.curso:hover {
+    background: #971c32;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.titulo-curso,
+.detalhes-curso {
+    font-size: 0.9rem;
+    color: #454444;
+    flex: 1;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 10px;
+    padding: 30px;
+}
+
+.ident {
+    display: flex;
+    color: var(--text-color);
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 15px;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 10px;
+}
+
+.cabecalho {
+    font-size: 1.0rem;
+    flex: 1;
+    text-align: center;
+}
+
+.opcoes {
+    display: flex;
+    max-height: 35px;
+    align-items: center;
+    align-content: center;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    gap: 10px;
+    font-size: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.lupa,
+.pagina,
+
+.notificacao {
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.lupa:hover,
+.pagina:hover,
+.notificacao:hover {
+    color: #8C031C;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    max-width: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+.search-container.visible {
+    max-width: 660px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.search-container input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+    height: 36px;
+    padding: 8px 16px;
+    background: rgba(124, 13, 29, 0.6);
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.search-container input::placeholder {
+    color: #fff;
+}
+
+.search-container input:focus {
+    background: rgba(194, 67, 86, 0.8);
+    box-shadow: 0 0 0 2px rgba(255, 6, 44, 0.3);
+    color: #fff;
+}
+
+.search-container button {
+    margin: 0;
+    height: 36px;
+    min-width: 80px;
+    background: var(--button-home);
+    color: var(--background-color);
+    font-size: 14px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container button:hover {
+    background: var(--button-home-hover, rgb(143, 41, 41));
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-out-hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, height 0s 0.5s;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 600px) {
+    .search-container {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .search-container form {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .search-container input {
+        min-width: 120px;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .search-container button {
+        padding: 6px 12px;
+        font-size: 12px;
+        min-width: 60px;
+    }
+
+    .opcoes {
+        font-size: 1rem;
+        margin-left: 0.6rem;
+    }
+}
+```
+
+### <span style="color: #AC58FA;">Página de Alunos</span>
+**alunos.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Gestão de Atrasos
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/alunos.css' %}">
+
+<meta name="keywords"
+    content="lista de alunos, gestão de frequência estudantil, controle de atrasos, presença de alunos, frequência escolar em tempo real, monitoramento de presença, sistema de gestão escolar">
+
+{% endblock %}
+
+{% block body %}
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}" aria-label="Voltar para a lista de cursos">
+                <i class="bi bi-house-fill" aria-hidden="true"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">{{ curso.nome_curso }}</h2>
+    </div>
+    <div class="container-atrasos">
+        <div class="lista-alunos" role="table" aria-labelledby="alunos-table">
+            <div class="ident" role="row">
+                <div class="detalhes-info" role="columnheader">Aluno</div>
+                <div class="detalhes-info" role="columnheader">Atrasos</div>
+                <div class="detalhes-info" role="columnheader">Frequência</div>
+                <div class="detalhes-info" role="columnheader">Faltas</div>
+                {% if user.is_authenticated and user.is_superuser %}
+                <div class="detalhes-info" role="columnheader">Opções</div>
+                {% endif %}
+            </div>
+
+            {% for aluno in alunos_detalhes %}
+            <div class="aluno-info" role="row">
+                <div class="titulo-info" role="cell">{{ aluno.aluno }}</div>
+                <div class="detalhes-info" role="cell">{{ aluno.atrasos }}</div>
+                <div class="detalhes-info" role="cell">{{ aluno.porcentagem_carga_horaria }}%</div>
+                <div class="detalhes-info" role="cell">{{ aluno.faltas }}</div>
+                {% if user.is_authenticated and user.is_superuser %}
+                <div class="detalhes-info" role="cell">
+                    <form method="POST" action="{% url 'excluir_aluno' curso.turma aluno.id_carteirinha %}"
+                        aria-label="Confirmar Exclusão">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Tem certeza de que deseja excluir este aluno?')"
+                            aria-label="Excluir aluno: {{ aluno.aluno }}">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p>Nenhum aluno encontrado.</p>
+            {% endfor %}
+        </div>
+
+        <div class="inform">
+            <div class="barra-lateral" aria-labelledby="informacoes-title">
+                <h3 id="informacoes-title">Informações</h3>
+                <p><strong>Responsável: </strong>{{ curso.responsavel }}</p>
+                <p><strong>Código da Turma: </strong>{{ curso.turma }}</p>
+                <p><strong>Horário: </strong>{{ curso.horario_entrada }} - {{ curso.horario_saida }}</p>
+            </div>
+            {% if user.is_authenticated and user.is_superuser %}
+            <div class="botao-lateral">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#excluirModal"
+                    aria-label="Excluir curso {{ curso.nome_curso }}" style="font-size: 1rem;">Excluir Curso</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="excluirModal" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true"
+    data-bs-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" data-bs-theme="dark">
+                <h5 class="modal-title" id="excluirModalLabel" style="color: #FFF;">Excluir Curso
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: #FFF;">
+                Tem certeza que deseja excluir este curso?<br><br>
+                Observação: Ao deletar o curso, os alunos serão excluídos.
+            </div>
+            <div class="modal-footer" data-bs-theme="dark">
+                <form method="POST" action="{% url 'excluir_curso' curso.turma %}" aria-label="Confirmar Exclusão"
+                    style="margin: 0; padding: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="botao-cor" style="margin: 0;">
+                        Excluir
+                    </button>
+                </form>
+                <button type="button" class="botao-cor" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+Detalhes do código:
+
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+```html
+{% extends 'index.html' %}
+```
+
+- O template **herda** o conteúdo de `index.html`, o que significa que ele usará a estrutura básica (cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Gestão de Atrasos
+{% endblock %}
+```
+
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podendo sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}" aria-label="Voltar para a lista de cursos">
+                <i class="bi bi-house-fill" aria-hidden="true"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">{{ curso.nome_curso }}</h2>
+    </div>
+    <div class="container-atrasos">
+        <div class="lista-alunos" role="table" aria-labelledby="alunos-table">
+            <div class="ident" role="row">
+                <div class="detalhes-info" role="columnheader">Aluno</div>
+                <div class="detalhes-info" role="columnheader">Atrasos</div>
+                <div class="detalhes-info" role="columnheader">Frequência</div>
+                <div class="detalhes-info" role="columnheader">Faltas</div>
+                {% if user.is_authenticated and user.is_superuser %}
+                <div class="detalhes-info" role="columnheader">Opções</div>
+                {% endif %}
+            </div>
+
+            {% for aluno in alunos_detalhes %}
+            <div class="aluno-info" role="row">
+                <div class="titulo-info" role="cell">{{ aluno.aluno }}</div>
+                <div class="detalhes-info" role="cell">{{ aluno.atrasos }}</div>
+                <div class="detalhes-info" role="cell">{{ aluno.porcentagem_carga_horaria }}%</div>
+                <div class="detalhes-info" role="cell">{{ aluno.faltas }}</div>
+                {% if user.is_authenticated and user.is_superuser %}
+                <div class="detalhes-info" role="cell">
+                    <form method="POST" action="{% url 'excluir_aluno' curso.turma aluno.id_carteirinha %}"
+                        aria-label="Confirmar Exclusão">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Tem certeza de que deseja excluir este aluno?')"
+                            aria-label="Excluir aluno: {{ aluno.aluno }}">
+                            <i class="bi bi-trash" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p>Nenhum aluno encontrado.</p>
+            {% endfor %}
+        </div>
+
+        <div class="inform">
+            <div class="barra-lateral" aria-labelledby="informacoes-title">
+                <h3 id="informacoes-title">Informações</h3>
+                <p><strong>Responsável: </strong>{{ curso.responsavel }}</p>
+                <p><strong>Código da Turma: </strong>{{ curso.turma }}</p>
+                <p><strong>Horário: </strong>{{ curso.horario_entrada }} - {{ curso.horario_saida }}</p>
+            </div>
+            {% if user.is_authenticated and user.is_superuser %}
+            <div class="botao-lateral">
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#excluirModal"
+                    aria-label="Excluir curso {{ curso.nome_curso }}" style="font-size: 1rem;">Excluir Curso</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="excluirModal" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true"
+    data-bs-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" data-bs-theme="dark">
+                <h5 class="modal-title" id="excluirModalLabel" style="color: #FFF;">Excluir Curso
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: #FFF;">
+                Tem certeza que deseja excluir este curso?<br><br>
+                Observação: Ao deletar o curso, os alunos serão excluídos.
+            </div>
+            <div class="modal-footer" data-bs-theme="dark">
+                <form method="POST" action="{% url 'excluir_curso' curso.turma %}" aria-label="Confirmar Exclusão"
+                    style="margin: 0; padding: 0;">
+                    {% csrf_token %}
+                    <button type="submit" class="botao-cor" style="margin: 0;">
+                        Excluir
+                    </button>
+                </form>
+                <button type="button" class="botao-cor" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe** `container-conteudo` **e Animação**:
+    - A **`<div>`** com a classe `container-conteudo` serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de deslocamento ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Listagem das informações dos Alunos:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - Um link por meio do componente `<a>` retorna o usuário para a página anterior
+        - No título da página, o nome do Curso, é exibido dentro de um **`*<h2>`*** por meio de uma variável que exibe o nome correspondente ao curso sendo `{{ curso.nome_curso }}` , sendo estilizado com a classe **`*.titulo*`**.
+        - Na `<div class="barra-lateral">` há vários componentes `<div>` que contem a classe `detalhes_info` , listando tópicos como nome do aluno, atraso, frequência, faltas e em caso do login ser feito com o perfil do administrador é exibido a opção de excluir curso ou usuário.
+        - Na classe `alunos-info`  é exibido os dados específicos de cada aluno, sendo listados abaixo dos tópicos, ou em caso de não existir alunos, nada é exibido
+        - Na `<div>` com a classe `modal`, utilizada para a exclusão de alunos e cursos, é exibido um componente de modal que ao ser clicado exibe uma confirmação de exclusão do aluno ou curso.
+
+**alunos.css**
+
+```css
+body {
+    font-family: "Kumbh Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 80px;
+}
+
+.container-conteudo {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 50px;
+    text-align: center;
+}
+
+.topo {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo {
+    color: var(--title);
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.container-atrasos {
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    min-height: 200px;
+}
+
+.lista-alunos {
+    flex: 2;
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.ident {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.aluno-info {
+    padding: 10px;
+    border-radius: 20px;
+    background: var(--list-bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 28px 0;
+    flex-wrap: wrap;
+    min-height: 50px;
+}
+
+.aluno-info button {
+    background-color: transparent;
+    margin: 0;
+}
+
+.aluno-info i {
+    color: var(--text-color);
+}
+
+.voltar {
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    position: absolute;
+    top: 5rem;
+    left: 4.6rem;
+    cursor: pointer;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.titulo-info,
+.detalhes-info {
+    font-size: 0.9rem;
+    color: var(--title);
+    flex: 1;
+    text-align: center;
+}
+
+.inform {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 64px;
+    border-radius: 10px;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 270px;
+}
+
+.inform h3 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.barra-lateral {
+    display: flex;
+    flex-direction: column;
+    background: var(--list-bg-color);
+    border-radius: 20px;
+    width: 100%;
+    padding: 1.2rem;
+    text-align: left;
+}
+
+.barra-lateral h3 {
+    align-self: center;
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.botao-lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.botao-cor {
+    color: white;
+    background: var(--background);
+}
+
+.botao-cor:hover {
+    color: #ffff;
+    background: #971c32;
+}
+
+.botao-lateral button {
+    color: var(--text-color);
+    background: var(--list-bg-color);
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-width: 150px;
+}
+
+.botao-lateral button:hover {
+    background: #971c32;
+    color: #fff;
+}
+
+.modal-content {
+    background: var(--background);
+    border-radius: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+}
+
+form {
+    margin-top: 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-atrasos {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-conteudo {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+    }
+
+    .aluno-info {
+        flex-direction: column;
+    }
+
+    .inform {
+        margin-top: 20px;
+    }
+
+    .ident {
+        gap: 20px;
+        align-items: center;
+        align-content: center;
+        text-align: center;
+        padding: 5px;
+        margin-bottom: 60px;
+    }
+}
+```
+
+### <span style="color: #AC58FA;">Página de Notificação</span>
+**notificacoes.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Notificações
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/notificacoes.css' %}">
+
+{% endblock %}
+
+{% block body %}
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}">
+                <i class="bi bi-house-fill"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">Notificações</h2>
+    </div>
+    <div class="container-cursos">
+        <div class="ident">
+            <h5 class="nome-aluno">Nome</h5>
+            <div class="detalhes-aluno">Atrasos</div>
+            <div class="detalhes-aluno">Turma</div>
+        </div>
+        <div class="fundo-curso">
+            {% for aluno in alunos_notificados %}
+            <div class="curso">
+                <h5 class="nome-aluno">{{ aluno.nome }}</h5>
+                <div class="detalhes-aluno">{{ aluno.total_atrasos }}</div>
+                <div class="detalhes-aluno">{{ aluno.turma}}</div>
+            </div>
+            {% empty %}
+            <div class="curso">
+                <h5 class="nome-aluno">Nenhum aluno com notificações.</h5>
+                <div class="detalhes-aluno">0</div>
+                <div class="detalhes-aluno">N/A</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+Detalhes do código:
+
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+```html
+{% extends 'index.html' %}
+```
+
+- O template herda o conteúdo de `index.html`, o que significa que ele usará a estrutura básica 
+(cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Notificações
+{% endblock %}
+```
+
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podenso sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+<div class="container-conteudo animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}">
+                <i class="bi bi-house-fill"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">Notificações</h2>
+    </div>
+    <div class="container-cursos">
+        <div class="ident">
+            <h5 class="nome-aluno">Nome</h5>
+            <div class="detalhes-aluno">Atrasos</div>
+            <div class="detalhes-aluno">Turma</div>
+        </div>
+        <div class="fundo-curso">
+            {% for aluno in alunos_notificados %}
+            <div class="curso">
+                <h5 class="nome-aluno">{{ aluno.nome }}</h5>
+                <div class="detalhes-aluno">{{ aluno.total_atrasos }}</div>
+                <div class="detalhes-aluno">{{ aluno.turma}}</div>
+            </div>
+            {% empty %}
+            <div class="curso">
+                <h5 class="nome-aluno">Nenhum aluno com notificações.</h5>
+                <div class="detalhes-aluno">0</div>
+                <div class="detalhes-aluno">N/A</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe** `container-conteudo` **e Animação**:
+    - A **`<div>`** com a classe `container-conteudo` serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de deslocamento ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Listagem das Notificações:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - Um link por meio do componente `<a>` retorna o usuário para a página anterior
+        - O título da página, **"Notificações"**, é exibido dentro de um **`*<h2>*`** com a classe **`*.titulo*`**.
+        - Na `<div class="container-cursos">` é listado todos os dados dos alunos separados pelos tópicos de Nome, Atrasos e Turma.
+        - Na `<div>` com a classe de `fundo-curso` , é importado por meio do `{% for aluno in aluno_notificados %}` os dados dos alunos.
+        - Na `<div class="container-curso">` é gerado os títulos da lista em um `<h3>` com a classe `cabecalho`
+        - Em caso de não existir nenhum aluno com mais de 3 atrasos registrados, nada é listado.
+
+**notificacoes.css**
+
+```css
+* {
+    font-family: "Kumbh Sans";
+}
+
+.container-conteudo {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background: var(--background-color);
+    padding: 60px;
+    box-sizing: border-box;
+}
+
+.container-cursos {
+    width: 100%;
+    max-width: 1000px;
+    border-radius: 10px;
+    color: #260104;
+}
+
+.curso {
+    padding: 18px;
+    border-radius: 20px;
+    background: var(--list-bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.curso .nome-aluno,
+.curso .detalhes-aluno,
+.curso .detalhes-info {
+    flex: 1;
+    text-align: center;
+}
+
+.fundo-curso a:hover .nome-aluno,
+.fundo-curso a:hover .detalhes-aluno {
+    color: #fff;
+}
+
+.fundo-curso :hover {
+    background: #971C32;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nome-aluno {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+}
+
+.detalhes-aluno {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+}
+
+.detalhes-info,
+.options {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flexbox;
+    gap: 10px;
+}
+
+.options a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.voltar {
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    position: absolute;
+    top: 5rem;
+    left: 4.6rem;
+}
+
+.voltar i {
+    margin-right: 4px;
+    font-size: 1.1rem;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.titulo {
+    color: var(--text-color);
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 20px;
+    padding: 40px
+}
+
+.ident {
+    display: flex;
+    color: #ff0000;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 10px;
+
+}
+
+.ident a {
+    text-decoration: none;
+    color: var(--text-color)
+}
+
+.ident a:hover {
+    color: #971C32;
+}
+
+.titulo-curso {
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .titulo-cabecalho {
+        font-size: 2rem;
+    }
+
+    .curso,
+    .ident {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nome-aluno,
+    .detalhes-aluno {
+        font-size: 0.8rem;
+        text-align: left;
+    }
+}
+```
+
+### <span style="color: #AC58FA;">Página de Relatórios</span>
+**relatorio.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Relatório
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/relatorio.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="bg_relatorio animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}">
+                <i class="bi bi-house-fill" aria-hidden="true"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">Relatórios</h2>
+    </div>
+    <div class="container-cursos">
+        <div class="imagem">
+            <img src="{% static 'img/imagem_relatorios.webp' %}" alt="Imagem ilustrativa de relatórios">
+        </div>
+        <div class="relatorio-geral">
+            <form method="GET" action="{% url 'relatorio' %}">
+                <input type="hidden" name="format" value="pdf">
+                <button type="submit">Gerar relatório em PDF</button>
+            </form>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#relatorioModal">
+                Sobre os Relatórios
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" data-bs-theme="dark">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="relatorioModalLabel">Sobre os relatórios</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    O relatório a ser baixado preza por mostrar à gestão escolar os dados referentes aos
+                    maiores números de atrasos e faltas dos alunos, mostrando sua porcentagem total de frequência.
+                    Assim, a gestão terá uma visão geral
+                    sobre seus alunos, facilitando a tomada de decisões e gerenciamento da escola. Para
+                    uma acessibilidade mais ampla, o relatório contará com tabelas contendo os dados a
+                    serem analisados.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+```
+
+Detalhes do código:
+
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+```html
+{% extends 'index.html' %}
+```
+
+- O template **herda** o conteúdo de `index.html`, o que significa que ele usará a estrutura básica (cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Relatório
+{% endblock %}
+```
+
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podenso sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+<div class="bg_relatorio animate downUp-1">
+    <div class="topo">
+        <div class="voltar">
+            <a href="{% url 'cursos' %}">
+                <i class="bi bi-house-fill" aria-hidden="true"></i>
+                <span>Voltar</span>
+            </a>
+        </div>
+        <h2 class="titulo">Relatórios</h2>
+    </div>
+    <div class="container-cursos">
+        <div class="imagem">
+            <img src="{% static 'img/imagem_relatorios.webp' %}" alt="Imagem ilustrativa de relatórios">
+        </div>
+        <div class="relatorio-geral">
+            <form method="GET" action="{% url 'relatorio' %}">
+                <input type="hidden" name="format" value="pdf">
+                <button type="submit">Gerar relatório em PDF</button>
+            </form>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#relatorioModal">
+                Sobre os Relatórios
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="relatorioModal" tabindex="-1" aria-labelledby="relatorioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" data-bs-theme="dark">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="relatorioModalLabel">Sobre os relatórios</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    O relatório a ser baixado preza por mostrar à gestão escolar os dados referentes aos
+                    maiores números de atrasos e faltas dos alunos, mostrando sua porcentagem total de frequência.
+                    Assim, a gestão terá uma visão geral
+                    sobre seus alunos, facilitando a tomada de decisões e gerenciamento da escola. Para
+                    uma acessibilidade mais ampla, o relatório contará com tabelas contendo os dados a
+                    serem analisados.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe `bg_relatorio` e Animação**:
+    - A **`<div>`** com a classe `bg_relatorio` ****serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de deslocamento ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Listagem dos Relatórios:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - Um link por meio do componente `<a>` retorna o usuário para a página anterior
+        - O título da página, **"Relatórios"**, é exibido dentro de um **`*<h2>*`** com a classe **`*.titulo*`**.
+        - Na `<div class="relatorio-geral">` é exibido um formulário exibindo a opção “Gerar um relatório em PDF”
+        - No componente de botão, ao ser clicado é exibido uma modal sobre as informações que serão exibidas no relatório em PDF
+
+**relatorio.css**
+
+```css
+* {
+    font-family: "Kumbh Sans";
+}
+
+.bg_relatorio {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+    padding: 40px;
+    margin: 0px;
+}
+
+.topo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voltar {
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    position: absolute;
+    top: 5rem;
+    left: 4.6rem;
+}
+
+.voltar i {
+    margin-right: 4px;
+    font-size: 1.1rem;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.titulo {
+    font-size: 2rem;
+    color: var(--title);
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container-cursos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.imagem {
+    max-width: 450px;
+    max-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagem img {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons i {
+    margin-left: 10px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.relatorio-geral {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.relatorio-geral button {
+    background: var(--list-bg-color);
+    border: none;
+    border-radius: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.relatorio-geral button:hover {
+    background: #8C031C;
+    color: #fff;
+}
+
+.modal-content {
+    background: var(--background);
+    color: #fff;
+    border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 1rem;
+    }
+
+    .container-cursos {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .relatorio-lista {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .imagem {
+        max-width: 300px;
+    }
+
+    .relatorio-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .voltar {
+        left: 10px;
+        top: 10px;
+    }
+}
+```
+
+### <span style="color: #AC58FA;">Página de Cadastro</span>
+**cadastro.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Cadastro
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+
+{% endblock %}
+
+{% block body %}
+<div class="bg_Cadastro animate downUp-1">
+    <div class="voltar">
+        <a href="{% url 'cursos' %}">
+            <i class="bi bi-house-fill"></i>
+            <span>Voltar</span>
+        </a>
+    </div>
+    <div class="main">
+        <form method="post">
+            <h2 class="titulo" style="color: white;">Fazer Cadastro</h2>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Nome</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.nome }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputSobrenome" class="form-label">Sobrenome</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.sobrenome }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputUser" class="form-label">Usuário</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.username }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-key icone"></i>
+                    </span>
+                    {{ form.senha }}
+                </div>
+            </div>
+
+            {% if messages %}
+            <div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+                {% for mensagem in messages %}
+                {{ mensagem }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div style="justify-content: center; align-items: center">
+                <button class="button" type="submit"
+                    style="color: #40010D; text-decoration: none; text-align:center;">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    <div class="imag">
+        <img src="{% static 'img/img_cadastro.webp' %}" alt="Imagem">
+    </div>
+</div>
+{% endblock %}
+```
+
+Detalhes do código:
+
+#### **<span style="color: #AC58FA;">1. Extensão de Template</span>**
+**1. Extensão de Template**
+
+```html
+{% extends 'index.html' %}
+```
+
+- O template **herda** o conteúdo de `index.html`, o que significa que ele usará a estrutura básica (cabeçalho, rodapé, etc.) definida no arquivo `index.html`. O conteúdo específico será inserido nos **blocos** definidos no template pai.
+
+#### **<span style="color: #AC58FA;">2. Carregamento de Arquivos Estáticos</span>**
+```html
+{% load static %}
+```
+
+- O comando `{% load static %}` é utilizado para **carregar arquivos estáticos** no Django (como imagens, arquivos CSS, JavaScript), que são armazenados em diretórios específicos. No código, isso permite que você acesse imagens e outros recursos estáticos.
+
+#### **<span style="color: #AC58FA;">3. Bloco title</span>**
+```html
+{% block title %}
+Cadastro
+{% endblock %}
+```
+
+- Este bloco define o título da página que aparecerá na **aba do navegador**.
+- Como o template extende `index.html`, esse bloco sobrescreve o título padrão do arquivo pai, definindo o título como **"Homepage"**.
+
+#### **<span style="color: #AC58FA;">4. Bloco head</span>**
+```html
+{% block head %}
+{% endblock %}
+```
+
+- O bloco **`*head*`** está vazio neste template, mas ele é utilizado para incluir **conteúdo adicional** dentro da tag **`*<head>*`** do HTML (como links de CSS ou meta tags). É necessário caso precise adicionar algo específico a esse bloco, podenso sobrescrevê-lo neste template ou em templates filhos.
+
+#### **<span style="color: #AC58FA;">5. Bloco body</span>**
+```html
+{% block body %}
+<div class="bg_Cadastro animate downUp-1">
+    <div class="voltar">
+        <a href="{% url 'cursos' %}">
+            <i class="bi bi-house-fill"></i>
+            <span>Voltar</span>
+        </a>
+    </div>
+    <div class="main">
+        <form method="post">
+            <h2 class="titulo" style="color: white;">Fazer Cadastro</h2>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="exampleInputName" class="form-label">Nome</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.nome }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputSobrenome" class="form-label">Sobrenome</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.sobrenome }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputUser" class="form-label">Usuário</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-person icone"></i>
+                    </span>
+                    {{ form.username }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-key icone"></i>
+                    </span>
+                    {{ form.senha }}
+                </div>
+            </div>
+
+            {% if messages %}
+            <div id="alert-container" class="mt-2 alert alert-warning fade-out" role="alert">
+                {% for mensagem in messages %}
+                {{ mensagem }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div style="justify-content: center; align-items: center">
+                <button class="button" type="submit"
+                    style="color: #40010D; text-decoration: none; text-align:center;">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+    <div class="imag">
+        <img src="{% static 'img/img_cadastro.webp' %}" alt="Imagem">
+    </div>
+</div>
+{% endblock %}
+```
+
+- **Estrutura do `*body*`**:
+
+Este é o conteúdo principal de uma página, onde a seção do corpo é definida. Contém o corpo de um documento ***HTML***, que é exibido pelo navegador em sua janela, ou seja, todo o conteúdo visível do site
+
+- **Classe `bg_relatorio` e Animação**:
+    - A **`<div>`** com a classe `bg_relatorio` ****serve como um **container** para o conteúdo da página.
+    - A classe **`*animate downUp-1*`** indica que o conteúdo tem uma animação associada (definida no CSS), fazendo com que ele tenha um efeito visual de deslocamento ao ser carregado.
+- **Seção Principal (`*main*`)**:
+    - **Formulário de Cadastro:**
+        - O link aponta para a URL associada ao nome de View **`*login`*** no Django, gerado dinamicamente com **`*{% url 'login' %}*`**.
+        - Um link por meio do componente `<a>` retorna o usuário para a página anterior
+        - O título da página, **"Fazer Cadastro"**, é exibido dentro de um **`*<h2>*`** com a classe **`*.titulo*`**.
+        - Na `<label>` com a classe `form-label`  é requerido Nome, Sobrenome  e senha do usuário
+        - Em caso de alguma informação estar sendo inserida no formato errado será exibido uma notificação de alerta de que há informações inseridas de forma incorreta
+- **Imagem de Fundo**:
+    - Dentro de **`*<div class="imag">*`**, uma imagem de fundo é carregada com a tag **`*<img>*`**, utilizando o arquivo de imagem estática **`*img_cadastro.webp*`** (com o caminho definido pelo **`*{% static 'img/img_cadastro.webp' %}*`**).
+    - A imagem tem largura de **400px** e altura de **300px**.
+    
+
+**cadastro.css**
+
+```css
+* {
+    font-family: "Kumbh Sans";
+}
+
+.bg_Cadastro {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--background-color);
+    gap: 10px;
+    padding: 80px;
+    padding-top: 60px;
+}
+
+.voltar {
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    position: absolute;
+    top: 5rem;
+    left: 4.6rem;
+}
+
+.voltar i {
+    margin-right: 4px;
+    font-size: 1.1rem;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.main {
+    padding: 40px;
+    background: var(--background);
+    border-radius: 30px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px;
+}
+
+.button {
+    color: #260164;
+    background-color: #FFFAFB;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #f2f2f2;
+    color: #40010D;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.imag {
+    width: 100%;
+    max-width: 600px;
+}
+
+.imag img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.titulo {
+    color: #ffff;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form {
+    border: none;
+    background: var(--input-bg);
+    color: #FFFAFB;
+}
+
+.form::placeholder {
+    color: #FFFAFB;
+    font-size: 13px;
+}
+
+.form:focus {
+    border: none;
+    background: var(--input-bg);
+    color: #FFFAFB;
+}
+
+.form-label {
+    color: #FFFAFB;
+}
+
+.icone {
+    color: #FFFAFB;
+}
+
+.input-group {
+    border: none;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--input-bg);
+    padding: 1px;
+}
+
+.input-group .form-control {
+    border: none;
+    border-radius: 0;
+}
+
+.input-group-text {
+    background-color: var(--input-bg);
+    border: none;
+    color: #FFFAFB;
+}
+
+.fade-out {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-out-hidden {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out, height 0s 0.5s;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) {
+    .bg_Cadastro {
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .main {
+        text-align: left;
+    }
+
+    .titulo {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .titulo {
+        font-size: 1.5rem;
+    }
+}
+```
+
+### <span style="color: #AC58FA;">Páginas de adicionar curso, aluno e frequência</span>
+**criar_curso.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Criar Curso
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="voltar">
+    <a href="{% url 'cursos' %}">
+        <i class="bi bi-house-fill" aria-hidden="true"></i>
+        <span>Voltar</span>
+    </a>
+</div>
+<div class="formulario">
+
+    <form action="{% url 'criar_curso' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="cursos" class="titulo">
+            <h2>Selecione o arquivo</h2>
+        </label>
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="cursos" name="cursos" accept=".csv">
+            <label class="input-group-text" for="inputGroupFile02"
+                style="align-items: center; justify-content: center;"><button
+                    style="background: transparent; color: #fefffa; align-items: center; justify-content: center;color: white; margin: 0; padding: 0;"
+                    type="submit">Enviar</button></label>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+```
+
+**criar_aluno.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Criar Aluno
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="voltar">
+    <a href="{% url 'cursos' %}">
+        <i class="bi bi-house-fill" aria-hidden="true"></i>
+        <span>Voltar</span>
+    </a>
+</div>
+<div class="formulario">
+    <form action="{% url 'criar_aluno' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="alunos" class="titulo">
+            <h2>Selecione o arquivo</h2>
+        </label>
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="alunos" name="alunos" accept=".csv">
+            <label class="input-group-text" for="inputGroupFile02"
+                style="align-items: center; justify-content: center;"><button
+                    style="background: transparent; color: #fefffa; align-items: center; justify-content: center;color: white; margin: 0; padding: 0;"
+                    type="submit">Enviar</button></label>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+```
+
+**frequencia.html**
+
+```html
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+Frequência
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="voltar">
+    <a href="{% url 'cursos' %}">
+        <i class="bi bi-house-fill" aria-hidden="true"></i>
+        <span>Voltar</span>
+    </a>
+</div>
+<div class="formulario">
+    <form action="{% url 'freq' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="freq">
+            <h2>Selecione o arquivo</h2>
+        </label>
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="freq" name="freq" accept=".txt">
+            <label class="input-group-text" for="inputGroupFile02"
+                style="align-items: center; justify-content: center;"><button
+                    style="background: transparent; color: #fefffa; align-items: center; justify-content: center; margin: 0; padding: 0;"
+                    type="submit">Enviar</button></label>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+```
+
+**formulario.css**
+
+```css
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Kumbh Sans";
+    background-color: var(--background-color);
+
+}
+
+.formulario {
+    background: var(--background);
+    color: #fefffa;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+}
+
+.formulario label {
+    margin-bottom: 10px;
+}
+
+.formulario input[type="file"] {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    height: 42px;
+}
+
+.input-group-text {
+    height: 42px;
+    background: var(--background);
+    color: #fefffa;
+}
+
+.voltar {
+    font-family: "Krona One", sans-serif;
+    font-size: 1rem;
+    position: absolute;
+    top: 7rem;
+    left: 4.6rem;
+    cursor: pointer;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.titulo {
+    font-family: "Krona One", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fefffa;
+}
+```
+
+---
+
+### <span style="color: #AC58FA;">Lógica de mostrar e esconder senha</span>
 
 Na página de login, para o melhor desempenho do site em relação ao usuário, foi adicionada uma lógica que possibilita esconder e mostrar a senha, de acordo com a preferência de quem estiver inserindo suas informações.
 Os arquivos usados para a realização dessa tarefa foram:
@@ -2240,82 +4751,426 @@ def notificacoes(request):
     return render(request, 'notificacoes.html', context)
 ```
 
+### <span style="color: #AC58FA;">Adicionar e deletar curso</span>
+### **View: `criar_cursos` (Adicionar Curso)**
 
+A view `criar_cursos` tem o objetivo de permitir a criação de cursos no sistema a partir de um arquivo CSV enviado pelo usuário. Ela processa o arquivo CSV, valida as informações e cria os cursos no banco de dados.
 
+### **Funcionamento:**
 
+1. **Método de Requisição**:
+    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
+2. **Validação do Arquivo**:
+    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
+    - Para cada linha do CSV, o sistema tenta extrair informações como turma, nome do curso, horários e datas.
+3. **Verificação de Cursos Existentes**:
+    - Antes de criar um novo curso, o sistema verifica se já existe um curso com a mesma **turma** e **nome do curso**. Se já existir, ele ignora a linha e passa para a próxima.
+4. **Criação de Curso**:
+    - Caso a linha seja válida, o curso é criado no banco de dados com os campos extraídos do CSV.
+    - Além disso, a data de início e de fim do curso são convertidas para o formato adequado, e os dias de funcionamento são divididos e armazenados.
+5. **Exceções**:
+    - Se ocorrer algum erro no processo de criação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
+6. **Respostas ao Usuário**:
+    - Se os cursos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, uma mensagem de erro será exibida.
 
+### **Código:**
 
+```python
+@login_required
+def criar_cursos(request):
 
+        if request.method == 'POST' and 'cursos' in request.FILES:
+            csv_file = request.FILES['cursos']
+            
+            fs = FileSystemStorage()
+            filename = fs.save(csv_file.name, csv_file)
 
+            with open(fs.path(filename), newline='', encoding='ISO-8859-1') as csvfile:
+                reader = csv.reader(csvfile, delimiter=';')
 
+                for row in reader:
+                    try:
+                        if Curso.objects.filter(turma=row[0], nome_curso=row[1]).exists():
+                            print(f"Curso já existe: {row[0]}, {row[1]}")
+                            continue
 
+                        dias = [dia.strip() for dia in row[6].split(',')]
+                        data_inicio = datetime.strptime(row[7], '%d/%m/%Y').date()
+                        data_fim = datetime.strptime(row[8], '%d/%m/%Y').date()
 
+                        Curso.objects.create(
+                            turma=row[0],
+                            nome_curso=row[1],
+                            horario_entrada=row[2],
+                            horario_saida=row[3],
+                            carga_horaria=row[4],
+                            responsavel=row[5],
+                            dias_funcionamento=dias,
+                            data_inicio=data_inicio,
+                            data_fim=data_fim,
+                            carga_horaria_intervalo=row[9],
+                            dias_letivos=row[10]
+                        )
+                    except (IndexError, ValueError) as e:
+                        print(f"Linha mal formatada ou erro: {row}, Erro: {e}")
 
+            messages.success(request, "Cursos criados com sucesso.")
+            return redirect("cursos")
+        
+        return render(request, 'criar_curso.html')
+```
 
+### **View: `delete_curso` (Deletar Curso)**
 
+A view `delete_curso` tem como objetivo permitir a exclusão de um curso específico e todos os alunos associados a ele. A view recebe a turma como parâmetro e, após a confirmação de que o usuário tem as permissões necessárias, exclui o curso e todos os alunos associados a ele.
 
+### **Funcionamento:**
 
+1. **Método de Requisição**:
+    - A view trata requisições `POST` para confirmar a exclusão do curso e seus alunos. Se a requisição não for `POST`, uma mensagem de erro é exibida.
+2. **Autenticação e Permissões**:
+    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do curso. Caso contrário, a ação é impedida e uma mensagem de erro é exibida.
+3. **Verificação de Existência do Curso**:
+    - O sistema tenta localizar o curso com base na **turma** fornecida. Se o curso não for encontrado, será gerado um erro 404.
+4. **Exclusão de Curso e Alunos**:
+    - Caso o curso seja encontrado, o sistema localiza todos os alunos associados a esse curso e os exclui.
+    - O sistema também remove os registros de frequência dos alunos excluídos.
+    - Após excluir todos os alunos e registros de frequência, o curso é excluído.
+5. **Respostas ao Usuário**:
+    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, uma mensagem de erro será exibida.
 
+### **Código:**
 
+```python
+@login_required
+def delete_curso(request, turma):
+    curso = get_object_or_404(Curso, turma=turma) 
+    alunos = curso.aluno_set.all()  
 
+    if not request.user.is_superuser:
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('cursos')
 
+    if request.method == 'POST':
+        Frequencia.objects.filter(id_aluno__in=alunos).delete()
+        alunos.delete()
+        curso.delete()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### <span style="color: #AC58FA;">Elaboração das classes</span>
-
-A elaboração das classes foi realizada no arquivo `models.py`, como é solicitado na documentação do Django.
-
-### <span style="color: #AC58FA;">Lógica de mostrar e esconder senha</span>
-
-Na página de login, para o melhor desempenho do site em relação ao usuário, foi adicionada uma lógica que possibilita esconder e mostrar a senha, de acordo com a preferência de quem estiver inserindo suas informações.
-
-Os arquivos usados para a realização dessa tarefa foram:
-
-- **<span style="color: #4682B4;">HTML</span>** - base da parte visual, contendo os elementos (tags) responsáveis pelos itens do site.
+        messages.success(request, "Curso e alunos associados excluídos com sucesso.")
+        return redirect('cursos')
     
-- **<span style="color: #4682B4;">JavaScript</span>** - responsável pela lógica.
+    else:
+        messages.error(request, "Erro ao excluir curso.")
 
-_**<span style="color: orange;">obs:** a estilização foi usada na tag `<style></style>` dentro do arquivo HTML._
+    context = {'curso': curso, 'alunos': alunos}
+    return render(request, 'alunos.html', context)
+```
 
-### **<span style="color: #9A2EFE;">Passo a passo do processo:</span>**
+---
 
-<span style="color: #4682B4;">1- Base no HTML</span>
+### <span style="color: #AC58FA;">Adicionar e deletar aluno</span>
+### **View: `criar_alunos` (Adicionar Alunos)**
+
+A view `criar_alunos` tem como objetivo permitir o cadastro em massa de alunos no sistema a partir de um arquivo CSV enviado pelo usuário. Ela processa o arquivo CSV, valida as informações e cria os alunos no banco de dados.
+
+### **Funcionamento:**
+
+1. **Método de Requisição**:
+    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
+2. **Validação do Arquivo**:
+    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
+    - Para cada linha do CSV, o sistema tenta extrair informações como nome do aluno, ID da carteirinha e o curso (identificado pela turma).
+3. **Verificação de Alunos Existentes**:
+    - Antes de criar um novo aluno, o sistema verifica se já existe um aluno com o mesmo **ID de carteirinha**. Se já existir, ele ignora a linha e passa para a próxima.
+    - O sistema também verifica se o curso informado existe no banco de dados. Se o curso não for encontrado, o registro do aluno será ignorado.
+4. **Criação de Aluno**:
+    - Caso a linha seja válida, o aluno é criado no banco de dados com os campos extraídos do CSV.
+5. **Exceções**:
+    - Se ocorrer algum erro no processo de leitura ou validação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
+6. **Respostas ao Usuário**:
+    - Se os alunos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, uma mensagem de erro será exibida.
+
+### **Código:**
+
+```python
+@login_required
+def criar_alunos(request):
+
+        if request.method == 'POST' and 'alunos' in request.FILES:
+            csv_file = request.FILES['alunos']
+
+            fs = FileSystemStorage()
+            filename = fs.save(csv_file.name, csv_file)
+
+            with open(fs.path(filename), newline='', encoding='ISO-8859-1') as csvfile:
+                reader = csv.reader(csvfile, delimiter=';')  
+
+                for row in reader:
+                    try:
+                        nome = row[0].strip()
+                        
+                        # Verifica se id_carteirinha não está vazio e é um número
+                        if row[1].strip().isdigit():
+                            id_carteirinha = int(row[1].strip())
+                        else:
+                            print(f"ID da carteirinha inválido para o aluno '{nome}'. Verifique o arquivo CSV.")
+                            continue  # Pula para o próximo registro se o id_carteirinha estiver inválido
+
+                        curso_id = row[2].strip()
+                        
+                        # Verifica se o curso existe
+                        try:
+                            curso = Curso.objects.get(turma=curso_id)
+                        except Curso.DoesNotExist:
+                            print(f"Curso com turma '{curso_id}' não encontrado para o aluno '{nome}'. Verifique o arquivo CSV.")
+                            continue  # Pula este registro e continua com o próximo
+
+                        # Verifica se o aluno já existe
+                        if Aluno.objects.filter(id_carteirinha=id_carteirinha).exists():
+                            print(f"Aluno com ID de carteirinha '{id_carteirinha}' já existe. Ignorando...")
+                            continue  # Ignora este registro e continua com o próximo
+
+                        # Criação do aluno
+                        Aluno.objects.create(
+                            nome=nome,
+                            id_carteirinha=id_carteirinha,
+                            id_curso=curso
+                        )
+                    except IndexError:
+                        print("Erro: O arquivo CSV está com formato incorreto.")
+                        return redirect("criar_aluno")
+
+            messages.success(request, "Alunos criados com sucesso.")
+            return redirect("cursos")
+
+        return render(request, 'criar_aluno.html')
+```
+
+### **View: `delete_aluno` (Deletar Aluno)**
+
+A view `delete_aluno` tem como objetivo permitir a exclusão de um aluno específico no sistema. Ela recebe como parâmetros a turma e o ID da carteirinha do aluno, verifica as permissões do usuário e, se autorizado, exclui o aluno do banco de dados.
+
+### **Funcionamento:**
+
+1. **Método de Requisição**:
+    - A view trata requisições `POST` para confirmar a exclusão do aluno. Se a requisição for diferente, uma mensagem de erro será exibida.
+2. **Autenticação e Permissões**:
+    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do aluno. Caso contrário, o sistema impede a ação e exibe uma mensagem de erro.
+3. **Verificação de Existência de Aluno**:
+    - O sistema tenta localizar o aluno com base no `id_carteirinha` e no código da turma. Se o aluno não for encontrado, um erro 404 será gerado.
+4. **Exclusão de Aluno**:
+    - Caso o aluno seja encontrado, ele é excluído do banco de dados com o método `aluno.delete()`.
+5. **Respostas ao Usuário**:
+    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, se ocorrer algum erro durante o processo, uma mensagem de erro será exibida.
+
+### **Código:**
+
+```python
+@login_required
+def delete_aluno(request, turma, id_carteirinha):
+    curso = get_object_or_404(Curso, turma=turma)
+    aluno = get_object_or_404(Aluno, id_carteirinha=id_carteirinha)
+    
+    if not request.user.is_superuser:
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('/')
+    
+    if request.method == 'POST':
+        aluno.delete()
+        messages.success(request, "Aluno excluído com sucesso.")
+        return redirect('cursos')
+    else:
+        messages.error(request, "Erro ao excluir aluno.")
+
+    context = {
+        'curso': curso,
+        'aluno': aluno,
+    }
+    return render(request, 'alunos.html', context)
+
+```
+---
+
+### <span style="color: #AC58FA;">Lógica de cadastro</span>
+Para permitir o administrador a adicionar algum funcionário da gestão como usuário do sistema, foi realizada a lógica abaixo:
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def cadastro(request):
+    context = {}
+
+    if request.user.groups.filter(name='COORDENAÇÃO').exists():
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('/')
+
+    else:
+        if request.method == "POST":
+            form = FormCadastro(request.POST)
+            if form.is_valid():
+                var_nome = form.cleaned_data['nome']
+                var_sobrenome = form.cleaned_data['sobrenome']
+                var_username = form.cleaned_data['username']
+                var_senha = form.cleaned_data['senha']
+
+                try:
+                    user = User.objects.create_user(username=var_username, password=var_senha)
+                    user.first_name = var_nome
+                    user.last_name = var_sobrenome
+                    user.save()
+
+                    coordenacao_group = Group.objects.get(name='COORDENAÇÃO')
+                    user.groups.add(coordenacao_group)
+
+                    Usuario.objects.create(
+                        nome=var_nome,
+                        sobrenome=var_sobrenome,
+                        username=var_username,
+                        cargo="COORDENAÇÃO",
+                    )
+                    messages.success(request, "Usuário cadastrado.")
+                    return redirect("cadastro")
+
+                except IntegrityError:
+                    messages.error(request, "Nome de usuário já existe. Por favor, escolha outro nome de usuário.")
+                    context.update({"form": form})
+                    return render(request, 'cadastro.html', context)
+            else:
+                context.update({"form": form})
+                return render(request, 'cadastro.html', context)
+        else:
+            form = FormCadastro()
+
+    context.update({"form": form})
+    return render(request, 'cadastro.html', context)
+```
+
+---
+
+### <span style="color: #AC58FA;">Lógicas do JavaScript</span>
+### Lógica de Exibição de Senha
+
+A lógica para mostrar ou esconder a senha é implementada no arquivo `mostrar_senha.js`. Essa funcionalidade altera o tipo de um campo de senha de "password" para "text" e vice-versa, permitindo que o usuário visualize ou oculte a senha.
+
+**Função:**
+
+```jsx
+function mostrar() {
+    const senhaInput = document.querySelector('input[name="senha"]');
+    const btnSenha = document.getElementById('btnSenha');
+
+    if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        btnSenha.classList.remove('bi-eye-slash');
+        btnSenha.classList.add('bi-eye');
+    } else {
+        senhaInput.type = 'password';
+        btnSenha.classList.remove('bi-eye');
+        btnSenha.classList.add('bi-eye-slash');
+    }
+}
+```
+
+Na função `mostrar()`, o código realiza a verificação do tipo do campo de senha (`senhaInput.type`) e altera o tipo entre "password" e "text". Também faz alterações nas classes CSS do botão (`btnSenha`), para mudar o ícone de olho, indicando se a senha está visível ou oculta.
+
+### Lógica de Mensagem de Erro
+
+O arquivo `msg_erro.js` gerencia a exibição e o desaparecimento de mensagens de erro na interface do usuário. A funcionalidade é executada assim que o DOM estiver completamente carregado.
+
+**Função de desaparecimento de mensagem de erro:**
+
+```jsx
+document.addEventListener("DOMContentLoaded", function () {
+    const alertContainer = document.getElementById("alert-container");
+    if (alertContainer) {
+        setTimeout(() => {
+            alertContainer.classList.add("fade-out-hidden");
+        }, 3000);
+    }
+});
+```
+
+Dentro dessa função, o código aguarda o carregamento completo do DOM e, após 3 segundos, adiciona a classe `fade-out-hidden` ao elemento de alerta (`alert-container`). Isso resulta na ocultação gradual da mensagem de erro, que provavelmente foi estilizada para desaparecer de forma suave com transições CSS.
+
+### Lógica de Troca de Tema
+
+A troca de tema, permitindo a alternância entre o modo claro e escuro, está implementada no arquivo `script.js`. Essa funcionalidade permite que o tema atual seja armazenado localmente e reaplicado sempre que a página for recarregada.
+
+**Função de troca de tema:**
+
+```jsx
+document.addEventListener("DOMContentLoaded", function () {
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+    let currentTheme = localStorage.getItem("theme") || "light";
+
+    document.documentElement.setAttribute("data-theme", currentTheme);
+    themeIcon.classList.remove("bi-sun-fill", "bi-moon-fill");
+    themeIcon.classList.add(currentTheme === "light" ? "bi-sun-fill" : "bi-moon-fill");
+
+    themeToggleBtn.addEventListener("click", function () {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        localStorage.setItem("theme", currentTheme);
+
+        themeIcon.classList.remove("bi-sun-fill", "bi-moon-fill");
+        themeIcon.classList.add(currentTheme === "light" ? "bi-sun-fill" : "bi-moon-fill");
+    });
+});
+```
+
+A lógica de troca de tema funciona da seguinte forma:
+
+1. Ao carregar a página, o tema atual é recuperado do `localStorage`, ou o padrão "light" é aplicado caso não haja tema salvo.
+2. O atributo `data-theme` do elemento `<html>` é alterado para aplicar o tema selecionado (claro ou escuro).
+3. O ícone de tema (um ícone de sol ou lua) é ajustado conforme o tema atual.
+4. Ao clicar no botão de alternância (`theme-toggle`), o tema é alterado entre "light" e "dark", e o novo valor é salvo no `localStorage`.
+
+### Lógica de Pesquisa com Animação
+
+No arquivo `search_transição.js`, a lógica lida com a exibição e ocultação da barra de pesquisa, além de aplicar uma transição suave.
+
+**Função de exibição e ocultação da barra de pesquisa:**
+
+```jsx
+document.addEventListener('DOMContentLoaded', function () {
+    const searchIcon = document.getElementById('search-icon');
+    const searchContainer = document.getElementById('search-container');
+
+    if (searchIcon && searchContainer) {
+        searchIcon.addEventListener('click', function () {
+            searchContainer.classList.toggle('visible');
+            if (searchContainer.classList.contains('visible')) {
+                setTimeout(() => {
+                    const input = searchContainer.querySelector('input');
+                    if (input) input.focus();
+                }, 500);
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            if (
+                !searchContainer.contains(event.target) &&
+                !searchIcon.contains(event.target)
+            ) {
+                searchContainer.classList.remove('visible');
+            }
+        });
+    }
+});
+```
+
+O código executa as seguintes ações:
+
+1. Ao clicar no ícone de pesquisa (`search-icon`), a classe `visible` é alternada no contêiner de pesquisa (`search-container`), fazendo com que a barra de pesquisa apareça ou desapareça.
+2. Se a barra de pesquisa se tornar visível, um `setTimeout` é usado para garantir que o foco seja dado ao campo de entrada (`input`) após meio segundo.
+3. Caso o usuário clique fora do contêiner de pesquisa ou do ícone de pesquisa, a barra de pesquisa é ocultada, removendo a classe `visible`.
 
 ---
 
