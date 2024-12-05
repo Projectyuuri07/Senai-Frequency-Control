@@ -2,32 +2,65 @@
 
 ## <span style="color: #8000FF;">Índice</span>
 
-1. **<span style="color: #9A2EFE;">Introdução</span>**
+ **<span style="color: #9A2EFE;">1. Introdução</span>**
    - [Sobre a documentação](#sobre-a-documentação)
    - [Problemática](#problemática)
    - [Objetivos](#objetivos)
    - [Justificativa](#justificativa)
+   - [Observação](#observação)
 
-2. **<span style="color: #9A2EFE;">Metodologia</span>**
-   - [Ferramentas a serem utilizadas](#ferramentas-a-serem-utilizadas)
+ **<span style="color: #9A2EFE;">2. Metodologia</span>**
+   - [Ferramentas utilizadas](#ferramentas-utilizadas)
    - [Linguagens de programação](#linguagens-de-programação)
    - [Linguagens de marcação](#linguagens-de-marcação)
    - [Linguagens de estilo](#linguagens-de-estilo)
    - [Frameworks](#frameworks)
+   - [Bibliotecas](#bibliotecas)
    - [Banco de dados](#banco-de-dados)
-   - [Metodologia para desenvolvimento](#metodologia-para-desenvolvimento)
+   - [Outras ferramentas](#outras-ferramentas)
+   - [Todas as Dependências](#todas-as-dependências)
+   - [Metodologia para Desenvolvimento](#metodologia-para-desenvolvimento)
 
-3. **<span style="color: #9A2EFE;">Implementação</span>**
-   - [v0.0 - Configuração do ambiente de desenvolvimento](#v00---configuração-do-ambiente-de-desenvolvimento)
-   - [v0.1 - Criação do aplicativo](#v01---criação-do-aplicativo)
-   - [v0.2 - Criação das URLs e Views](#v02---criação-das-urls-e-views)
-   - [v1.0 - Início do desenvolvimento das funcionalidades](#v1.0---Início-do-desenvolvimento-das-páginas)
+ **<span style="color: #9A2EFE;">3. Levantamento de Requisitos</span>**
+   - [Requisitos Funcionais](#requisitos-funcionais)
+   - [Requisitos Não Funcionais](#requisitos-não-funcionais)
+
+ **<span style="color: #9A2EFE;">4. Arquitetura do Sistema</span>**
+   - [Diagrama Model-Template-View (MTV)](#diagrama-mtv)
+   - [Diagrama de Classes](#diagrama-de-classes)
+   - [Diagrama de Entidade e Relacionamento](#diagrama-er)
+   - [Diagrama de Casos de Uso](#diagrama-casos-de-uso)
+   - [Fluxograma](#fluxograma)
+
+ **<span style="color: #9A2EFE;">5. Visual das Interfaces</span>**
+   - [Interface Inicial](#interface-homepage)
+   - [Interface de Login](#interface-login)
+   - [Interface de Cursos](#interface-cursos)
+   - [Interface de Alunos](#interface-alunos)
+   - [Interface de Cadastro](#interface-cadastro)
+   - [Interface de Relatórios](#interface-relatórios)
+   - [Interface de Notificações](#interface-notificações)
+   - [Interface de Adição de Alunos, Cursos e Frequências](#interface-adição-de-alunos-cursos-e-frequência)
+
+ **<span style="color: #9A2EFE;">6. Implementação</span>**
+   - [v0.0 - Configuração do Ambiente de Desenvolvimento](#v00-configuração-do-ambiente-de-desenvolvimento)
+   - [v0.1 - Configuração do Ambiente do Selenium](#v01-configuração-do-ambiente-do-selenium)
+   - [v0.2 - Criação do Aplicativo](#v02-criação-do-aplicativo)
+   - [v0.3 - Criação das URLs, Views e Models](#v03-criação-das-urls-e-views)
+   - [v0.4 - Desenvolvimento das Páginas](#v04-desenvolvimento-das-páginas)
+   - [Importações e Arquivos CSS globais](#importações-e-arquivos-css-globais)
    - [Temas claro e escuro](#temas-claro-e-escuro)
    - [Elaboração das classes](#elaboração-das-classes)
-   - [Lógica de mostrar e esconder senha](#lógica-de-mostrar-e-esconder-senha)
 
-4. **<span style="color: #9A2EFE;">Manual do usuário</span>**
-   - [Iniciando](#iniciando)
+ **<span style="color: #9A2EFE;">7. Lógicas</span>**
+   - [Lógica das Views](#lógica-das-views)
+   - [Lógica do JavaScript](#lógica-do-javascript)
+   - [Lógica de Automação com o Selenium, PyAutoGUI e Agendador de Tarefas](#lógica-de-automação)
+
+ **<span style="color: #9A2EFE;">8. Testes de Software</span>**
+   - [Testes Automatizados](#testes-automatizados)
+   - [Testes Unitários](#testes-unitários)
+   - [Testes Manuais](#testes-manuais)
 
 ---
 
@@ -80,7 +113,7 @@ A linguagem é uma das mais populares do mundo e é amplamente utilizada em dive
 
 No sistema, o Python foi essencial para construir o back-end (parte interna de uma aplicação) utilizando Django, um framework que facilitou o desenvolvimento das lógicas de cadastro e login de coordenadores, uploads de dados de frequência, alunos e dos cursos fornecidos pela instituição, bem como a implementação das funcionalidades de notificação automática. Além disso, a linguagem foi utilizada para a coleta de informações do banco de dados para a listagem dos alunos e cursos, por exemplo, nas páginas de visualização.
 
-### **<span style="color: #9A2EFE;">JavaScript</span>**
+### **<span style="color: #9A2EFE;">JavaScript ECMAScript 5.1</span>**
 JavaScript é uma linguagem de programação interpretada e orientada a objetos, frequentemente usada para desenvolver interatividade em páginas web. Ela permite que os desenvolvedores controlem o comportamento dos elementos na tela, respondendo a eventos como cliques e movimentos do mouse. Suas capacidades dinâmicas incluem a criação de objetos em tempo real e a manipulação de funções.
 A linguagem é executada no cliente web ou pode ser usada para projetar e/ou programar o comportamento de páginas web quando ocorrem eventos.
 Neste projeto, o JavaScript foi utilizado para implementar mudanças de estado, como a alternância entre temas claro e escuro, amostragem e ocultação de senhas em formulários, e a funcionalidade da barra de pesquisa, proporcionando uma experiência mais interativa e conversacional ao usuário.
@@ -117,7 +150,7 @@ O Selenium é uma ferramenta para automatizar navegadores, usada especialmente p
 A biblioteca facilita a execução de testes repetitivos e de regressão, garantindo que novas alterações não afetem funcionalidades existentes.
 Neste sistema, a biblioteca foi utilizada para o desenvolvimento da lógica para automatização da extração dos dados da catraca para serem salvos no banco de dados PostgreSQL, evitando erros manuais e economizando tempo.
 
-#### **<span style="color: #AC58FA;">PyAutoGui v0.9.54</span>**
+#### **<span style="color: #AC58FA;">PyAutoGUI v0.9.54</span>**
 O PyAutoGUI é uma biblioteca Python que permite automatizar a interação com a Graphical User Interface, ou Interface Gráfica do Usuário (GUI), do seu computador, podendo controlar o mouse, teclado, entre outros elementos visuais da tela, diferente do Selenium, que é focado exclusivamente em navegadores web.
 
 O Selenium e o PyAutoGUI foram utilizados em conjunto para automatizar a coleta de dados da catraca e armazená-los no banco de dados PostgreSQL. Enquanto o Selenium foca na extração automatizada de dados por meio de navegação web, o PyAutoGUI foi essencial para interagir com a interface gráfica da máquina, controlando elementos visuais fora do navegador, como ações que não poderiam ser realizadas apenas via web. Essa combinação permitiu uma integração completa, eliminando erros manuais e garantindo a precisão dos dados coletados e armazenados.
@@ -155,7 +188,7 @@ Essas características fazem do PostgreSQL uma escolha sólida e eficiente para 
 O Agendador de Tarefas é um programa disponibilizado pelo Windows que permite automatizar atividades repetitivas, bem como executar ações em um horário previamente especificado.
 Para realizar o agendamento automático para executar o código que obterá o arquivo contendo os dados extraídos das catracas, optou-se pela utilização do Agendador de Tarefas do Windows, que, ao criar a tarefa, define informações básicas como nome, com qual condição será iniciada a tarefa e sua data de início, horário e dia específicos que ela será executada.
 
-#### **<span style="color: #AC58FA;">Dependencias do Projeto</span>**
+#### **<span style="color: #AC58FA;">Todas as Dependências</span>**
 
 ```python
 attrs==24.2.0
@@ -189,7 +222,7 @@ websocket-client==1.8.0
 wsproto==1.2.0
 ```
 
-### **<span style="color: #9A2EFE;">Metodologia para o Desenvolvimento</span>**
+### **<span style="color: #9A2EFE;">Metodologia para Desenvolvimento</span>**
 
 Traduzido do inglês, Scrum é uma estrutura ágil de colaboração em equipe comumente usada no desenvolvimento de software e em outros setores. O Scrum prescreve que as equipes dividam o trabalho em metas a serem concluídas dentro de iterações com limite de tempo, chamadas sprints. Para desenvolver o projeto, fizemos a utilização da metodologia ágil Scrum, que nos permitiu organizar o trabalho em sprints curtos e interativos, garantindo entregas contínuas e adaptáveis.
 
@@ -273,15 +306,82 @@ Traduzido do inglês, Scrum é uma estrutura ágil de colaboração em equipe co
     - **Restrições Tecnológicas:** Compatibilidade com diferentes dispositivos e navegadores.
     
 - **<span style="color: #8000FF;"> [RNF004] - Código comentado e documentação.**</span>
-    - Prioridade: Média
-    - Descrição: O código do sistema deve ser bem comentado e acompanhado de documentação clara, facilitando a manutenção e futuras atualizações.
-    - Regras de Negócio: A documentação deve ser mantida atualizada com as mudanças no sistema.
-    - Restrições Tecnológicas: A documentação deve ser acessível a todos os
+    - **Prioridade:** Média
+    - **Descrição:** O código do sistema deve ser bem comentado e acompanhado de documentação clara, facilitando a manutenção e futuras atualizações.
+    - **Regras de Negócio:** A documentação deve ser mantida atualizada com as mudanças no sistema.
+    - **Restrições Tecnológicas:** A documentação deve ser acessível a todos os
     membros da equipe de desenvolvimento.
 
-### <span style="color: #9A2EFE;">**Diagrama de Caso de Uso**</span>
 
-![alt text](img/Diagrama_de_caso_de_uso.webp)
+## **<span style="color: #9A2EFE;">Arquitetura do Sistema</span>**
+
+### <span style="color: #9A2EFE;">**Diagrama Model-Template-View (MTV)**</span>
+
+A arquitetura MTV significa Model-Template-View, e é um padrão de design de software para projetos que utilizam o framework Django. A seguir, o diagrama representa visualmente o funcionamento da arquitetura deste framework:
+
+![alt text](img/Diagrama_MTV.png)
+
+A seguir, está uma descrição de cada camada que estão presentes na arquitetura MTV:
+- **Model:** responsável pelo mapeamento do banco de dados, que possui uma comunicação direta com ele. As Models estão contidas no arquivo *models.py*.
+- **Template:** pasta que conterá os arquivos .html para as páginas do sistema. Receberá das Views os dados que aparecerão no front-end do sistema.
+- **View:** onde é feita a lógica de negócio. Receberá os dados do app da Model e mandará para os Templates. As Views são as funções presentes no arquivo *views.py*.
+As setas sólidas representam uma relação direta entre os componentes do diagrama, enquanto a seta pontilhada representa uma relação menos direta. Duas setas presentes no diagrama possuem duas pontas, o que significa uma comunicação entre os dois componentes.
+
+---
+
+### <span style="color: #9A2EFE;">**Diagrama de Classes**</span>
+
+Um Diagrama de Classes é uma representação gráfica amplamente utilizada na engenharia de software para descrever a estrutura estática de um sistema, representando suas classes, atributos, métodos e os relacionamentos entre elas. Este tipo de diagrama segue o padrão UML (Unified Modeling Language ou Linguagem de Modelagem Unificada), que é amplamente utilizado para a padronização de modelagem e documentação de sistemas de software. A seguir, o diagrama representa visualmente o funcionamento da estrutura do sistema:
+
+![alt text](img/Diagrama_de_Classes.png)
+
+No Diagrama de Classes apresentado, estão representadas as entidades fundamentais do sistema, destacando seus atributos, métodos e os tipos de relacionamento entre as classes, como associação, agregação, composição e herança.
+As classes são os elementos básicos de um Diagrama de Classes, representando abstrações de objetos do mundo real ou conceitos relacionados ao sistema. Cada classe é descrita com seus atributos (dados que ela armazena) e métodos (operações que ela realiza). A seguir, está uma descrição das classes presentes no diagrama:
+- **Usuario:** representa os usuários que possuem acesso ao sistema, como coordenadores e administradores. Inclui atributos como nome, sobrenome, username e cargo.
+- **Aluno:** representa os estudantes registrados no sistema. Seus atributos incluem informações como nome, id_carteirinha e id_curso.
+- **Frequencia:** representa a classe responsável por armazenar os registros vindos da catraca, com atributos como id, id_aluno, data, hora e identificador (1 ou 2, entrada ou saída, respectivamente).
+- **Curso:** representa os cursos disponíveis na instituição. Contém atributos como turma, nome_curso, horario_entrada, horario_saida, carga_horaria, responsavel, dias_funcionamento, data_inicio, data_fim, carga_horaria_intervalo e dias_letivos.
+
+Os relacionamentos entre classes em um Diagrama de Classes são fundamentais para entender a estrutura e as interações do sistema. Os principais tipos de relacionamentos presentes incluem:
+- **Relacionamento entre Aluno e Curso:** cada aluno está vinculado a apenas um curso, utilizando a chave estrangeira id_curso na classe Aluno para referenciar a classe Curso. Por outro lado, um curso pode estar associado a vários alunos (0..* para Aluno e 1 para Curso).
+- **Relacionamento entre Aluno e Frequência:** um aluno pode ter vários registros de frequência, mas cada registro está associado a um único aluno, representado pela chave estrangeira id_aluno na classe Frequência (1 para Aluno e 0..* para Frequência).
+
+---
+
+### <span style="color: #9A2EFE;">**Diagrama de Entidade e Relacionamento**</span>
+
+O Diagrama de Entidade-Relacionamento (DER) é uma representação gráfica amplamente utilizada para descrever a estrutura lógica de um banco de dados, representando suas entidades, atributos e os relacionamentos entre elas. Ele é essencial para planejar e visualizar como os dados são organizados e como as diferentes entidades do sistema interagem.
+
+![alt text](img/Diagrama_ER.webp)
+
+**Relacionamentos e Simbologias das Entidades do Sistema:**
+
+- ***auth_user*** e ***web_usuario*:** cada usuário em auth_user possui uma associação obrigatória e única com um registro em web_usuario. Isso indica um relacionamento 1:1.
+    - **Representação:**
+        - Traços duplos indicam que o relacionamento é obrigatório e único.
+        - Cada registro em auth_user está associado diretamente a um registro correspondente em web_usuario.
+    - **Implementação no Banco de Dados:**
+        - A tabela web_usuario possui um campo username, que é a chave primária e uma chave estrangeira que referencia o campo username de auth_user, respectivamente.
+
+- ***web_aluno*** e ***web_frequencia*:** um aluno em web_aluno pode estar associado a várias frequências registradas em web_frequencia. O relacionamento é do tipo 1:N.
+    - **Representação:**
+        - No lado de web_aluno, os dois traços verticais indicam que uma frequência está obrigatoriamente vinculada a um aluno.
+        - No lado de web_frequencia, o pé de galinha indica que um aluno pode ter várias frequências registradas.
+    - **Implementação no Banco de Dados:**
+        - A tabela web_frequencia possui o campo id_aluno_id como chave estrangeira, que referencia o campo id_carteirinha da tabela web_aluno.
+
+- ***web_aluno*** e ***web_curso*:** um aluno em web_aluno está associado a exatamente um curso em web_curso. O relacionamento é do tipo N:1, onde vários alunos podem estar vinculados a um único curso.
+    - **Representação:**
+        - No lado de web_aluno, o pé de galinha indica que vários alunos podem estar associados ao mesmo curso.
+        - No lado de web_curso, os dois traços verticais indicam que o relacionamento é obrigatório e único para cada aluno.
+    - **Implementação no Banco de Dados:**
+        - A tabela web_aluno possui o campo id_curso como chave estrangeira, que referencia o campo turma da tabela web_curso.
+
+---
+
+### <span style="color: #9A2EFE;">**Diagrama de Casos de Uso**</span>
+
+![alt text](img/Diagrama_de_Casos_de_Uso.webp)
 
 No Diagrama de Caso de Uso apresentado, são representadas as interações entre diferentes atores (usuários do sistema) e as funcionalidades disponíveis no projeto desenvolvido, destacando a relação entre ações e dependências. A seguir, está uma descrição detalhada de cada elemento.
 
@@ -328,38 +428,64 @@ Com o detalhamento do Diagrama de Caso de Uso apresentado, torna-se mais fácil 
 
 ---
 
-## <span style="color: #9A2EFE;">**Design do Sistema**</span>
-### <span style="color: #AC58FA;">**Casos de Uso do Sistema Automatizado (Catraca):**</span>
+### <span style="color: #AC58FA;">**Fluxograma**</span>
 
-A arquitetura MTV significa Model-Template-View, e é um padrão de design de software para projetos que utilizam o framework Django. A seguir, o diagrama representa visualmente o funcionamento da arquitetura deste framework:
+![alt text](img/Fluxograma.jpg)
 
-![alt text](img/Design%20do%20sistema.png)
+#### <span style="color: #AC58FA;">**Seção Usuário**</span>
 
-A seguir, está uma descrição de cada camada que estão presentes na arquitetura MTV:
-- **Model:** responsável pelo mapeamento do banco de dados, que possui uma comunicação direta com ele. As Models estão contidas no arquivo *models.py*.
-- **Template:** pasta que conterá os arquivos .html para as páginas do sistema. Receberá das Views os dados que aparecerão no front-end do sistema.
-- **View:** onde é feita a lógica de negócio. Receberá os dados do app da Model e mandará para os Templates. As Views são as funções presentes no arquivo *views.py*.
-As setas sólidas representam uma relação direta entre os componentes do diagrama, enquanto a seta pontilhada representa uma relação menos direta. Duas setas presentes no diagrama possuem duas pontas, o que significa uma comunicação entre os dois componentes.
+- **Realiza Logout**: O usuário pode sair do sistema, encerrando a sessão e sendo redirecionado à Página Inicial, protegendo a privacidade dos dados.  
+- **Acessa Página Inicial**: Página de entrada do sistema, exibida inicialmente para usuários não autenticados, com informações básicas e opções de navegação.  
+- **Tenta Login**: Caso não esteja autenticado, o usuário é direcionado à Página de Login para inserir suas credenciais.  
+- **Insere Credenciais**: O usuário preenche o formulário com nome de usuário e senha, e os dados são enviados para validação.  
+- **Verifica Autenticação**:  
+  - **Se autenticado**: O sistema identifica o grupo de acesso e redireciona:  
+    - **Coordenação**: Página de Cursos.  
+    - **Administração**: Página de Cursos com acesso a funcionalidades administrativas.  
+  - **Se não autenticado**: Exibe mensagem de erro e redireciona à Página de Login.  
+- **Acessa Página de Cursos**: Usuários da Coordenação podem gerenciar cursos, com funcionalidades como exibição de notificações, busca por cursos e visualização de detalhes das turmas.  
+- **Acessa Página de Alunos**: Permite gerenciar alunos vinculados a um curso, incluindo visualização da lista, detalhes individuais e exclusão de registros.
 
-### <span style="color: #AC58FA;">**Diagrama de Classes**</span>
-Um Diagrama de Classes é uma representação gráfica amplamente utilizada na engenharia de software para descrever a estrutura estática de um sistema, representando suas classes, atributos, métodos e os relacionamentos entre elas. Este tipo de diagrama segue o padrão UML (Unified Modeling Language ou Linguagem de Modelagem Unificada), que é amplamente utilizado para a padronização de modelagem e documentação de sistemas de software. A seguir, o diagrama representa visualmente o funcionamento da estrutura do sistema:
+#### <span style="color: #AC58FA;">**Seção Sistema**</span>  
 
-![alt text](img/Diagraama%20de%20Classes.png)
+- **Gerenciamento de Cursos e Alunos**: Centraliza o controle de dados para atualizações diretas no banco.  
+- **Retorna à Página Inicial**: Usuários não autenticados ou em logout são redirecionados à Página Inicial.  
+- **Exibe Resultados da Pesquisa**: Mostra resultados com base nos critérios definidos pelo usuário, otimizando a navegação.  
+- **Gera uma Notificação**: Alerta eventos importantes, como mais de três atrasos de um aluno.  
+- **Atualiza a Lista de Alunos**: Mantém a lista sincronizada após adições ou exclusões de alunos.  
 
-No Diagrama de Classes apresentado, estão representadas as entidades fundamentais do sistema, destacando seus atributos, métodos e os tipos de relacionamento entre as classes, como associação, agregação, composição e herança.
-As classes são os elementos básicos de um Diagrama de Classes, representando abstrações de objetos do mundo real ou conceitos relacionados ao sistema. Cada classe é descrita com seus atributos (dados que ela armazena) e métodos (operações que ela realiza). A seguir, está uma descrição das classes presentes no diagrama:
-- **Usuario:** representa os usuários que possuem acesso ao sistema, como coordenadores e administradores. Inclui atributos como nome, sobrenome, username e cargo.
-- **Aluno:** representa os estudantes registrados no sistema. Seus atributos incluem informações como nome, id_carteirinha e id_curso.
-- **Frequencia:** representa a classe responsável por armazenar os registros vindos da catraca, com atributos como id, id_aluno, data, hora e identificador (1 ou 2, entrada ou saída, respectivamente).
-- **Curso:** representa os cursos disponíveis na instituição. Contém atributos como turma, nome_curso, horario_entrada, horario_saida, carga_horaria, responsavel, dias_funcionamento, data_inicio, data_fim, carga_horaria_intervalo e dias_letivos.
-Os relacionamentos entre classes em um Diagrama de Classes são fundamentais para entender a estrutura e as interações do sistema. Os principais tipos de relacionamentos presentes incluem:
-- **Relacionamento entre Aluno e Curso:** cada aluno está vinculado a apenas um curso, utilizando a chave estrangeira id_curso na classe Aluno para referenciar a classe Curso. Por outro lado, um curso pode estar associado a vários alunos (0..* para Aluno e 1 para Curso).
-- **Relacionamento entre Aluno e Frequência:** um aluno pode ter vários registros de frequência, mas cada registro está associado a um único aluno, representado pela chave estrangeira id_aluno na classe Frequência (1 para Aluno e 0..* para Frequência).
+#### <span style="color: #AC58FA;">**Seção Administrativa**</span> 
+
+- **Ações Administrativas**: Usuários administrativos podem:  
+  - Cadastrar ou excluir alunos e cursos.  
+  - Processar dados do site.  
+  - Gerar relatórios detalhados.  
+- **Recebe e Visualiza Relatórios**: Relatórios de frequência, atrasos e cursos ajudam na tomada de decisões estratégicas.  
+
+#### <span style="color: #AC58FA;">**Seção Automação**</span>  
+
+- **Coleta Dados da Catraca**: Registra automaticamente a passagem do aluno na catraca, iniciando o controle de frequência.  
+- **Verifica Registro de Presença**: Analisa a situação do aluno:  
+  - **Falta**: Sem registro nos horários esperados.  
+  - **Atraso**:  
+    - **Mais de 10 minutos**: Marcado como atrasado.  
+    - **Menos de 10 minutos**: Dados armazenados sem penalização.  
+
+#### <span style="color: #AC58FA;">**Seção Banco de Dados**</sp>  
+
+- **Insere Dados no Banco**: Registra automaticamente informações coletadas pela catraca.  
+- **Armazena Dados de Frequência**: Mantém histórico detalhado de presença dos alunos.  
+- **Visualiza Dados Salvos**: Permite consultar registros de frequência e informações dos alunos.  
+- **Atualiza Dados no Banco**: Reflete alterações como inclusão ou exclusão de alunos e cursos.  
+
+#### <span style="color: #AC58FA;">**Seção Catraca**</span>  
+
+- **Aluno Passa pela Catraca**: O registro da catraca inicia a automação para análise e controle da frequência.  
 
 ---
 
-## <span style="color: #9A2EFE;">**Páginas**</span>
-### <span style="color: #AC58FA;">**Página Inicial**</span>
+## <span style="color: #9A2EFE;">**Visual das Interfaces**</span>
+### <span style="color: #AC58FA;">**Interface Inicial**</span>
 
 A página inicial conta com uma barra de navegação localizada no topo, onde a logo do SENAI está posicionada no lado esquerdo e, no lado direito, encontra-se um componente padrão: um botão para troca de tema, permitindo a alternância da coloração da página entre os temas claro e escuro. No conteúdo principal, há um texto com o título da página e um botão que redireciona o usuário para a página de Login.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
@@ -367,7 +493,7 @@ A página inicial conta com uma barra de navegação localizada no topo, onde a 
   <img src="img/paginas/home- dark.webp" alt="Homepage - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Login**</span>
+### <span style="color: #AC58FA;">**Interface de Login**</span>
 
 Após o redirecionamento para a página de Login, o usuário deve inserir seus dados, como username e senha. Ao lado do campo de senha, há um ícone que permite exibir ou ocultar a senha, alterando sua aparência de acordo com a ação: um olho riscado quando a senha está visível e um olho aberto quando ela está oculta. Caso os dados sejam inseridos corretamente e o botão de Login seja clicado, o usuário será redirecionado para a página de Cursos. No entanto, se houver erro nos dados fornecidos, será exibida a mensagem: “Nome de usuário ou senha incorretos”.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
@@ -375,7 +501,7 @@ Após o redirecionamento para a página de Login, o usuário deve inserir seus d
   <img src="img/paginas/login- dark.webp" alt="Login - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Cursos**</span>
+### <span style="color: #AC58FA;">**Interface de Cursos**</span>
 
 Após a realização do Login, o usuário é redirecionado para a página de Cursos. A barra de navegação, presente em todas as páginas, passa a ser exibida. Após o Login, uma mensagem no formato “Olá, usuário”, onde o nome do usuário correspondente é mostrado. Além disso, é adicionado um novo componente que abre um Offcanvas, um elemento do Bootstrap que exibe uma barra lateral. Essa barra contém opções para Logout (saída), redirecionamento para as página de Cadastro, Criar Alunos, Criar Cursos e de Importação de Frequência. Os componentes de Cadastro, Aluno, Curso e Frequência são exibidos de forma exclusiva para o Administrador.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
@@ -389,7 +515,18 @@ No conteúdo principal da página, os cursos são listados em linhas, apresentan
   <img src="img/paginas/cursos- dark.webp" alt="Cursos - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Cadastro**</span>
+### <span style="color: #AC58FA;">**Interface de Alunos**</span>
+
+Na página de Cursos, ao clicar em qualquer um dos cursos listados no conteúdo principal, o usuário é redirecionado para a página de Alunos, onde são exibidos os alunos específicos do curso selecionado.
+No topo, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
+No conteúdo da página de Alunos, é exibido uma lista dos alunos, onde é informado dados sobre eles, como: nome do aluno, quantidade de atrasos, porcentagem de frequência e quantidade de faltas. Vale ressaltar que, acessando pelo perfil de Administrador, é exibido uma opção de excluir o aluno, utilizada em casos de desistência.
+Ao lado da lista de alunos, é exibido informações sobre o curso, como: o responsável pela turma, código do curso e o seu horário de funcionamento. Adicionalmente, para o perfil de Administrador, há um botão que permite excluir o curso.
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/paginas/alunos- white.webp" alt="alunos - white" width="45%">
+  <img src="img/paginas/alunos- dark.webp" alt="alunos - dark" width="45%">
+</p>
+
+### <span style="color: #AC58FA;">**Interface de Cadastro**</span>
 
 No Offcanvas, ao clicar no componente de Cadastro, o usuário Administrador é redirecionado para a página de Cadastro. Na parte superior da página, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
 O conteúdo principal exibe um formulário destinado ao cadastro de um novo usuário. Esse formulário solicita as seguintes informações: nome, sobrenome, nome de usuário e senha.
@@ -399,7 +536,7 @@ O conteúdo principal exibe um formulário destinado ao cadastro de um novo usu�
   <img src="img/paginas/cadastro- dark.webp" alt="cadastro - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Relátorios**</span>
+### <span style="color: #AC58FA;">**Interface de Relatórios**</span>
 
 Na página de Cursos, ao clicar no ícone de relatórios, o usuário é redirecionado para a página de Relatórios. No topo, no canto esquerdo, há um botão que permite retornar à página anterior (página de Cursos).
 No centro da página, o conteúdo apresenta uma imagem ilustrativa e dois botões dispostos um abaixo do outro:
@@ -414,7 +551,7 @@ No centro da página, o conteúdo apresenta uma imagem ilustrativa e dois botõe
   <img src="img/paginas/sobre- dark.webp" alt="sobre - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Notificações**</span>
+### <span style="color: #AC58FA;">**Interface de Notificações**</span>
 
 Na página de Cursos, ao clicar no ícone de notificações, o usuário é redirecionado para a página de Notificações. No canto superior esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
 No centro do conteúdo, a página exibe o título Notificações e, logo abaixo, uma lista dos alunos com 3 ou mais atrasos. As informações apresentadas incluem: o nome do aluno, a quantidade de atrasos e sua turma correspondente. Caso nenhum aluno atenda a esse critério, a lista permanecerá vazia.
@@ -423,7 +560,7 @@ No centro do conteúdo, a página exibe o título Notificações e, logo abaixo,
   <img src="img/paginas/notificacao- dark.webp" alt="notificacao - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Páginas de Adição de Alunos, Cursos e Frequência**</span>
+### <span style="color: #AC58FA;">**Interface de Adição de Alunos, Cursos e Frequências**</span>
 
 Todas as páginas de adição seguem o mesmo layout, proporcionando uma experiência de usuário mais intuitiva. Nessa interface, o usuário pode carregar arquivos nos formatos apropriados para o sistema e realizar operações de cadastro ou atualização de dados. A página de criação de frequência foi desenvolvida especificamente para inserir dados fictícios dos alunos.
 - **Botão "Escolher arquivo"**: permite selecionar um arquivo armazenado no dispositivo.
@@ -432,51 +569,10 @@ Todas as páginas de adição seguem o mesmo layout, proporcionando uma experiê
 Para o cadastro de alunos e cursos, o arquivo deve ser no formato CSV, enquanto para a criação de frequência, o arquivo deve ser no formato TXT.
 Em conclusão, este manual visa facilitar o uso do sistema, proporcionando uma navegação simples e eficiente para o usuário. Com as funcionalidades de upload de arquivos, o processo de cadastro e atualização de dados se torna rápido e prático. Caso surjam dúvidas ou dificuldades, a equipe de suporte estará disponível para garantir que sua experiência seja a mais tranquila possível.
 <p align="center" style="display: flex; justify-content: center; gap: 10px;">
-  <img src="img/paginas/notificacao- white.webp" alt="notificacao - white" width="45%">
-  <img src="img/paginas/notificacao- dark.webp" alt="notificacao - dark" width="45%">
+  <img src="img/paginas/adicionar- white.webp" alt="adicionar - white" width="45%">
+  <img src="img/paginas/adicionar- dark.webp" alt="adicionar - dark" width="45%">
 </p>
 
-### <span style="color: #AC58FA;">**Página de Alunos**</span>
-
-Na página de Cursos, ao clicar em qualquer um dos cursos listados no conteúdo principal, o usuário é redirecionado para a página de Alunos, onde são exibidos os alunos específicos do curso selecionado.
-No topo, no canto esquerdo, há um componente que permite retornar à página anterior (página de Cursos).
-No conteúdo da página de Alunos, é exibido uma lista dos alunos, onde é informado dados sobre eles, como: nome do aluno, quantidade de atrasos, porcentagem de frequência e quantidade de faltas. Vale ressaltar que, acessando pelo perfil de Administrador, é exibido uma opção de excluir o aluno, utilizada em casos de desistência.
-Ao lado da lista de alunos, é exibido informações sobre o curso, como: o responsável pela turma, código do curso e o seu horário de funcionamento. Adicionalmente, para o perfil de Administrador, há um botão que permite excluir o curso.
-<p align="center" style="display: flex; justify-content: center; gap: 10px;">
-  <img src="img/paginas/alunos- white.webp" alt="alunos - white" width="45%">
-  <img src="img/paginas/alunos- dark.webp" alt="alunos - dark" width="45%">
-</p>
-
-## <span style="color: #9A2EFE;">**Diagrama de Entidade-Relacionamento**</span>
-
-O Diagrama de Entidade-Relacionamento (DER) é uma representação gráfica amplamente utilizada para descrever a estrutura lógica de um banco de dados, representando suas entidades, atributos e os relacionamentos entre elas. Ele é essencial para planejar e visualizar como os dados são organizados e como as diferentes entidades do sistema interagem.
-
-![alt text](img/Diagrama%20de%20entidade%20e%20relacionamento.webp)
-
-**Relacionamentos e Simbologias das Entidades do Sistema:**
-
-- ***auth_user*** e ***web_usuario*:** cada usuário em auth_user possui uma associação obrigatória e única com um registro em web_usuario. Isso indica um relacionamento 1:1.
-    - Representação:
-        - Traços duplos indicam que o relacionamento é obrigatório e único.
-        - Cada registro em auth_user está associado diretamente a um registro correspondente em web_usuario.
-    - Implementação no Banco de Dados:
-        - A tabela web_usuario possui um campo username, que é a chave primária e uma chave estrangeira que referencia o campo username de auth_user, respectivamente.
-
-- ***web_aluno*** e ***web_frequencia*:** um aluno em web_aluno pode estar associado a várias frequências registradas em web_frequencia. O relacionamento é do tipo 1:N.
-    - Representação:
-        - No lado de web_aluno, os dois traços verticais indicam que uma frequência está obrigatoriamente vinculada a um aluno.
-        - No lado de web_frequencia, o pé de galinha indica que um aluno pode ter várias frequências registradas.
-    - Implementação no Banco de Dados:
-        - A tabela web_frequencia possui o campo id_aluno_id como chave estrangeira, que referencia o campo id_carteirinha da tabela web_aluno.
-
-- ***web_aluno*** e ***web_curso*:** um aluno em web_aluno está associado a exatamente um curso em web_curso. O relacionamento é do tipo N:1, onde vários alunos podem estar vinculados a um único curso.
-    - Representação:
-        - No lado de web_aluno, o pé de galinha indica que vários alunos podem estar associados ao mesmo curso.
-        - No lado de web_curso, os dois traços verticais indicam que o relacionamento é obrigatório e único para cada aluno.
-    - Implementação no Banco de Dados:
-        - A tabela web_aluno possui o campo id_curso como chave estrangeira, que referencia o campo turma da tabela web_curso.
-
----
 
 ## <span style="color: #9A2EFE;">**Implementação**</span>
 ### <span style="color: #AC58FA;">**v0.0 - Configuração do Ambiente de Desenvolvimento**</span>
@@ -518,7 +614,88 @@ DATABASES = {
 
 Em seguida, um arquivo .env foi criado, contendo as informações (nome, usuário, senha, host e porta) do banco de dados que não serão exibidas na documentação por motivos de segurança. Por fim, foram gravadas as configurações da base de dados, criando-se então o super usuário.
 
-### <span style="color: #AC58FA;">v0.1 - Criação do Aplicativo</span>
+### <span style="color: #AC58FA;">v0.1 - Configuração do Ambiente do Selenium</span>
+
+#### <span style="color: #AC58FA;"> 1. **Instale o Python**</span>
+
+Se ainda não tiver o Python instalado:
+
+- Acesse [python.org](https://www.python.org/downloads/) e baixe a versão mais recente.
+
+---
+
+#### <span style="color: #AC58FA;"> 2. **Crie um Ambiente Virtual (Recomendado)**</span>
+
+Crie um ambiente virtual para isolar as dependências do projeto:
+
+```bash
+python -m venv selenium_env
+```
+
+Ative o ambiente:
+
+- **Windows**:
+    
+    ```bash
+    selenium_env\Scripts\activate.ps1
+    ```
+    
+- **Linux/Mac**:
+    
+    ```bash
+    source selenium_env/bin/activat
+    ```
+    
+---
+
+#### <span style="color: #AC58FA;"> 3. **Instale o Selenium**</span>
+
+Instale o Selenium via pip:
+
+```bash
+pip install selenium
+```
+
+---
+
+#### <span style="color: #AC58FA;"> 4. **Baixe o WebDriver**</span>
+
+O Selenium usa um WebDriver para interagir com os navegadores. Escolhlla o WebDriver compatível com o navegador que deseja usar:
+
+#### <span style="color: #AC58FA;">Navegadores comuns e seus WebDrivers:</span>
+
+- **Google Chrome**: [ChromeDriver](https://chromedriver.storage.googleapis.com/index.html?path=114.0.5735.90/)
+- **Mozilla Firefox**: [GeckoDriver](https://github.com/mozilla/geckodriver/releases)
+- **Microsoft Edge**: [EdgeDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
+- **Safari**: O SafariDriver já vem integrado no macOS.
+
+Certifique-se de:
+
+- Baixar a versão do WebDriver compatível com a versão do navegador.
+- Colocar o executável do WebDriver em uma pasta do PATH ou especificar seu caminho no código.
+
+---
+
+#### <span style="color: #AC58FA;"> 5. **Teste a Configuração**</span>
+
+Crie um script básico para testar:
+
+```python
+python
+Copiar código
+from selenium import webdriver
+
+# Substitua 'path_to_webdriver' pelo caminho do WebDriver baixado
+driver = webdriver.Chrome(executable_path='path_to_webdriver')
+
+driver.get('https://www.google.com')
+print("Título da página:", driver.title)
+driver.quit()
+
+```
+
+
+### <span style="color: #AC58FA;">v0.2 - Criação do Aplicativo</span>
 Após a criação do projeto e as configurações iniciais do ambiente, foi criado o aplicativo (ou módulo) dentro do diretório do projeto.
 
 #### <span style="color: #AC58FA;">**Um projeto em Django?**</span>
@@ -552,7 +729,7 @@ frequency_management/
 
 Com a estrutura pronta, deu-se início à criação das URLs e Views.
 
-### <span style="color: #AC58FA;">v0.2 - Criação das URLs e Views</span>
+### <span style="color: #AC58FA;">v0.3 - Criação das URLs, Views e Models</span>
 
 Com o módulo criado, houve a criação das *URLs*. Para isso, foram realizados alguns procedimentos para configurar o projeto com o novo aplicativo, a fim de deixá-lo apto a recebê-las. Primeiro, o grupo registrou o módulo no arquivo *settings.py*. É importante ressaltar que todo o aplicativo criado deve ser registrado para que a aplicação o reconheça.
 
@@ -748,11 +925,11 @@ Representa um usuário do sistema (como administradores ou coordenadores).
 
 Para finalizar, criam-se as views para dar início ao desenvolvimento das páginas e lógicas.
 
-### <span style="color: #AC58FA;">v1.0 - Início do desenvolvimento das páginas</span>
+### <span style="color: #AC58FA;">v0.4 - Desenvolvimento das Páginas</span>
 Inicialmente, desenvolvemos a estrutura base das páginas, incluindo os arquivos HTML, CSS e JavaScript.
 
 #### **<span style="color: #AC58FA;">Estruturas Base</span>**
-**Index.html**
+**index.html**
 
 ```html
 {% load static %}
@@ -879,7 +1056,7 @@ O template utiliza recursos do Django Template Language.
 
 O código apresentado é um componente de rodapé HTML com estilização inline, utilizado para exibir uma mensagem de direitos autorais. A seguir, está sua descrição de forma detalhada:
 
-**Footer.html**
+**footer.html**
 
 ```html
 <footer style="color: var(--background-color);">
@@ -913,7 +1090,7 @@ O código apresentado é um componente de **rodapé HTML** com estilização inl
 - **`height: 30px`**: Define a altura do parágrafo.
 - **`font-size: 15px`**: Define o tamanho da fonte.
 
-**Navbar.html**
+**navbar.html**
 
 ```html
 {% load static %}
