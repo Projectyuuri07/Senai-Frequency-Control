@@ -4474,7 +4474,7 @@ function mostrar() {
 }
 ```
 
-### <span style="color: #AC58FA;">Lógicas no arquivo views.py</span>
+### <span style="color: #AC58FA;">**Lógicas no arquivo views.py**</span>
 Nesse arquivo, cada função (def) representa uma view, de acordo com a arquitetura MTV (Model-Template-View).
 Importações realizadas:
 ```python
@@ -4504,8 +4504,11 @@ Dados:
 - As importações feitas da biblioteca *ReportLab* são voltadas para a lógica de realização de relatórios, além de *BytesIO*, importado de *io*, e outras ferramentas disponibilizadas pelo framework Django.
 - A função de *login_required*, importada de *django.contrib.auth.decorators*, serve para requerir o login a cada função a ser realizada que contenha essa ferramenta.
 
-### <span style="color: #AC58FA;">Lógicas de login e logout</span>
-A lógica de realizar login, fazendo as verificações necessárias, foi realizada dentro da função login.
+
+### <span style="color: #9A2EFE;">Lógicas de Login e Logout</span>
+A função login é responsável por autenticar os usuários no sistema. Ela valida as credenciais enviadas pelo formulário de login e, caso sejam válidas, autentica o usuário e redireciona-o para a página principal do sistema. Caso contrário, exibe uma mensagem de erro. Essa função também garante que a página não seja armazenada no cache do navegador para melhorar a segurança.
+
+#### <span style="color: #AC58FA;">**Login**</span>
 ```python
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login(request):
@@ -4532,7 +4535,150 @@ def login(request):
     context.update({"form": form})
     return render(request, 'login.html', context)
 ```
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**1. Decorador `@cache_control`**
+
+```python
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+```
+
+- Este decorador configura o cabeçalho HTTP para que a página de login não seja armazenada no cache do navegador. Ele utiliza três parâmetros:
+    - **`no_cache=True`**: garante que o navegador sempre revalide o conteúdo com o servidor.
+    - **`must_revalidate=True`**: especifica que qualquer dado armazenado no cache deve ser validado antes de ser reutilizado.
+    - **`no_store=True`**: impede o armazenamento da página no cache local ou em cache intermediário.
+
+Essas configurações são importantes para evitar que informações sensíveis sejam acessadas de forma não autorizada.
+
+**2. Definição da Função**
+
+```python
+def login(request):
+    context = {}
+
+```
+
+- A função recebe um parâmetro:
+    - **`request`**: representa a solicitação HTTP feita pelo usuário.
+- **`context`**: um dicionário usado para armazenar dados a serem enviados para o template HTML.
+
+**3. Verificação do Método HTTP**
+
+```python
+if request.method == "POST":
+
+```
+
+- Verifica se o método da solicitação é `POST`. Isso indica que o formulário foi enviado pelo usuário.
+
+**4. Inicialização do Formulário**
+
+```python
+form = FormLogin(request.POST)
+
+```
+
+- O objeto `FormLogin` é instanciado com os dados enviados pelo formulário. Esse formulário foi previamente definido para validar os campos necessários (ex.: `username` e `senha`).
+
+**5. Validação do Formulário**
+
+```python
+if form.is_valid():
+    var_username = form.cleaned_data['username']
+    var_senha = form.cleaned_data['senha']
+
+```
+
+- **`form.is_valid()`**: verifica se os dados enviados pelo usuário atendem às regras de validação definidas no formulário.
+- **`form.cleaned_data`**: extrai os dados limpos do formulário para uso no código.
+
+**6. Autenticação do Usuário**
+
+```python
+user = authenticate(username=var_username, password=var_senha)
+```
+
+- A função **`authenticate`** verifica as credenciais fornecidas:
+    - Se as credenciais estiverem corretas, retorna o objeto do usuário.
+    - Caso contrário, retorna `None`.
+    
+
+**7. Verificação do Usuário**
+
+```python
+if user is not None:
+    auth_login(request, user)
+    return redirect("cursos")
+else:
+    messages.error(request, "Nome de usuário ou senha incorretos.")
+    return redirect("login")
+```
+
+- Se o usuário for autenticado com sucesso:
+    - **`auth_login(request, user)`**: Realiza o login do usuário no sistema.
+    - **`redirect("cursos")`**: Redireciona o usuário autenticado para a página principal do sistema.
+- Se a autenticação falhar:
+    - **`messages.error`**: Adiciona uma mensagem de erro informando que o nome de usuário ou a senha estão incorretos.
+    - **`redirect("login")`**: Redireciona o usuário de volta para a página de login.
+    
+
+**8. Tratamento do Método `GET`**
+
+```python
+else:
+    form = FormLogin()
+
+```
+
+- Se o método HTTP da solicitação for `GET`, um formulário vazio é instanciado.
+
+**9. Contexto e Renderização**
+
+```python
+context.update({"form": form})
+return render(request, 'login.html', context)
+```
+
+- O formulário (com ou sem erros) é adicionado ao dicionário `context`.
+- **`render(request, 'login.html', context)`**: Renderiza a página de login, enviando o formulário para exibição no template `login.html`.
+
+#### <span style="color: #AC58FA;">***Fluxo de Execução***</span>
+
+1. **Requisição GET**:
+    - Um formulário vazio é exibido ao usuário.
+2. **Requisição POST**:
+    - O formulário é processado.
+    - As credenciais são verificadas:
+        - Se forem válidas: o usuário é autenticado e redirecionado.
+        - Caso contrário: uma mensagem de erro é exibida, e o usuário é redirecionado para tentar novamente.
+        
+
+#### <span style="color: #AC58FA;">***Considerações de Segurança***</span>
+
+1. **Prevenção de Cache**:
+    - A utilização de `@cache_control` impede que dados sensíveis fiquem acessíveis via cache.
+2. **Mensagens de Erro Genéricas**:
+    - Mensagens genéricas como "Nome de usuário ou senha incorretos" dificultam que um invasor identifique se um nome de usuário existe no sistema.
+3. **Validação e Sanitização de Dados**:
+    - O uso de `form.is_valid()` e `form.cleaned_data` garante que os dados sejam devidamente validados e sanitizados antes do processamento.
+    
+
+#### <span style="color: #AC58FA;">***Dependências Externas***</span>
+
+- **`FormLogin`**: classe do formulário de login, definida em um arquivo de formulários (ex.: `forms.py`).
+- **`authenticate` e `auth_login`**: funções do Django usadas para autenticar e logar usuários.
+- **`messages.error`**: módulo do Django utilizado para exibir mensagens temporárias ao usuário.
+- **`redirect` e `render`**: funções auxiliares do Django para redirecionar ou renderizar páginas HTML.
+
+#### <span style="color: #AC58FA;">**Logout**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `logout` é uma funcionalidade simples e essencial em aplicativos Django que gerenciam autenticação de usuários. Sua principal responsabilidade é encerrar a sessão de um usuário autenticado e redirecioná-lo para a página inicial do sistema.
+
 Caso o usuário queira sair do sistema (logout), a lógica apresentada abaixo permite que o faça.
+
 ```python
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
@@ -4541,9 +4687,44 @@ def logout(request):
     return redirect("homepage")
 ```
 
-### <span style="color: #AC58FA;">Lógica de cálculo de frequência</span>
-Essa lógica foi realizada na função chamada upload_frequencia, como consta abaixo:
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
+**Componentes:**
+
+1. **Decoradores:**
+    - `@login_required`:
+        - Garante que apenas usuários autenticados possam acessar essa função. Se um usuário não autenticado tentar acessar, ele será redirecionado para a página de login.
+    - `@cache_control(no_cache=True, must_revalidate=True, no_store=True)`:
+        - Define cabeçalhos HTTP relacionados ao cache para esta função. Essas configurações ajudam a proteger a página e os dados do usuário ao impedir o armazenamento no cache do navegador:
+            - `no_cache=True`: Evita que o conteúdo seja armazenado em cache.
+            - `must_revalidate=True`: Força o navegador a revalidar os dados antes de reutilizá-los.
+            - `no_store=True`: Garante que nada seja armazenado no cache.
+2. **`logout(request)` (Função):**
+    - `auth_logout(request)`:
+        - Esta função, fornecida pelo Django, encerra a sessão do usuário atual, removendo suas informações de autenticação.
+        - Isso invalida o cookie de sessão, efetivamente desconectando o usuário.
+    - `return redirect("homepage")`:
+        - Após a execução do logout, o usuário é redirecionado para a página inicial do site (identificada pela URL "homepage").
+        
+
+**Lógica Completa:**
+
+1. **Autenticação Obrigatória:**
+    - Somente usuários autenticados podem acessar a função, garantindo segurança.
+2. **Logout Seguro:**
+    - Quando o usuário solicita logout, suas credenciais e dados de sessão são removidos.
+3. **Controle de Cache:**
+    - As configurações de cache evitam que o navegador armazene informações da sessão anterior, protegendo os dados do usuário, especialmente em computadores compartilhados.
+4. **Redirecionamento:**
+    - Após o logout, o usuário é levado para a página inicial do site.
+
+
+### <span style="color: #9A2EFE;">Lógica de Registrar Frequência Fictícia</span>
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `upload_frequencia` é responsável por realizar o upload, processamento e salvamento de dados de frequência a partir de um arquivo `.txt`. O arquivo deve conter dados de frequência tabulados (separados por tabulação). A função verifica a existência de alunos associados aos registros no banco de dados e cria entradas de frequência relacionadas.
+
+Essa funcionalidade é protegida por autenticação e requer que o usuário esteja logado para acessá-la.
 ```python
 @login_required
 def upload_frequencia(request):
@@ -4589,12 +4770,390 @@ def upload_frequencia(request):
         return render(request, 'frequencia.html')
 ```
 
-### <span style="color: #AC58FA;">Lógica de relatórios</span>
-Para a realização dessa lógica, o grupo contou com as ferramentas disponibilizadas pela biblioteca ReportLab.
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
-A lógica foi codificada no arquivo views.py, separada em duas funções.
+**1. Decorador `@login_required`**
 
-**Função de estilização e geração do relatório:**
+- Garante que apenas usuários autenticados possam acessar a função.
+- Caso um usuário não autenticado tente acessar, ele será redirecionado para a página de login.
+
+**2. Verificação do Método HTTP**
+
+```python
+if request.method == 'POST' and 'freq' in request.FILES:
+
+```
+
+- **`request.method == 'POST'`**: Verifica se a solicitação é do tipo POST, indicando que o arquivo foi enviado.
+- **`'freq' in request.FILES`**: Certifica-se de que o arquivo enviado está presente no campo `freq` do formulário.
+
+**3. Salvamento do Arquivo**
+
+```python
+fs = FileSystemStorage()
+filename = fs.save(txt_file.name, txt_file)
+
+```
+
+- **`FileSystemStorage`**: Gerencia o armazenamento de arquivos no sistema de arquivos.
+- **`fs.save()`**: Salva o arquivo no diretório configurado (geralmente no diretório de mídia).
+
+**4. Abertura e Leitura do Arquivo TXT**
+
+```python
+with open(fs.path(filename), newline='', encoding='ISO-8859-1') as txtfile:
+    reader = csv.reader(txtfile, delimiter='\t')
+
+```
+
+- **`fs.path(filename)`**: Obtém o caminho completo do arquivo salvo.
+- **`encoding='ISO-8859-1'`**: Define o encoding para leitura do arquivo. O formato `ISO-8859-1` é comum em arquivos gerados em sistemas legados.
+- **`csv.reader`**: Lê o arquivo, considerando tabulação (`\t`) como delimitador.
+
+**5. Processamento de Cada Linha**
+
+```python
+for row in reader:
+    try:
+        data = row[0].strip()
+        id_carteirinha = int(row[1].strip())
+        hora = row[2].strip()
+        identificador = int(row[3].strip())
+
+```
+
+- Itera sobre cada linha do arquivo.
+- Os dados são extraídos e convertidos conforme necessário:
+    - **`data`**: Data do registro.
+    - **`id_carteirinha`**: ID único da carteirinha do aluno.
+    - **`hora`**: Hora do registro.
+    - **`identificador`**: Indica se o registro é de entrada ou saída (número inteiro).
+    
+
+**6. Verificação e Criação de Frequência**
+
+```python
+aluno = Aluno.objects.get(id_carteirinha=id_carteirinha)
+Frequencia.objects.create(
+    id_aluno=aluno,
+    data=data,
+    hora=hora,
+    identificador=identificador
+)
+
+```
+
+- **`Aluno.objects.get(id_carteirinha=id_carteirinha)`**:
+    - Busca no banco de dados o aluno associado ao `id_carteirinha`.
+    - Caso o aluno não exista, é lançada uma exceção `Aluno.DoesNotExist`.
+- **`Frequencia.objects.create()`**:
+    - Cria um registro na tabela `Frequencia` associando:
+        - O aluno encontrado.
+        - Data e hora da frequência.
+        - Identificador do tipo de registro (entrada ou saída).
+        
+
+**7. Tratamento de Exceções**
+
+```python
+except Aluno.DoesNotExist:
+    print(request, f"Aluno com carteirinha {id_carteirinha} não encontrado.")
+except IndexError:
+    print(request, "Erro no formato do arquivo TXT.")
+except Exception as e:
+    print(request, f"Erro ao salvar a frequência: {str(e)}")
+
+```
+
+- **`Aluno.DoesNotExist`**: Captura casos onde um `id_carteirinha` não corresponde a nenhum aluno.
+- **`IndexError`**: Trata erros de formato no arquivo TXT, como colunas ausentes.
+- **`Exception`**: Captura quaisquer outros erros não específicos durante o processamento.
+
+**8. Mensagem de Sucesso e Redirecionamento**
+
+```python
+messages.success(request, "Frequências carregadas com sucesso.")
+return redirect("homepage")
+```
+
+- **`messages.success`**: Exibe uma mensagem ao usuário indicando que o processo foi concluído com sucesso.
+- **`redirect("homepage")`**: Redireciona o usuário para a página principal do sistema.
+
+**9. Renderização Inicial**
+
+```python
+return render(request, 'frequencia.html')
+```
+
+- Caso a solicitação seja do tipo `GET`, renderiza a página `frequencia.html`, que contém o formulário para envio do arquivo.
+
+#### <span style="color: #AC58FA;">***Fluxo de Execução***</span>
+
+1. **Requisição GET**:
+    - A página para envio do arquivo é exibida.
+2. **Requisição POST**:
+    - O arquivo TXT é enviado e salvo no sistema.
+    - Cada linha do arquivo é processada para criar registros de frequência no banco.
+    - Mensagens de erro são exibidas para casos específicos:
+        - Aluno não encontrado.
+        - Formato incorreto do arquivo.
+    - Mensagem de sucesso é exibida ao final do processamento.
+3. **Redirecionamento**:
+    - Após o processamento, o usuário é redirecionado para a página inicial.
+    
+#### <span style="color: #AC58FA;">***Considerações de Segurança***</span>
+
+1. **Proteção por Login**:
+    - Apenas usuários autenticados podem acessar a funcionalidade.
+2. **Validação do Arquivo**:
+    - O código assume que o arquivo enviado segue um formato esperado (TXT tabulado). Adicionar validações adicionais seria uma boa prática.
+3. **Tratamento de Exceções**:
+    - As exceções capturadas garantem que o sistema não falhe completamente devido a erros isolados.
+    
+#### <span style="color: #AC58FA;">***Dependências Externas***</span>
+
+- **`FileSystemStorage`**: Gerencia o armazenamento e acesso ao arquivo TXT.
+- **`Aluno` e `Frequencia`**: Modelos do banco de dados, usados para consultar e criar registros.
+- **`csv.reader`**: Biblioteca padrão do Python para leitura de arquivos tabulados.
+- **`messages.success`**: Componente do Django usado para exibir mensagens temporárias ao usuário.
+- **`redirect` e `render`**: Funções do Django para redirecionar e renderizar páginas.
+
+
+### <span style="color: #9A2EFE;">Lógica de Cálculo de Frequência dos Alunos</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `alunos` exibe detalhes sobre a frequência, presença, faltas e atrasos dos alunos de uma turma específica. Ela utiliza consultas SQL avançadas com tabelas e funções analíticas para calcular métricas de desempenho de frequência por aluno, relacionadas à carga horária total e porcentagem de presença no curso.
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def alunos(request, turma):
+    curso = get_object_or_404(Curso, turma=turma)
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            WITH frequencias_calculadas AS (
+                SELECT 
+                    f.id_aluno_id,
+                    f.data,
+                    f.hora,
+                    LEAD(f.hora) OVER (PARTITION BY f.id_aluno_id, f.data ORDER BY f.hora) AS proxima_hora,
+                    CAST(f.identificador AS INTEGER) AS identificador,
+                    CASE 
+                        WHEN CAST(f.identificador AS INTEGER) = 2 
+                        AND NOT EXISTS (
+                            SELECT 1
+                            FROM web_frequencia f2 
+                            WHERE f2.id_aluno_id = f.id_aluno_id 
+                            AND f2.data = f.data 
+                            AND CAST(f2.identificador AS INTEGER) = 1
+                        ) THEN true
+                        ELSE false
+                    END AS apenas_saida
+                FROM 
+                    web_frequencia AS f
+            ),
+            presenca_por_dia AS (
+                SELECT 
+                    aluno.id_carteirinha,
+                    f.data,
+                    CASE 
+                        WHEN f.apenas_saida THEN
+                            EXTRACT(EPOCH FROM (
+                                f.hora - c.horario_entrada
+                            )) / 3600.0
+                            - 
+                            EXTRACT(EPOCH FROM c.carga_horaria_intervalo) / 3600.0
+                        WHEN CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN
+                            CASE 
+                                WHEN f.hora IS NULL THEN 0
+                                ELSE
+                                    EXTRACT(EPOCH FROM LEAST(
+                                        COALESCE(f.proxima_hora, c.horario_saida),
+                                        c.horario_saida
+                                    ) - 
+                                    GREATEST(
+                                        f.hora,
+                                        c.horario_entrada
+                                    )) / 3600.0
+                                    - 
+                                    EXTRACT(EPOCH FROM c.carga_horaria_intervalo) / 3600.0
+                            END
+                        ELSE 0
+                    END AS horas_presenca,
+                    CASE 
+                        WHEN f.id_aluno_id IS NULL THEN 1
+                        WHEN f.apenas_saida THEN 0         
+                        WHEN f.hora IS NULL AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN 1 
+                        ELSE 0 
+                    END AS teve_falta,
+                    CASE 
+                        WHEN f.apenas_saida THEN 0
+                        WHEN f.hora > c.horario_entrada + INTERVAL '10 minutes' AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN 1 
+                        ELSE 0 
+                    END AS teve_atraso,
+                    CASE 
+                        WHEN CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 
+                            OR CAST(COALESCE(f.identificador, 0) AS INTEGER) = 2
+                            OR f.apenas_saida
+                            OR f.hora IS NOT NULL
+                        THEN 1
+                        ELSE 0
+                    END AS presenca
+                FROM 
+                    web_aluno AS aluno
+                CROSS JOIN
+                    web_curso AS c 
+                LEFT JOIN 
+                    frequencias_calculadas AS f ON aluno.id_carteirinha = f.id_aluno_id
+                    AND f.data BETWEEN c.data_inicio AND c.data_fim
+                WHERE 
+                    c.turma = %s
+            ),
+            totais_aluno AS (
+                SELECT 
+                    aluno.id_carteirinha,
+                    COALESCE(SUM(p.horas_presenca), 0) AS total_horas_presenca,
+                    COALESCE(COUNT(DISTINCT CASE WHEN p.teve_atraso = 1 THEN p.data END), 0) AS total_atrasos,
+                    COALESCE(COUNT(DISTINCT CASE WHEN p.presenca = 1 THEN p.data END), 0) AS total_presencas
+                FROM 
+                    web_aluno AS aluno
+                LEFT JOIN 
+                    presenca_por_dia AS p ON aluno.id_carteirinha = p.id_carteirinha
+                WHERE
+                    aluno.id_curso_id = %s
+                GROUP BY 
+                    aluno.id_carteirinha
+            )
+            SELECT 
+                aluno.id_carteirinha,
+                aluno.nome,
+                GREATEST(c.dias_letivos - t.total_presencas, 0) AS total_faltas,  -- Atualizado para calcular total_faltas
+                t.total_atrasos,
+                t.total_presencas,
+                LEAST(t.total_horas_presenca, 600) AS carga_horaria_cumprida,
+                CASE 
+                    WHEN c.dias_letivos > 0 THEN 
+                        LEAST(100, ROUND((LEAST(t.total_horas_presenca, 600) / (c.dias_letivos * 7.5)) * 100, 2))
+                    ELSE 0
+                END AS porcentagem_frequencia
+            FROM 
+                web_aluno AS aluno
+            JOIN 
+                totais_aluno AS t ON aluno.id_carteirinha = t.id_carteirinha
+            JOIN 
+                web_curso AS c ON aluno.id_curso_id = c.turma
+            WHERE 
+                c.turma = %s
+            ORDER BY 
+                aluno.nome;
+        """, [curso.turma, curso.turma, curso.turma])
+
+        resultados = cursor.fetchall()
+
+    alunos_detalhes = []
+    for resultado in resultados:
+        alunos_detalhes.append({
+            'id_carteirinha': resultado[0],
+            'aluno': resultado[1],
+            'faltas': resultado[2],
+            'atrasos': resultado[3],
+            'presencas': resultado[4],
+            'carga_horaria_aluno': resultado[5],
+            'porcentagem_carga_horaria': round(resultado[6], 2),
+        })
+
+    context = {
+        'curso': curso,
+        'alunos_detalhes': alunos_detalhes,
+    }
+
+    return render(request, 'alunos.html', context)
+```
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**1. Decoradores**
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+```
+
+- **`@login_required`**: Garante que somente usuários autenticados possam acessar a função.
+- **`@cache_control`**: Desativa o cache do navegador para evitar a exibição de dados desatualizados.
+
+**2. Obtenção do Curso**
+
+```python
+curso = get_object_or_404(Curso, turma=turma)
+```
+
+- Usa o `get_object_or_404` para buscar o curso pela turma. Retorna erro 404 se não encontrar.
+
+**3. Consulta SQL Avançada**
+
+A consulta realiza as seguintes etapas:
+
+**a) Subconsulta: `frequencias_calculadas`**
+
+- Utiliza a função `LEAD` para calcular a próxima hora de registro de presença.
+- Identifica registros de apenas saída (`apenas_saida`), ausência de entrada, e outros dados de frequência.
+
+**b) Subconsulta: `presenca_por_dia`**
+
+- Calcula as horas de presença por dia, considerando atrasos e faltas.
+- Garante que somente alunos dentro do período letivo sejam avaliados.
+
+**c) Subconsulta: `totais_aluno`**
+
+- Soma horas de presença, conta atrasos e dias de presença para cada aluno.
+- Agrupa os dados por aluno.
+
+**d) Resultado Final**
+
+- Calcula faltas restantes (`total_faltas`) baseadas nos dias letivos do curso.
+- Garante que a carga horária máxima não exceda 600 horas.
+- Calcula a porcentagem de frequência com base no total de horas exigidas pelo curso.
+
+**4. Processamento de Resultados**
+
+```python
+alunos_detalhes = []
+for resultado in resultados:
+    alunos_detalhes.append({
+        'id_carteirinha': resultado[0],
+        'aluno': resultado[1],
+        'faltas': resultado[2],
+        'atrasos': resultado[3],
+        'presencas': resultado[4],
+        'carga_horaria_aluno': resultado[5],
+        'porcentagem_carga_horaria': round(resultado[6], 2),
+    })
+```
+
+- Converte os resultados da consulta para um dicionário utilizável no template.
+
+**5. Renderização do Template**
+
+```python
+context = {
+    'curso': curso,
+    'alunos_detalhes': alunos_detalhes,
+}
+
+return render(request, 'alunos.html', context)
+```
+
+- Passa os detalhes do curso e dos alunos para o template `alunos.html`.
+
+
+### <span style="color: #9A2EFE;">Lógica de Geração de Relatórios</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `gerar_relatorio_pdf` gera um relatório em formato PDF que apresenta informações detalhadas sobre frequência e atrasos de alunos, estruturando os dados de forma organizada e visualmente atrativa. O relatório inclui tabelas, gráficos e textos formatados para facilitar a análise de desempenho acadêmico.
 
 ```python
 def gerar_relatorio_pdf(relatorio):
@@ -4715,21 +5274,75 @@ def gerar_relatorio_pdf(relatorio):
     return buffer
 ```
 
-**Informações**
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Criação do buffer**
+
 Dentro da função de estilizar e gerar relatório, foi criada uma variável chamada *buffer*:
+
 ```python
 buffer = BytesIO()
 doc = SimpleDocTemplate(buffer, pagesize=A4, title="Relatório de Frequência")
 ```
-Buffer significa uma área em que os dados serão armazenados temporariamente enquanto vão de um sistema de *input* para um sistema de *output* (enquanto estão sendo processados).
-O uso de *BytesIO()* significa que os dados inseridos na variável serão transformados em *bytes* enquanto forem armazenados.
-Essa variável é chamada em seguida, como demonstrado abaixo:
+
+- Buffer significa uma área em que os dados serão armazenados temporariamente enquanto vão de um sistema de *input* para um sistema de *output* (enquanto estão sendo processados).
+- O uso de *BytesIO()* significa que os dados inseridos na variável serão transformados em *bytes* enquanto forem armazenados.
+
+**Documento em PDF**
+
+1. **Uso de ReportLab**:
+    - A biblioteca é utilizada para criar o PDF com texto, imagens e tabelas.
+    - A classe `SimpleDocTemplate()` cria o template vinculado ao nome do arquivo.
+    - As tabelas são estilizadas com `Table` e `TableStyle`.
+    
+2. **Estrutura do Relatório**:
+    - **Capa do relatório**: para capa do relatório, foram adicionadas informações relevantes:
+        
+        ```python
+        hoje = datetime.now().strftime('%d/%m/%Y')
+            elementos.append(Spacer(1, 12))
+            elementos.append(Paragraph("Relatório de Frequência e Atrasos", styles['Title']))
+            elementos.append(Paragraph("Análise de Desempenho dos Alunos", styles['Subtitle']))
+            elementos.append(Paragraph(f"Gerado em: {hoje}", styles['BodyText']))
+            elementos.append(Spacer(1, 12))
+        ```
+        
+        - A variável `hoje` foi criada para definir o dia, utilizando a classe datetime e os métodos `now` e `strftime`.
+        - Foram adicionados elementos como espaço e parágrafo, através da variável criada previamente.
+    - **Tabelas**:
+        - "Alunos com Mais Atrasos".
+        - "Alunos com Baixa Frequência".
+        - "Detalhes dos Alunos".
+    - As tabelas são geradas dinamicamente a partir da lista `relatorio`, que deve conter os dados organizados por categoria e outros atributos dos alunos.
+    
+3. **Verificação de imagem**:
+    - Verifica se o arquivo de logo (`senai_logo.webp`) está no diretório esperado e o adiciona ao PDF.
+        - Uma variável `caminho_imagem` foi criada para definir o caminho da imagem a ser inserida no documento, através do módulo `os`
+        - É usada a classe `Imagem` para inserir a imagem, caso o caminho exista.
+            
+            Para a tabela de alunos com mais atrasos e frequência mais baixa, além da, foram adicionados títulos e foram criadas listas, que conterão o conteúdo das colunas e linhas.
+            
+            Em seguida, as tabelas foram estilizadas
+            
+    
+4. **Personalização do Estilo**:
+    - Usa estilos predefinidos e customizados do `getSampleStyleSheet` para títulos, subtítulos e corpo do texto.
+
+A variável `buffer` é chamada em seguida, como demonstrado abaixo:
+
 ```python
 buffer.seek(0)
 ```
+
 A função *seek* é usada para mover o cursor ao lugar desejado do arquivo ao ser aberto, em que 0 significa que será movido para o início do arquivo.
 
-**Função de consulta:**
+
+### <span style="color: #9A2EFE;">**Lógica de Consulta de Relatório**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `relatorio` é responsável por gerar e exibir um relatório de frequência e atrasos de alunos. O relatório pode ser exibido em uma página HTML ou baixado como PDF, dependendo do parâmetro `format` passado na requisição.
+
 ```python
 # Controle de acesso para a função
 @login_required
@@ -4836,22 +5449,118 @@ def relatorio(request):
     return render(request, 'relatorio.html', context)
 ```
 
-**Informações:**
-A lista “relatorio” que foi criada é uma compreensão de lista, em que os resultados brutos da consulta são transformados em uma lista de dicionários mais legível. Segue o trecho do código especificado abaixo:
-```python
-relatorio = [
-        {
-            'categoria': row[0],
-            'nome': row[1],
-            'turma': row[2],
-            'total_atrasos': row[3],
-            'total_faltas': row[4],
-        } for row in alunos_detalhes
-    ]
-```
-Essa compreensão de lista atua sobre cada *row* (linha) e adiciona um dicionário com chaves descritivas para cada uma.
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
-### <span style="color: #AC58FA;">Lógica de notificações</span>
+**Informações**
+
+- Após a consulta ao banco de dados, é criada a compreensão de lista `relatorio`, em que os resultados brutos da consulta são transformados em uma lista de dicionários mais legível.
+- Essa compreensão de lista atua sobre cada *row* (linha) e adiciona um dicionário com chaves descritivas para cada uma.
+- Dentro de um `if`, é conferido se o formato está conforme esperado. Caso esteja, a variável buffer converterá a função de gerar relatório em bytes.
+
+**1. Decoradores**
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
+```
+
+- **@login_required**:
+    
+    Garante que apenas usuários autenticados possam acessar a função.
+    
+- **@cache_control(no_cache=True, must_revalidate=True, no_store=True)**:
+    
+    Impede o armazenamento em cache para garantir que os dados exibidos estejam sempre atualizados.
+    
+
+**2. Parâmetros de Entrada**
+
+- **request**:
+Contém os dados da requisição HTTP, permitindo verificar o formato de saída desejado (HTML ou PDF).
+
+**3. Execução da Consulta SQL**
+
+A consulta é estruturada com subconsultas para organizar e consolidar os dados em várias etapas:
+
+**a) Subconsulta: `frequencias_calculadas`**
+
+- Calcula:
+    - **Hora seguinte** (`proxima_hora`) usando a função analítica `LEAD`.
+    - Identifica se o registro representa apenas uma saída, sem entrada correspondente (`apenas_saida`).
+- Garante que os dados sejam organizados por aluno e data.
+
+**b) Subconsulta: `atrasos_aluno`**
+
+- Relaciona os alunos com os dados de frequência.
+- Calcula:
+    - Total de atrasos (`total_atrasos`): Dias em que o aluno chegou mais de 10 minutos atrasado.
+    - Dias de presença (`dias_presenca`): Total de dias em que o aluno foi identificado.
+    - Total de faltas (`total_faltas`): Diferença entre dias letivos e dias de presença.
+
+**c) Subconsulta: `frequencia_aluno`**
+
+- Estrutura os dados consolidados para serem utilizados nas categorias finais.
+
+**d) Subconsulta: `top_atrasos`**
+
+- Seleciona os 5 alunos com o maior número de atrasos.
+
+**e) Subconsulta: `baixa_frequencia`**
+
+- Seleciona os 5 alunos com menor frequência (independente do número de atrasos).
+
+**f) Resultado Final**
+
+- Consolida os dados em duas categorias:
+    - "Top Atrasos": Alunos com maior número de atrasos.
+    - "Baixa Frequência": Alunos com menor índice de presença.
+    
+
+**4. Processamento dos Resultados**
+
+```python
+alunos_detalhes = cursor.fetchall()
+```
+
+- Os resultados são armazenados em uma lista estruturada de dicionários, onde cada entrada contém:
+    - **categoria**: Tipo de registro (Top Atrasos ou Baixa Frequência).
+    - **nome**: Nome do aluno.
+    - **turma**: Turma do aluno.
+    - **total_atrasos**: Número total de atrasos.
+    - **total_faltas**: Número total de faltas.
+    
+
+**5. Geração do PDF**
+
+Se a requisição contém o parâmetro `format=pdf`, o relatório é convertido para PDF:
+
+```python
+if request.GET.get('format') == 'pdf':
+    buffer = gerar_relatorio_pdf(relatorio)
+    return FileResponse(buffer, as_attachment=True, filename="relatorio_de_frequencia.pdf")
+```
+
+**6. Renderização do Template**
+
+Se a saída é HTML, os dados são enviados para o template:
+
+```python
+context = {'relatorio': relatorio}
+return render(request, 'relatorio.html', context)
+
+```
+
+- O template exibe o relatório com base nas informações calculadas.
+
+
+### <span style="color: #9A2EFE;">Lógica de Notificações</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `notificacoes` é responsável por calcular e exibir notificações relacionadas a atrasos frequentes de alunos em seus horários de entrada. Utilizando consultas SQL complexas, a função verifica alunos que acumularam três ou mais atrasos durante o período letivo e exibe essas informações na interface do usuário.
+
+Essa funcionalidade é protegida por autenticação e caching está desabilitado para garantir a exibição de dados atualizados.
 Essa lógica foi realizada na função de notificacoes, realizando uma consulta no banco de dados, buscando alunos com mais de 3 atrasos, e fazendo aparecer na página correspondente.
 
 ```python
@@ -4928,30 +5637,54 @@ def notificacoes(request):
     return render(request, 'notificacoes.html', context)
 ```
 
-### <span style="color: #AC58FA;">Adicionar e deletar curso</span>
-### **View: `criar_cursos` (Adicionar Curso)**
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Informações:**
+
+1. **Autenticação e Cache:**
+    - O decorator `@login_required` garante que apenas usuários autenticados possam acessar essa funcionalidade.
+    - `@cache_control(no_cache=True, must_revalidate=True, no_store=True)` desabilita o cache da página para garantir que as informações exibidas estejam sempre atualizadas.
+    
+2. **Consulta SQL Complexa:**
+    - Utiliza a conexão direta ao banco de dados (`connection.cursor()`) para executar uma consulta SQL detalhada com subconsultas e janelas analíticas. A consulta pode ser dividida em etapas:
+    
+    a. **Subconsulta `frequencias_calculadas`:**
+    
+    - Processa os dados de frequência (`web_frequencia`) para:
+        - Identificar a próxima marcação de horário usando a função `LEAD`.
+        - Verificar se há registros de "saída" (`identificador = 2`) sem uma entrada correspondente no mesmo dia.
+        
+    
+    b. **Subconsulta `atrasos_aluno`:**
+    
+    - Calcula o total de atrasos por aluno considerando:
+        - Um atraso ocorre quando a hora de entrada (`identificador = 1`) excede o horário de entrada do curso por mais de 10 minutos.
+        - Filtra apenas as frequências dentro do período do curso (entre `data_inicio` e `data_fim`).
+    - Agrupa os resultados por aluno e turma e filtra apenas os alunos com três ou mais dias de atraso.
+    
+    c. **Consulta Final:**
+    
+    - Seleciona o nome do aluno, a turma, e o total de atrasos a partir da subconsulta `atrasos_aluno`.
+    - Ordena os resultados pelo nome do aluno.
+    
+3. **Extração dos Dados:**
+    - A função executa a consulta e obtém os resultados com `cursor.fetchall()`.
+    
+4. **Estruturação dos Dados:**
+    - Os resultados da consulta são convertidos em uma lista de dicionários (`alunos_notificados`) para facilitar a renderização no template.
+    - Também é calculada uma flag `tem_notificacoes` para verificar se há notificações a serem exibidas.
+    
+5. **Renderização do Template:**
+    - Retorna o template `notificacoes.html` com o contexto:
+        - `alunos_notificados`: Lista de alunos com três ou mais atrasos.
+        - `tem_notificacoes`: Indica se há notificações disponíveis.
+
+
+### <span style="color: #9A2EFE;">Lógica de Adicionar curso</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
 
 A view `criar_cursos` tem o objetivo de permitir a criação de cursos no sistema a partir de um arquivo CSV enviado pelo usuário. Ela processa o arquivo CSV, valida as informações e cria os cursos no banco de dados.
-
-### **Funcionamento:**
-
-1. **Método de Requisição**:
-    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
-2. **Validação do Arquivo**:
-    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
-    - Para cada linha do CSV, o sistema tenta extrair informações como turma, nome do curso, horários e datas.
-3. **Verificação de Cursos Existentes**:
-    - Antes de criar um novo curso, o sistema verifica se já existe um curso com a mesma **turma** e **nome do curso**. Se já existir, ele ignora a linha e passa para a próxima.
-4. **Criação de Curso**:
-    - Caso a linha seja válida, o curso é criado no banco de dados com os campos extraídos do CSV.
-    - Além disso, a data de início e de fim do curso são convertidas para o formato adequado, e os dias de funcionamento são divididos e armazenados.
-5. **Exceções**:
-    - Se ocorrer algum erro no processo de criação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
-6. **Respostas ao Usuário**:
-    - Se os cursos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
-    - Caso contrário, uma mensagem de erro será exibida.
-
-### **Código:**
 
 ```python
 @login_required
@@ -4998,27 +5731,65 @@ def criar_cursos(request):
         return render(request, 'criar_curso.html')
 ```
 
-### **View: `delete_curso` (Deletar Curso)**
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
-A view `delete_curso` tem como objetivo permitir a exclusão de um curso específico e todos os alunos associados a ele. A view recebe a turma como parâmetro e, após a confirmação de que o usuário tem as permissões necessárias, exclui o curso e todos os alunos associados a ele.
-
-### **Funcionamento:**
+**Informações**
 
 1. **Método de Requisição**:
-    - A view trata requisições `POST` para confirmar a exclusão do curso e seus alunos. Se a requisição não for `POST`, uma mensagem de erro é exibida.
-2. **Autenticação e Permissões**:
-    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do curso. Caso contrário, a ação é impedida e uma mensagem de erro é exibida.
-3. **Verificação de Existência do Curso**:
-    - O sistema tenta localizar o curso com base na **turma** fornecida. Se o curso não for encontrado, será gerado um erro 404.
-4. **Exclusão de Curso e Alunos**:
-    - Caso o curso seja encontrado, o sistema localiza todos os alunos associados a esse curso e os exclui.
-    - O sistema também remove os registros de frequência dos alunos excluídos.
-    - Após excluir todos os alunos e registros de frequência, o curso é excluído.
-5. **Respostas ao Usuário**:
-    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
+2. **Validação do Arquivo**:
+    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
+    - Para cada linha do CSV, o sistema tenta extrair informações como turma, nome do curso, horários e datas.
+3. **Verificação de Cursos Existentes**:
+    - Antes de criar um novo curso, o sistema verifica se já existe um curso com a mesma **turma** e **nome do curso**. Se já existir, ele ignora a linha e passa para a próxima.
+4. **Criação de Curso**:
+    - Caso a linha seja válida, o curso é criado no banco de dados com os campos extraídos do CSV.
+    - Além disso, a data de início e de fim do curso são convertidas para o formato adequado, e os dias de funcionamento são divididos e armazenados.
+5. **Exceções**:
+    - Se ocorrer algum erro no processo de criação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
+6. **Respostas ao Usuário**:
+    - Se os cursos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
     - Caso contrário, uma mensagem de erro será exibida.
+    
 
-### **Código:**
+**Decoradores**
+
+- **`@login_required`:**
+    - Garante que apenas usuários autenticados possam acessar esta funcionalidade. Se o usuário não estiver autenticado, ele será redirecionado para a página de login.
+
+**Fluxo da Função**
+
+1. **Verificação de Método e Arquivo:**
+    - Confere se a requisição é do tipo `POST` e se contém um arquivo chamado `cursos` enviado pelo usuário.
+    - Se essas condições forem verdadeiras, o arquivo CSV será processado.
+2. **Armazenamento do Arquivo:**
+    - Utiliza `FileSystemStorage` para salvar o arquivo enviado no sistema de arquivos local. Isso permite acessar o conteúdo do arquivo durante o processamento.
+3. **Leitura do Arquivo CSV:**
+    - O arquivo CSV salvo é aberto com `open()` usando codificação `ISO-8859-1` para evitar problemas de compatibilidade com caracteres especiais.
+    - O leitor de CSV (`csv.reader`) interpreta o conteúdo do arquivo, separando as colunas por `;`.
+4. **Processamento das Linhas:**
+    - Para cada linha do arquivo CSV, tenta-se:
+        - **Evitar duplicatas:** Verifica se já existe um registro com a mesma turma e nome de curso. Se existir, a linha é ignorada.
+        - **Conversões necessárias:**
+            - Divide os dias de funcionamento por vírgula e remove espaços.
+            - Converte as datas de início e fim para objetos `datetime.date` com o formato esperado (`%d/%m/%Y`).
+        - **Criação de Registro:**
+            - Se não houver problemas, um novo curso é criado com os dados fornecidos.
+5. **Tratamento de Erros:**
+    - Se houver problemas, como índices fora de alcance (`IndexError`) ou falhas na conversão de dados (`ValueError`), esses erros são capturados e exibidos no console para depuração, mas o processamento continua para as próximas linhas.
+6. **Mensagem de Sucesso:**
+    - Após processar o arquivo, exibe uma mensagem de sucesso na interface do usuário usando `messages.success`.
+7. **Redirecionamento:**
+    - Após a criação bem-sucedida dos cursos, o usuário é redirecionado para a página "cursos".
+8. **Renderização:**
+    - Se o método de requisição não for `POST`, ou se nenhum arquivo for enviado, renderiza um template chamado `criar_curso.html` para o usuário carregar um novo arquivo.
+
+
+### <span style="color: #9A2EFE;">Lógica de Deletar Curso</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A view `delete_curso` tem como objetivo permitir a exclusão de um curso específico e todos os alunos associados a ele. A view recebe a turma como parâmetro e, após a confirmação de que o usuário tem as permissões necessárias, exclui o curso e todos os alunos associados a ele.
 
 ```python
 @login_required
@@ -5045,32 +5816,57 @@ def delete_curso(request, turma):
     return render(request, 'alunos.html', context)
 ```
 
----
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
-### <span style="color: #AC58FA;">Adicionar e deletar aluno</span>
-### **View: `criar_alunos` (Adicionar Alunos)**
-
-A view `criar_alunos` tem como objetivo permitir o cadastro em massa de alunos no sistema a partir de um arquivo CSV enviado pelo usuário. Ela processa o arquivo CSV, valida as informações e cria os alunos no banco de dados.
-
-### **Funcionamento:**
+**Funcionamento:**
 
 1. **Método de Requisição**:
-    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
-2. **Validação do Arquivo**:
-    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
-    - Para cada linha do CSV, o sistema tenta extrair informações como nome do aluno, ID da carteirinha e o curso (identificado pela turma).
-3. **Verificação de Alunos Existentes**:
-    - Antes de criar um novo aluno, o sistema verifica se já existe um aluno com o mesmo **ID de carteirinha**. Se já existir, ele ignora a linha e passa para a próxima.
-    - O sistema também verifica se o curso informado existe no banco de dados. Se o curso não for encontrado, o registro do aluno será ignorado.
-4. **Criação de Aluno**:
-    - Caso a linha seja válida, o aluno é criado no banco de dados com os campos extraídos do CSV.
-5. **Exceções**:
-    - Se ocorrer algum erro no processo de leitura ou validação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
-6. **Respostas ao Usuário**:
-    - Se os alunos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - A view trata requisições `POST` para confirmar a exclusão do curso e seus alunos. Se a requisição não for `POST`, uma mensagem de erro é exibida.
+2. **Autenticação e Permissões**:
+    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do curso. Caso contrário, a ação é impedida e uma mensagem de erro é exibida.
+3. **Verificação de Existência do Curso**:
+    - O sistema tenta localizar o curso com base na **turma** fornecida. Se o curso não for encontrado, será gerado um erro 404.
+4. **Exclusão de Curso e Alunos**:
+    - Caso o curso seja encontrado, o sistema localiza todos os alunos associados a esse curso e os exclui.
+    - O sistema também remove os registros de frequência dos alunos excluídos.
+    - Após excluir todos os alunos e registros de frequência, o curso é excluído.
+5. **Respostas ao Usuário**:
+    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
     - Caso contrário, uma mensagem de erro será exibida.
 
-### **Código:**
+#### <span style="color: #AC58FA;">***Fluxo Detalhado da Função***</span>
+
+1. **Autenticação Obrigatória (`@login_required`):**
+    - A função só pode ser acessada por usuários autenticados. Caso contrário, o usuário será redirecionado para a página de login.
+2. **Busca do Curso pelo `turma`:**
+    - Usa `get_object_or_404` para buscar um curso específico com base no identificador `turma`.
+    - Caso o curso não seja encontrado, retorna uma página de erro 404 automaticamente.
+3. **Busca dos Alunos Associados:**
+    - Recupera todos os alunos relacionados ao curso usando o relacionamento reverso (`aluno_set.all()`).
+4. **Verificação de Permissões:**
+    - Apenas usuários com status de superusuário (`is_superuser`) têm permissão para excluir o curso e os alunos associados.
+    - Se o usuário não for um superusuário:
+        - Uma mensagem de erro é exibida ao usuário com `messages.error`.
+        - O sistema redireciona para a página de cursos.
+5. **Exclusão do Curso e Dados Relacionados (Método `POST`):**
+    - Verifica se a requisição é do tipo `POST` para confirmar a exclusão.
+    - Se confirmado:
+        - Exclui os registros de frequência associados aos alunos do curso usando o filtro `Frequencia.objects.filter(id_aluno__in=alunos).delete()`.
+        - Exclui os alunos associados ao curso com `alunos.delete()`.
+        - Exclui o curso em si com `curso.delete()`.
+        - Exibe uma mensagem de sucesso ao usuário com `messages.success`.
+        - Redireciona para a página de cursos.
+6. **Erro no Método Diferente de `POST`:**
+    - Se o método da requisição não for `POST`, exibe uma mensagem de erro indicando que a exclusão falhou.
+7. **Renderização de Template:**
+    - Caso a exclusão não seja realizada ou seja apenas visualização, renderiza um template `alunos.html`, passando o curso e seus alunos como contexto.
+
+
+### <span style="color: #9A2EFE;">Lógica de Adicionar Aluno</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A view `criar_alunos` tem como objetivo permitir o cadastro em massa de alunos no sistema a partir de um arquivo CSV enviado pelo usuário. Ela processa o arquivo CSV, valida as informações e cria os alunos no banco de dados.
 
 ```python
 @login_required
@@ -5126,25 +5922,64 @@ def criar_alunos(request):
         return render(request, 'criar_aluno.html')
 ```
 
-### **View: `delete_aluno` (Deletar Aluno)**
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
 
-A view `delete_aluno` tem como objetivo permitir a exclusão de um aluno específico no sistema. Ela recebe como parâmetros a turma e o ID da carteirinha do aluno, verifica as permissões do usuário e, se autorizado, exclui o aluno do banco de dados.
-
-### **Funcionamento:**
+**Funcionamento:**
 
 1. **Método de Requisição**:
-    - A view trata requisições `POST` para confirmar a exclusão do aluno. Se a requisição for diferente, uma mensagem de erro será exibida.
-2. **Autenticação e Permissões**:
-    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do aluno. Caso contrário, o sistema impede a ação e exibe uma mensagem de erro.
-3. **Verificação de Existência de Aluno**:
-    - O sistema tenta localizar o aluno com base no `id_carteirinha` e no código da turma. Se o aluno não for encontrado, um erro 404 será gerado.
-4. **Exclusão de Aluno**:
-    - Caso o aluno seja encontrado, ele é excluído do banco de dados com o método `aluno.delete()`.
-5. **Respostas ao Usuário**:
-    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
-    - Caso contrário, se ocorrer algum erro durante o processo, uma mensagem de erro será exibida.
+    - A view trata requisições `POST` com arquivos (`multipart/form-data`), ou seja, o usuário envia um arquivo CSV através de um formulário.
+2. **Validação do Arquivo**:
+    - O arquivo enviado é lido como CSV, utilizando o delimitador `;` para separar os campos das linhas.
+    - Para cada linha do CSV, o sistema tenta extrair informações como nome do aluno, ID da carteirinha e o curso (identificado pela turma).
+3. **Verificação de Alunos Existentes**:
+    - Antes de criar um novo aluno, o sistema verifica se já existe um aluno com o mesmo **ID de carteirinha**. Se já existir, ele ignora a linha e passa para a próxima.
+    - O sistema também verifica se o curso informado existe no banco de dados. Se o curso não for encontrado, o registro do aluno será ignorado.
+4. **Criação de Aluno**:
+    - Caso a linha seja válida, o aluno é criado no banco de dados com os campos extraídos do CSV.
+5. **Exceções**:
+    - Se ocorrer algum erro no processo de leitura ou validação (como erro de formatação ou dados inválidos), o sistema captura e registra o erro, mas não interrompe o processamento do arquivo.
+6. **Respostas ao Usuário**:
+    - Se os alunos forem criados com sucesso, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, uma mensagem de erro será exibida.
 
-### **Código:**
+#### <span style="color: #AC58FA;">***Fluxo Detalhado da Função***</span>
+
+1. **Autenticação:**
+    - O decorator `@login_required` garante que apenas usuários autenticados podem acessar essa funcionalidade.
+2. **Manipulação de Requisição POST:**
+    - A função verifica se a requisição é do tipo `POST` e se o arquivo CSV está presente no campo `'alunos'`.
+3. **Armazenamento Temporário do Arquivo:**
+    - O arquivo CSV é salvo no sistema usando `FileSystemStorage` para manipulação posterior.
+4. **Processamento do Arquivo CSV:**
+    - O arquivo é aberto e lido linha por linha usando o módulo `csv`.
+    - O delimitador `;` é utilizado para separar os campos, e a codificação é definida como `ISO-8859-1` para lidar com caracteres especiais.
+5. **Validação e Criação dos Registros:**
+Para cada linha do arquivo CSV:
+    - **Nome do Aluno:**
+        - O primeiro campo é tratado como o nome do aluno e é "limpo" com `.strip()` para remover espaços em branco.
+    - **ID da Carteirinha:**
+        - Verifica se o campo não está vazio e é numérico.
+        - Se for inválido, o registro é ignorado, e uma mensagem é exibida no console.
+    - **Curso:**
+        - O campo do curso é usado para buscar a instância correspondente na tabela de cursos.
+        - Se o curso não existir, o registro é ignorado.
+    - **Duplicidade:**
+        - Verifica se já existe um aluno com o mesmo `id_carteirinha`. Se sim, o registro é ignorado.
+    - **Criação do Aluno:**
+        - Caso todas as validações passem, o aluno é criado com os dados fornecidos.
+6. **Mensagens ao Usuário:**
+    - Após o processamento, uma mensagem de sucesso é exibida ao usuário via `messages.success`.
+7. **Redirecionamento:**
+    - O usuário é redirecionado para a página de cursos após o processamento.
+8. **Renderização do Template:**
+    - Caso a requisição seja `GET`, o formulário para upload do arquivo CSV é exibido.
+
+
+### <span style="color: #9A2EFE;">**Lógica de Deletar Aluno**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A view `delete_aluno` tem como objetivo permitir a exclusão de um aluno específico no sistema. Ela recebe como parâmetros a turma e o ID da carteirinha do aluno, verifica as permissões do usuário e, se autorizado, exclui o aluno do banco de dados.
 
 ```python
 @login_required
@@ -5170,10 +6005,49 @@ def delete_aluno(request, turma, id_carteirinha):
     return render(request, 'alunos.html', context)
 
 ```
----
 
-### <span style="color: #AC58FA;">Lógica de cadastro</span>
-Para permitir o administrador a adicionar algum funcionário da gestão como usuário do sistema, foi realizada a lógica abaixo:
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Funcionamento:**
+
+1. **Método de Requisição**:
+    - A view trata requisições `POST` para confirmar a exclusão do aluno. Se a requisição for diferente, uma mensagem de erro será exibida.
+2. **Autenticação e Permissões**:
+    - O sistema verifica se o usuário é um superusuário (administrador) para permitir a exclusão do aluno. Caso contrário, o sistema impede a ação e exibe uma mensagem de erro.
+3. **Verificação de Existência de Aluno**:
+    - O sistema tenta localizar o aluno com base no `id_carteirinha` e no código da turma. Se o aluno não for encontrado, um erro 404 será gerado.
+4. **Exclusão de Aluno**:
+    - Caso o aluno seja encontrado, ele é excluído do banco de dados com o método `aluno.delete()`.
+5. **Respostas ao Usuário**:
+    - Se a exclusão for bem-sucedida, o sistema exibe uma mensagem de sucesso e redireciona o usuário para a lista de cursos.
+    - Caso contrário, se ocorrer algum erro durante o processo, uma mensagem de erro será exibida.
+
+#### <span style="color: #AC58FA;">***Fluxo Detalhado da Função***</span>
+
+1. **Autenticação:**
+    - O decorator `@login_required` garante que apenas usuários autenticados podem acessar a funcionalidade.
+2. **Busca dos Registros:**
+    - O curso é buscado usando `get_object_or_404` com base no identificador `turma`.
+    - O aluno é buscado pelo número de carteirinha (`id_carteirinha`) usando também `get_object_or_404`.
+3. **Verificação de Permissão:**
+    - Apenas usuários com permissão de superusuário (`request.user.is_superuser`) podem executar a ação de exclusão.
+    - Caso o usuário não seja superusuário, uma mensagem de erro é exibida via `messages.error`, e ele é redirecionado para a página inicial (`'/'`).
+4. **Processamento de Requisição POST:**
+    - Se o método da requisição for `POST`, o registro do aluno é excluído.
+    - Após a exclusão, uma mensagem de sucesso é exibida com `messages.success`.
+    - O usuário é redirecionado para a página de cursos (`'cursos'`).
+5. **Requisição GET ou Falha na Exclusão:**
+    - Caso a requisição não seja do tipo `POST`, ou ocorra algum erro, uma mensagem de erro é exibida.
+    - As informações do curso e do aluno são passadas para o contexto para exibição na página `'alunos.html'`.
+6. **Renderização do Template:**
+    - Renderiza o template `alunos.html` com informações do aluno e do curso, permitindo exibir detalhes ao usuário antes de tomar a ação.
+
+
+### <span style="color: #9A2EFE;">Lógica de cadastro</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `cadastro` é responsável por gerenciar o cadastro de novos usuários no sistema. Ela permite que um usuário crie uma conta com um nome, sobrenome, nome de usuário e senha. O usuário criado será automaticamente atribuído ao grupo "COORDENAÇÃO", e um registro adicional será criado na tabela `Usuario` com o cargo de "COORDENAÇÃO". Caso o nome de usuário já exista no banco de dados, uma mensagem de erro será exibida.
 
 ```python
 @login_required
@@ -5226,10 +6100,442 @@ def cadastro(request):
     return render(request, 'cadastro.html', context)
 ```
 
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Fluxo da Função**
+
+1. **Autenticação e Controle de Cache:**
+    - O decorator `@login_required` garante que apenas usuários autenticados podem acessar a página.
+    - `@cache_control(no_cache=True, must_revalidate=True, no_store=True)` evita que o navegador armazene o cache da página, garantindo segurança e privacidade.
+2. **Restrição para Grupo 'COORDENAÇÃO':**
+    - Se o usuário autenticado pertence ao grupo "COORDENAÇÃO", ele é redirecionado para a página inicial com uma mensagem de erro: *"Você não tem permissão para acessar essa página."*
+3. **Tratamento de Requisição POST:**
+    - Se o método da requisição for `POST`, os dados do formulário (`FormCadastro`) são validados:
+        - **Validação bem-sucedida:**
+            - Os campos `nome`, `sobrenome`, `username`, e `senha` são extraídos.
+            - Um novo usuário é criado com `User.objects.create_user`.
+            - O nome e sobrenome são atribuídos aos campos `first_name` e `last_name` do objeto `User`.
+            - O usuário é associado ao grupo "COORDENAÇÃO".
+            - Um registro adicional é criado na tabela `Usuario` com informações complementares.
+            - Uma mensagem de sucesso é exibida: *"Usuário cadastrado."*
+            - O usuário é redirecionado para a mesma página de cadastro.
+        - **Erro de Integridade:**
+            - Caso o nome de usuário já exista, é exibida a mensagem: *"Nome de usuário já existe. Por favor, escolha outro nome de usuário."*
+            - O formulário preenchido é retornado ao template.
+4. **Requisição GET:**
+    - Se a requisição for `GET`, um formulário vazio (`FormCadastro`) é inicializado.
+5. **Contexto e Renderização:**
+    - O formulário é enviado ao template `cadastro.html` para renderização.
+
+### <span style="color: #9A2EFE;">**Lógica para Listagem dos Alunos e Informações de Frequência**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `alunos` é responsável por gerar uma visão detalhada sobre a frequência dos alunos de um determinado curso e turma. Ela calcula e exibe informações como faltas, atrasos, presenças, carga horária cumprida e porcentagem de frequência de cada aluno, considerando os dados de frequência armazenados no banco de dados. As informações são calculadas por meio de uma consulta SQL complexa que analisa as entradas e saídas dos alunos, incluindo considerações sobre horários de entrada, saída e intervalos. O resultado é apresentado em uma página de detalhes dos alunos.
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def alunos(request, turma):
+    curso = get_object_or_404(Curso, turma=turma)
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            WITH frequencias_calculadas AS (
+                SELECT 
+                    f.id_aluno_id,
+                    f.data,
+                    f.hora,
+                    LEAD(f.hora) OVER (PARTITION BY f.id_aluno_id, f.data ORDER BY f.hora) AS proxima_hora,
+                    CAST(f.identificador AS INTEGER) AS identificador,
+                    CASE 
+                        WHEN CAST(f.identificador AS INTEGER) = 2 
+                        AND NOT EXISTS (
+                            SELECT 1
+                            FROM web_frequencia f2 
+                            WHERE f2.id_aluno_id = f.id_aluno_id 
+                            AND f2.data = f.data 
+                            AND CAST(f2.identificador AS INTEGER) = 1
+                        ) THEN true
+                        ELSE false
+                    END AS apenas_saida
+                FROM 
+                    web_frequencia AS f
+            ),
+            presenca_por_dia AS (
+                SELECT 
+                    aluno.id_carteirinha,
+                    f.data,
+                    CASE 
+                        WHEN f.apenas_saida THEN
+                            EXTRACT(EPOCH FROM (
+                                f.hora - c.horario_entrada
+                            )) / 3600.0
+                            - 
+                            EXTRACT(EPOCH FROM c.carga_horaria_intervalo) / 3600.0
+                        WHEN CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN
+                            CASE 
+                                WHEN f.hora IS NULL THEN 0
+                                ELSE
+                                    EXTRACT(EPOCH FROM LEAST(
+                                        COALESCE(f.proxima_hora, c.horario_saida),
+                                        c.horario_saida
+                                    ) - 
+                                    GREATEST(
+                                        f.hora,
+                                        c.horario_entrada
+                                    )) / 3600.0
+                                    - 
+                                    EXTRACT(EPOCH FROM c.carga_horaria_intervalo) / 3600.0
+                            END
+                        ELSE 0
+                    END AS horas_presenca,
+                    CASE 
+                        WHEN f.id_aluno_id IS NULL THEN 1
+                        WHEN f.apenas_saida THEN 0         
+                        WHEN f.hora IS NULL AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN 1 
+                        ELSE 0 
+                    END AS teve_falta,
+                    CASE 
+                        WHEN f.apenas_saida THEN 0
+                        WHEN f.hora > c.horario_entrada + INTERVAL '10 minutes' AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN 1 
+                        ELSE 0 
+                    END AS teve_atraso,
+                    CASE 
+                        WHEN CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 
+                            OR CAST(COALESCE(f.identificador, 0) AS INTEGER) = 2
+                            OR f.apenas_saida
+                            OR f.hora IS NOT NULL
+                        THEN 1
+                        ELSE 0
+                    END AS presenca
+                FROM 
+                    web_aluno AS aluno
+                CROSS JOIN
+                    web_curso AS c 
+                LEFT JOIN 
+                    frequencias_calculadas AS f ON aluno.id_carteirinha = f.id_aluno_id
+                    AND f.data BETWEEN c.data_inicio AND c.data_fim
+                WHERE 
+                    c.turma = %s
+            ),
+            totais_aluno AS (
+                SELECT 
+                    aluno.id_carteirinha,
+                    COALESCE(SUM(p.horas_presenca), 0) AS total_horas_presenca,
+                    COALESCE(COUNT(DISTINCT CASE WHEN p.teve_atraso = 1 THEN p.data END), 0) AS total_atrasos,
+                    COALESCE(COUNT(DISTINCT CASE WHEN p.presenca = 1 THEN p.data END), 0) AS total_presencas
+                FROM 
+                    web_aluno AS aluno
+                LEFT JOIN 
+                    presenca_por_dia AS p ON aluno.id_carteirinha = p.id_carteirinha
+                WHERE
+                    aluno.id_curso_id = %s
+                GROUP BY 
+                    aluno.id_carteirinha
+            )
+            SELECT 
+                aluno.id_carteirinha,
+                aluno.nome,
+                GREATEST(c.dias_letivos - t.total_presencas, 0) AS total_faltas,  -- Atualizado para calcular total_faltas
+                t.total_atrasos,
+                t.total_presencas,
+                LEAST(t.total_horas_presenca, 600) AS carga_horaria_cumprida,
+                CASE 
+                    WHEN c.dias_letivos > 0 THEN 
+                        LEAST(100, ROUND((LEAST(t.total_horas_presenca, 600) / (c.dias_letivos * 7.5)) * 100, 2))
+                    ELSE 0
+                END AS porcentagem_frequencia
+            FROM 
+                web_aluno AS aluno
+            JOIN 
+                totais_aluno AS t ON aluno.id_carteirinha = t.id_carteirinha
+            JOIN 
+                web_curso AS c ON aluno.id_curso_id = c.turma
+            WHERE 
+                c.turma = %s
+            ORDER BY 
+                aluno.nome;
+        """, [curso.turma, curso.turma, curso.turma])
+
+        resultados = cursor.fetchall()
+
+    alunos_detalhes = []
+    for resultado in resultados:
+        alunos_detalhes.append({
+            'id_carteirinha': resultado[0],
+            'aluno': resultado[1],
+            'faltas': resultado[2],
+            'atrasos': resultado[3],
+            'presencas': resultado[4],
+            'carga_horaria_aluno': resultado[5],
+            'porcentagem_carga_horaria': round(resultado[6], 2),
+        })
+
+    context = {
+        'curso': curso,
+        'alunos_detalhes': alunos_detalhes,
+    }
+
+    return render(request, 'alunos.html', context)
+```
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Funcionamento**
+
+1. **Requer Login:**
+    - O decorator `@login_required` impede que usuários não autenticados acessem a página.
+2. **Controle de Cache:**
+    - `@cache_control(no_cache=True, must_revalidate=True, no_store=True)` evita cache da página, garantindo que os dados exibidos estejam sempre atualizados.
+3. **Busca do Curso:**
+    - A função utiliza `get_object_or_404` para buscar o curso pela turma. Caso o curso não seja encontrado, retorna uma página de erro 404.
+4. **Consulta SQL Avançada:**
+    - Usa a funcionalidade de CTEs (Common Table Expressions) para estruturar a consulta:
+        - **`frequencias_calculadas`:**
+            - Gera dados sobre cada entrada de frequência, incluindo a próxima hora de entrada e se há apenas registro de saída sem entrada.
+        - **`presenca_por_dia`:**
+            - Calcula as horas de presença, verifica se houve faltas ou atrasos, e identifica registros de presença por dia.
+        - **`totais_aluno`:**
+            - Resume as informações por aluno, como total de horas de presença, atrasos e presenças.
+    - A consulta final retorna:
+        - ID do aluno.
+        - Nome do aluno.
+        - Total de faltas.
+        - Total de atrasos.
+        - Total de presenças.
+        - Carga horária cumprida (limitada a 600 horas).
+        - Porcentagem de frequência (baseada em 7,5 horas por dia letivo).
+5. **Manipulação dos Resultados:**
+    - Os resultados da consulta SQL são armazenados em `resultados`.
+    - Cada registro é processado para criar um dicionário com os dados relevantes para o aluno, que são armazenados na lista `alunos_detalhes`.
+6. **Contexto e Renderização:**
+    - Um dicionário `context` é criado com:
+        - Informações do curso (`curso`).
+        - Detalhes dos alunos (`alunos_detalhes`).
+    - O contexto é passado para o template `alunos.html`.
+
+
+### <span style="color: #9A2EFE;">**Lógica de Listar Cursos**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `cursos` é responsável por exibir informações detalhadas sobre os cursos de uma instituição, permitindo a pesquisa por nome do curso, turma ou aluno. Ela também realiza o cálculo de atrasos de alunos, apresentando notificações para os casos em que os alunos acumulam três ou mais atrasos. Além disso, a função permite o gerenciamento eficiente de cache, garantindo que os dados exibidos estejam sempre atualizados. O resultado é apresentado em uma página de cursos, onde o usuário pode visualizar os cursos filtrados e as notificações de atrasos dos alunos.
+
+```python
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def cursos(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        cursos = Curso.objects.filter(
+            nome_curso__icontains=search_query
+        ) | Curso.objects.filter(
+            turma__icontains=search_query
+        ) | Curso.objects.filter(
+            aluno__nome__icontains=search_query
+        )
+        cursos = cursos.distinct()  # Remove duplicatas
+    else:
+        cursos = Curso.objects.all()
+
+    form = FormPesquisa(initial={'search': search_query})
+
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            WITH frequencias_calculadas AS (
+                SELECT 
+                    f.id_aluno_id,
+                    f.data,
+                    f.hora,
+                    LEAD(f.hora) OVER (PARTITION BY f.id_aluno_id, f.data ORDER BY f.hora) AS proxima_hora,
+                    CAST(f.identificador AS INTEGER) AS identificador,
+                    CASE 
+                        WHEN CAST(f.identificador AS INTEGER) = 2 
+                        AND NOT EXISTS (
+                            SELECT 1
+                            FROM web_frequencia f2 
+                            WHERE f2.id_aluno_id = f.id_aluno_id 
+                            AND f2.data = f.data 
+                            AND CAST(f2.identificador AS INTEGER) = 1
+                        ) THEN true
+                        ELSE false
+                    END as apenas_saida
+                FROM 
+                    web_frequencia AS f
+            ),
+            atrasos_aluno AS (
+                SELECT 
+                    aluno.id_carteirinha,
+                    aluno.nome,
+                    c.turma,
+                    COUNT(DISTINCT CASE WHEN f.hora > c.horario_entrada + INTERVAL '10 minutes' AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN f.data END) AS total_atrasos
+                FROM 
+                    web_aluno AS aluno
+                JOIN 
+                    web_curso AS c ON aluno.id_curso_id = c.turma
+                LEFT JOIN 
+                    frequencias_calculadas AS f ON aluno.id_carteirinha = f.id_aluno_id
+                    AND f.data BETWEEN c.data_inicio AND c.data_fim
+                GROUP BY 
+                    aluno.id_carteirinha, aluno.nome, c.turma
+                HAVING 
+                    COUNT(DISTINCT CASE WHEN f.hora > c.horario_entrada + INTERVAL '10 minutes' AND CAST(COALESCE(f.identificador, 0) AS INTEGER) = 1 THEN f.data END) >= 3
+            )
+            SELECT 
+                nome,
+                turma,
+                total_atrasos
+            FROM 
+                atrasos_aluno
+            ORDER BY 
+                nome;
+        """)
+
+        notificacoes = cursor.fetchall()
+    
+    tem_notificacoes = len(notificacoes) > 0
+
+    return render(request, 'cursos.html', {
+        'form': form,
+        'cursos': cursos,
+        'tem_notificacoes': tem_notificacoes
+    })
+
+```
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Fluxo da Função**
+
+**1. Busca de Cursos**
+
+O primeiro bloco de código verifica se há uma consulta de pesquisa na URL (`search_query`).
+
+- **Filtragem Condicional**:
+    
+    ```python
+    cursos = Curso.objects.filter(
+        nome_curso__icontains=search_query
+    ) | Curso.objects.filter(
+        turma__icontains=search_query
+    ) | Curso.objects.filter(
+        aluno__nome__icontains=search_query
+    )
+    ```
+    
+    - Busca cursos cujo nome, turma ou nome de aluno associado contenha o termo pesquisado.
+    - O operador `|` (OR) combina os filtros, e `.distinct()` garante que os resultados não se repitam.
+- **Caso não haja consulta**:
+    
+    ```python
+    cursos = Curso.objects.all()
+    ```
+    
+- Um formulário (`FormPesquisa`) é inicializado para manter o termo de busca na interface.
+
+**2. Notificações de Atrasos**
+
+- **Consulta SQL com `WITH`**:
+A consulta SQL embutida calcula os atrasos por aluno:
+    - **CTE `frequencias_calculadas`**: Processa a frequência por aluno, destacando registros como "apenas saída" ou atrasos (considerando horário de entrada com tolerância de 10 minutos).
+    - **CTE `atrasos_aluno`**: Calcula o total de atrasos por aluno para cursos em que houve atrasos repetidos (>= 3).
+    - **Consulta Final**:
+        
+        ```sql
+        SELECT
+            nome,
+            turma,
+            total_atrasos
+        FROM
+            atrasos_aluno
+        ORDER BY
+            nome;
+        ```
+        
+        - Retorna a lista de alunos com atrasos recorrentes.
+    - **Resultados**:
+        
+        ```python
+        notificacoes = cursor.fetchall()
+        tem_notificacoes = len(notificacoes) > 0
+        ```
+
+
+### <span style="color: #9A2EFE;">**Lógica Homepage**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `homepage` é responsável por exibir a página inicial do sistema. Caso o usuário já esteja autenticado, ele será redirecionado automaticamente para a página de cursos (`cursos`). Caso contrário, a função renderiza a página de entrada (`homepage.html`), permitindo que usuários não autenticados possam visualizar a página de boas-vindas.
+
+```python
+def homepage(request):
+    if request.user.is_authenticated:
+        return redirect('cursos')
+    return render(request, 'homepage.html')
+```
+
+O método `homepage` é simples e funcional. Ele determina qual página será exibida com base no estado de autenticação do usuário.
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**1. Checagem de Autenticação**
+
+```python
+if request.user.is_authenticated:
+    return redirect('cursos')
+```
+
+- O método `is_authenticated` verifica se o usuário atual está autenticado.
+- Se o usuário estiver autenticado, ele será redirecionado para a página `cursos`.
+    - O `redirect('cursos')` presume que há uma URL nomeada como `'cursos'` configurada no `urls.py`.
+    
+
+**2. Exibição da Página Inicial**
+
+```python
+return render(request, 'homepage.html')
+```
+
+- Se o usuário **não estiver autenticado**, a página inicial (`homepage.html`) será renderizada.
+
+
+### <span style="color: #9A2EFE;">**Lógica de Nome de Usuário**</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+A função `nomeUsuario` é responsável por retornar o nome completo do usuário autenticado no sistema. Ela verifica o usuário autenticado por meio do nome de usuário (`username`) e recupera o objeto `Usuario` correspondente. O nome do usuário é então retornado.
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**1. Decorador**
+
+```python
+@login_required
+```
+
+- Assegura que apenas usuários autenticados possam acessar essa função.
+
+**2. Obtenção do Usuário**
+
+```python
+usuario = Usuario.objects.get(username=request.user.username)
+```
+
+- Usa o modelo `Usuario` para buscar o objeto relacionado ao usuário autenticado. O `request.user.username` fornece o nome de usuário.
+
+**3. Retorno**
+
+```python
+return usuario.nome
+```
+
+- Retorna diretamente o nome do usuário como resposta.
+
 ---
 
-### <span style="color: #AC58FA;">Lógicas do JavaScript</span>
-### Lógica de Exibição de Senha
+### <span style="color: #9A2EFE;">Lógicas do JavaScript</span>
+#### Lógica de Exibição de Senha
 
 A lógica para mostrar ou esconder a senha é implementada no arquivo `mostrar_senha.js`. Essa funcionalidade altera o tipo de um campo de senha de "password" para "text" e vice-versa, permitindo que o usuário visualize ou oculte a senha.
 
@@ -5254,7 +6560,7 @@ function mostrar() {
 
 Na função `mostrar()`, o código realiza a verificação do tipo do campo de senha (`senhaInput.type`) e altera o tipo entre "password" e "text". Também faz alterações nas classes CSS do botão (`btnSenha`), para mudar o ícone de olho, indicando se a senha está visível ou oculta.
 
-### Lógica de Mensagem de Erro
+#### Lógica de Mensagem de Erro
 
 O arquivo `msg_erro.js` gerencia a exibição e o desaparecimento de mensagens de erro na interface do usuário. A funcionalidade é executada assim que o DOM estiver completamente carregado.
 
@@ -5273,7 +6579,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 Dentro dessa função, o código aguarda o carregamento completo do DOM e, após 3 segundos, adiciona a classe `fade-out-hidden` ao elemento de alerta (`alert-container`). Isso resulta na ocultação gradual da mensagem de erro, que provavelmente foi estilizada para desaparecer de forma suave com transições CSS.
 
-### Lógica de Troca de Tema
+#### Lógica de Troca de Tema
 
 A troca de tema, permitindo a alternância entre o modo claro e escuro, está implementada no arquivo `script.js`. Essa funcionalidade permite que o tema atual seja armazenado localmente e reaplicado sempre que a página for recarregada.
 
@@ -5309,7 +6615,7 @@ A lógica de troca de tema funciona da seguinte forma:
 3. O ícone de tema (um ícone de sol ou lua) é ajustado conforme o tema atual.
 4. Ao clicar no botão de alternância (`theme-toggle`), o tema é alterado entre "light" e "dark", e o novo valor é salvo no `localStorage`.
 
-### Lógica de Pesquisa com Animação
+#### Lógica de Pesquisa com Animação
 
 No arquivo `search_transição.js`, a lógica lida com a exibição e ocultação da barra de pesquisa, além de aplicar uma transição suave.
 
@@ -5348,6 +6654,1268 @@ O código executa as seguintes ações:
 1. Ao clicar no ícone de pesquisa (`search-icon`), a classe `visible` é alternada no contêiner de pesquisa (`search-container`), fazendo com que a barra de pesquisa apareça ou desapareça.
 2. Se a barra de pesquisa se tornar visível, um `setTimeout` é usado para garantir que o foco seja dado ao campo de entrada (`input`) após meio segundo.
 3. Caso o usuário clique fora do contêiner de pesquisa ou do ícone de pesquisa, a barra de pesquisa é ocultada, removendo a classe `visible`.
+
+
+### <span style="color: #9A2EFE;">Lógica de Automação com o Selenium, PyAutoGui e Agendador de Tarefas</span>
+
+#### <span style="color: #AC58FA;">***Descrição Geral***</span>
+
+O código que abaixo implementa um processo automatizado para baixar arquivos de catraca, combiná-los, e inserir dados extraídos em um banco de dados PostgreSQL. Abaixo está uma explicação do que o código faz.
+
+```python
+import os
+import re
+import time
+import pyautogui
+import schedule
+import psycopg2
+from psycopg2 import sql
+from datetime import datetime
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+
+def executar_tarefa():
+    # Diretório onde os arquivos serão baixados
+    download_path = r'rota'
+
+    # Nomes dos arquivos que devem ser verificados
+    file1 = os.path.join(download_path, 'catraca 03.txt')
+    file2 = os.path.join(download_path, 'catraca 04.txt')
+    combined_file = os.path.join(download_path, 'catracas.txt')
+
+    # Verificar e apagar os arquivos antigos, se existirem
+    if os.path.exists(file1):
+        print(f"Apagando arquivo antigo: {file1}")
+        os.remove(file1)
+    if os.path.exists(file2):
+        print(f"Apagando arquivo antigo: {file2}")
+        os.remove(file2)
+    if os.path.exists(combined_file):
+        print(f"Apagando arquivo antigo combinado: {combined_file}")
+        os.remove(combined_file)
+
+    # Configurar opções do Chfome (modo anônimo)
+    chrome_options = Options()
+    chrome_options.add_argument("--incognito")
+    
+    # Iniciar o navegador Chrome em modo anônimo
+    nav = webdriver.Chrome(options=chrome_options)
+
+    login = 'login'
+    senha = 'senha'
+
+    try:
+        login_input = WebDriverWait(nav, 10).until(
+            EC.presence_of_element_located((By.ID, 'lblLogin'))
+        )
+        login_input.send_keys(login)
+    except TimeoutException:
+        print("Elemento 'lblLogin' não encontrado no tempo esperado.")
+
+##########################################################| catraca NÚMERO 03 |##################################################################################
+
+    nav.get('url')
+    time.sleep(5)
+
+    # Login
+    login_input = nav.find_element(By.ID, 'lblLogin')
+    login_input.send_keys(login)
+    time.sleep(3)
+
+    senha_input = nav.find_element(By.ID, 'lblPass')
+    senha_input.send_keys(senha)
+    time.sleep(3)
+
+    login_button = nav.find_element(By.LINK_TEXT, 'Entrar')
+    login_button.click()
+    time.sleep(3)
+
+    # Botão dados
+    botao_dados = nav.find_element(By.CSS_SELECTOR, "a[onclick='subComp(0, 8, 0);']")
+    botao_dados.click()
+    time.sleep(3)
+
+    # Botão salvar
+    botao_salvar = nav.find_element(By.PARTIAL_LINK_TEXT, "Salvar")
+    botao_salvar.click()
+    time.sleep(3)
+
+    pyautogui.write('catraca 03')
+    time.sleep(3)
+
+    pyautogui.press('enter')
+    time.sleep(120)
+
+    sair = nav.find_element(By.XPATH, "//a[center[text()='Sair']]")
+    sair.click()
+    time.sleep(3)
+
+##########################################################| catraca NÚMERO 04 |######################################################################################
+
+    nav.get('url')
+    time.sleep(5)
+
+    # Login
+    login_input = nav.find_element(By.ID, 'lblLogin')
+    login_input.send_keys(login)
+    time.sleep(3)
+
+    senha_input = nav.find_element(By.ID, 'lblPass')
+    senha_input.send_keys(senha)
+    time.sleep(3)
+
+    login_button = nav.find_element(By.LINK_TEXT, 'Entrar')
+    login_button.click()
+    time.sleep(5)
+
+    # Botão dados
+    botao_dados = nav.find_element(By.CSS_SELECTOR, "a[onclick='subComp(0, 8, 0);']")
+    botao_dados.click()
+    time.sleep(3)
+
+    # Botão salvar
+    botao_salvar = nav.find_element(By.PARTIAL_LINK_TEXT, "Salvar")
+    botao_salvar.click()
+    time.sleep(3)
+
+    pyautogui.write('catraca 04')
+    time.sleep(3)
+
+    pyautogui.press('enter')
+    time.sleep(120)
+
+    sair = nav.find_element(By.XPATH, "//a[center[text()='Sair']]")
+    sair.click()
+    time.sleep(3)
+  
+    combined_file_path = unir_arquivos()
+    print(f"Arquivo combinado disponível em: {combined_file_path}")
+    filtrar()
+
+##########################################################| catraca NÚMERO 02 |######################################################################################
+
+    # nav.get('url')
+    # time.sleep(5)
+
+    # # Login
+    # login_input = nav.find_element(By.ID, 'lblLogin')
+    # login_input.send_keys(login)
+    # time.sleep(3)
+
+    # senha_input = nav.find_element(By.ID, 'lblPass')
+    # senha_input.send_keys(senha)
+    # time.sleep(3)
+
+    # login_button = nav.find_element(By.LINK_TEXT, 'Entrar')
+    # login_button.click()
+    # time.sleep(3)
+
+    # # Botão dados
+    # botao_dados = nav.find_element(By.CSS_SELECTOR, "a[onclick='subComp(0, 8, 0);']")
+    # botao_dados.click()
+    # time.sleep(3)
+
+    # # Botão salvar
+    # botao_salvar = nav.find_element(By.PARTIAL_LINK_TEXT, "Salvar")
+    # botao_salvar.click()
+    # time.sleep(3)
+
+    # pyautogui.write('catraca 04')
+    # time.sleep(3)
+
+    # pyautogui.press('enter')
+    # time.sleep(34)
+
+    # sair = nav.find_element(By.XPATH, "//a[center[text()='Sair']]")
+    # sair.click()
+    # time.sleep(3)
+
+##########################################################| MANIPULAÇÃO DOS ARQUIVOS TXT |###########################################################################
+
+def unir_arquivos():
+    # Diretório onde os arquivos foram baixados
+    download_path = r'c:\Users\Aluno\Downloads'
+
+    # Nomes dos arquivos baixados
+    file1 = os.path.join(download_path, 'catraca 03.txt')
+    file2 = os.path.join(download_path, 'catraca 04.txt')
+    combined_file = os.path.join(download_path, 'catracas.txt')
+
+    try:
+        # Verificar se os arquivos existem
+        if os.path.exists(file1) and os.path.exists(file2):
+            print("Arquivos encontrados, iniciando a combinação...")
+
+            # Verificação do conteúdo dos arquivos
+            with open(file1, 'r', encoding='utf-8') as f1, open(file2, 'r', encoding='utf-8') as f2:
+                data1 = f1.readlines()
+                data2 = f2.readlines()
+
+                # Verificação do conteúdo de cada arquivo
+                if not data1:
+                    print(f"O arquivo {file1} está vazio ou não contém dados.")
+                if not data2:
+                    print(f"O arquivo {file2} está vazio ou não contém dados.")
+
+                # Se ambos os arquivos tiverem conteúdo, combinar
+                if data1 and data2:
+                    # Concatenar as linhas de ambos os arquivos
+                    combined_data = data1 + data2
+
+                    # Escrever o resultado no arquivo final
+                    output_file = os.path.join(download_path, 'catracas.txt')
+                    with open(output_file, 'w', encoding='utf-8') as outfile:
+                        outfile.writelines(combined_data)
+
+                    print(f"Arquivos combinados e salvos em {output_file}")
+                else:
+                    print("Um dos arquivos está vazio. Verifique os dados antes de continuar.")
+        else:
+            print("Um ou ambos os arquivos não foram encontrados. Verifique os nomes e o diretório.")
+    except Exception as e:
+        print(f"Ocorreu um erro ao combinar os arquivos: {e}")
+              
+    return combined_file
+
+##########################################################| Subir dados no Banco de Dados |##########################################################################
+
+def filtrar():
+    download_path = r'rota'
+    arquivo_entrada = f'{download_path}\\catracas.txt'
+
+    # parâmetros
+    db_params = {
+        'database': 'database',
+        'user': 'user',
+        'password': 'password',
+        'host': 'host',
+        'port': 0000
+    }
+
+    # IDs específicos para filtrar
+    ids_selecionados = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6'
+    ]
+
+    # lista para armazenar os dados extraídos
+    dados_extraidos = []
+
+    # Faz a filtragem de texto pra capturar a data e o horário
+    padrao_data_hora = re.compile(r'(\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2})')
+
+    # lógica para abrir o arquivo e procurar pelas linhas que contenham os IDs
+    with open(arquivo_entrada, 'r', encoding='utf-8') as file:
+        linhas = file.readlines()
+        for linha in linhas:
+            for id in ids_selecionados:
+                if id in linha:
+                    # lógica para procurar a data e o horário na linha
+                    match_data_hora = padrao_data_hora.search(linha)
+                    if match_data_hora:
+                        data_hora = match_data_hora.group(1)
+
+                        # Pega o número (1 ou 2) que vem logo após a data/hora
+                        pos_data_hora = match_data_hora.end()
+                        numero = linha[pos_data_hora + 1]  # número referente a entrada e saída (1=entrada; 2=saída)
+
+                        # Armazena os dados extraídos
+                        dados_extraidos.append((id, data_hora.split()[0], data_hora.split()[1], numero))
+                    break  # Se encontrar o ID, não precisa continuar procurando outros IDs na mesma linha
+
+    # Verifica se encontrou alguma linha
+    if dados_extraidos:
+        conn = None  # Inicializa a conexão como None
+        try:
+            # Conecta ao banco de dados
+            conn = psycopg2.connect(**db_params)
+            cur = conn.cursor()
+
+            # Cria a tabela se ela não existir
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS web_frequencia (
+                    id SERIAL PRIMARY KEY,
+                    data DATE,
+                    id_aluno_id VARCHAR,
+                    hora TIME,
+                    identificador CHAR(1)
+                )
+            """)
+
+            # Verifica se a tabela está vazia
+            cur.execute("SELECT COUNT(*) FROM web_frequencia")
+            count = cur.fetchone()[0]
+
+            if count == 0:
+                # Se a tabela estiver vazia, insere todos os dados
+                insert_query = sql.SQL("""
+                    INSERT INTO web_frequencia (id_aluno_id, data, hora, identificador)
+                    VALUES (%s, %s, %s, %s)
+                """)
+                cur.executemany(insert_query, dados_extraidos)
+                print("Tabela vazia. Todos os dados foram inseridos.")
+            else:
+                # Se a tabela não estiver vazia, insere apenas os novos dados
+                for dado in dados_extraidos:
+                    cur.execute("""
+                        SELECT COUNT(*) FROM web_frequencia
+                        WHERE id_aluno_id = %s AND data = %s AND hora = %s AND identificador = %s
+                    """, dado)
+                    if cur.fetchone()[0] == 0:
+                        cur.execute("""
+                            INSERT INTO web_frequencia (id_aluno_id, data, hora, identificador)
+                            VALUES (%s, %s, %s, %s)
+                        """, dado)
+                print("Apenas os novos dados foram inseridos.")
+
+            # Commita as mudanças e fechar a conexão
+            conn.commit()
+            print("Operação concluída com sucesso.")
+
+        except (Exception, psycopg2.Error) as error:
+            print(f"Erro ao conectar ao PostgreSQL: {error}")
+
+        finally:
+            # Fecha a conexão apenas se ela foi estabelecida corretamente
+            if conn is not None:
+                cur.close()
+                conn.close()
+                print("Conexão com o banco de dados fechada.")
+    else:
+        print("Nenhum dado correspondente foi encontrado.")
+
+##########################################################| Agendamento de tarefas para rodar em horários específicos |###############################################
+
+schedule.every().day.at("08:20").do(executar_tarefa)
+schedule.every().day.at("13:00").do(executar_tarefa)
+schedule.every().day.at("15:00").do(executar_tarefa)
+schedule.every().day.at("18:00").do(executar_tarefa)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+```
+
+#### <span style="color: #AC58FA;">***Explicação Detalhada***</span>
+
+**Descrição do código**:
+
+1. **Automação de navegação no navegador**:
+    - Usa `selenium` para automatizar o login em uma página web e clicar em botões para baixar arquivos de catracas (`catraca 03` e `catraca 04`).
+    - Após o login, o script navega e baixa os arquivos de dados das catracas e os salva com o nome correspondente utilizando o PyAutoGui.
+2. **Manipulação de arquivos**:
+    - Após o download dos arquivos, o script verifica se os arquivos existem, combina os dados de dois arquivos (`catraca 03.txt` e `catraca 04.txt`) em um único arquivo chamado `catracas.txt`.
+    - Se algum dos arquivos não for encontrado ou estiver vazio, o código imprime uma mensagem de erro.
+3. **Filtragem e inserção no banco de dados**:
+    - O script lê o arquivo combinado, filtra as linhas que contêm IDs específicos e extrai as informações de data, hora e número de entrada/saída.
+    - Ele então conecta a um banco de dados PostgreSQL e insere os dados extraídos na tabela `web_frequencia`.
+    - Antes de inserir, ele verifica se os dados já existem na tabela para evitar duplicações.
+4. **Agendamento de execução**:
+    - Utiliza o módulo `schedule` para agendar a execução da função `executar_tarefa` em horários específicos (08:20, 13:00, 15:00, 18:00).
+
+**Usando o Agendador de Tarefas:**
+
+Para realizar o agendamento automático e executar o código que obterá o arquivo contendo os dados extraídos das catracas, foi optado pela utilização do Agendador de Tarefa do Windows, que, ao criar a tarefa, precisa definir informações básicas como nome, com qual condição será iniciada a tarefa e também sua data de início, horário e dias específicos que executará (dependendo da necessidade).
+
+Na etapa da imagem abaixo, é definido quando iniciar a tarefa, sendo indicado o intervalo para a execução do tarefa, horário para a tarefa ser executada e/ou suas datas específicas de funcionamento:
+
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/agendador_1.png" alt="Agendador de Tarefas - 1" width="45%">
+</p>
+
+Após isso, a ação que será realizada na tarefa agendada é escolhida, nesse caso sendo **iniciar um programa.** A tarefa executará um arquivo **.bat**, que informa onde o código principal será rodado (interpretador ou linguagem de programação) e o caminho do código a ser percorrido. Ao ser inciado, abrirá em segundo plano e executará o código python principal.
+
+Na etapa da imagem abaixo, é definida a ação que a tarefa executará e caminho do programa/script a ser aberto:
+
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/agendador_2.png" alt="Agendador de Tarefas - 2" width="45%">
+</p>
+
+**Observação: Todos os prints utilizados de exemplo foram extraídos de um teste para a utilização do agendador de tarefas no projeto.**
+
+
+### <span style="color: #9A2EFE;">Testes de Software</span>
+Os testes de software **são um processo fundamental no desenvolvimento de software, que visa verificar se o produto ou aplicativo cumpre o que se propõe**. Eles podem ser realizados em qualquer parte do software, desde a unidade até o funcionamento global, e são essenciais para evitar problemas e bugs.
+
+Os benefícios de bons testes incluem: prevenir bugs, melhorar o desempenho, identificar e corrigir falhas e bugs, otimizar a gestão de recursos.
+
+**Fluxos da aplicação testados**
+
+- **Cadastro de Coordenador:** esta página deve estar visível apenas para o administrador. Deve ser inserida as informações para a criação do usuário (coordenador), clicar no botão de “Cadastrar” e, assim, o usuário é cadastrado pelo sistema no banco de dados.
+- **Formulário de Login:** a partir da página inicial, deve ser acessada a página de Login. Deve-se realizar a verificação de se a página está acessível, inserir as credenciais para autenticação (válidas e inválidas para teste) e clicar no botão “Entrar”, realizando o login do usuário pelo sistema.
+
+**Funções testadas**
+
+- **Geração de relatório:** esta função deve realizar uma consulta no banco de dados para a geração do relatório, contendo os nomes dos alunos com mais faltas e atrasos, e a frequência total (%).
+- **Exclusão de curso:** a partir da página de Cursos, deve ser acessada a página de Curso Teste e o deletar.
+- **Cálculo de frequência:** esta função deve realizar uma consulta no documento das informações extraídas das catracas sobre entrada e saída de cada aluno. Deve calcular suas faltas, atrasos e a frequência total (%).
+
+#### <span style="color: #AC58FA;">Resultados obtidos</span>
+
+#### <span style="color: #AC58FA;">Testes Automatizados</span>
+
+#### **Cadastro de Coordenador**
+
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/teste_cadastro.png" alt="Teste de Cadastro" width="45%">
+</p>
+
+```javascript
+describe('Testes da Página de Cadastro', () => {
+  beforeEach(() => {
+    // Acessa a página de login antes de cada teste
+    cy.visit('http://127.0.0.1:8000/login');
+  });
+
+  it('deve carregar a página de login corretamente', () => {
+    cy.title().should('contain', 'Controle de Frequência');
+    cy.get('.titulo').should('be.visible').and('have.text', 'Fazer Login');
+  });
+
+  it('deve redirecionar para a página de cursos após login bem-sucedido', () => {
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/cursos');
+  });
+
+  it('deve abrir o offcanvas e clicar no link de cadastro após login', () => {
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/cursos');
+    cy.get('.navbar-toggler').click();
+    cy.get('.offcanvas').should('be.visible');
+    cy.get('.nav-link').contains('Cadastro').click();
+    cy.url().should('include', '/cadastro');
+  });
+
+  it('deve carregar os campos de cadastro corretamente', () => {
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/cursos');
+    cy.get('.navbar-toggler').click();
+    cy.get('.offcanvas').should('be.visible');
+    cy.get('.nav-link').contains('Cadastro').click();
+    cy.get('h2.titulo').should('contain.text', 'Fazer Cadastro');
+    cy.get('input[name="nome"]').should('exist');
+    cy.get('input[name="sobrenome"]').should('exist');
+    cy.get('input[name="username"]').should('exist');
+    cy.get('input[name="senha"]').should('exist');
+    cy.get('button[type="submit"]').should('contain.text', 'Cadastrar');
+  });
+
+  it('deve preencher e enviar o formulário de cadastro com sucesso', () => {
+    // Gerar um nome de usuário único usando um timestamp ou UUID
+    const username = `usuario_${Date.now()}`;
+    const password = 'Senha123';
+  
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/cursos');
+    cy.get('.navbar-toggler').click();
+    cy.get('.offcanvas').should('be.visible');
+    cy.get('.nav-link').contains('Cadastro').click();
+  
+    // Preencher os campos com dados dinâmicos
+    cy.get('input[name="nome"]').type('Ruan');
+    cy.get('input[name="sobrenome"]').type('silva');
+    cy.get('input[name="username"]').type(username); // Nome de usuário único
+    cy.get('input[name="senha"]').type(password);
+  
+    // Submeter o formulário
+    cy.get('button[type="submit"]').click();
+  
+    // Verificar mensagem de sucesso
+    cy.get('#alert-container')
+      .should('be.visible')
+      .and('contain.text', 'Usuário cadastrado.');
+  });
+  
+
+  it('deve exibir mensagem de erro se o nome de usuário já existir', () => {
+    const username = 'admin'; // Nome de usuário existente
+    const password = 'Senha123';
+  
+    // Primeira execução: cadastrar o usuário
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+    cy.url().should('include', '/cursos');
+    cy.get('.navbar-toggler').click();
+    cy.get('.offcanvas').should('be.visible');
+    cy.get('.nav-link').contains('Cadastro').click();
+  
+    // Preencher com dados do usuário já existente
+    cy.get('input[name="nome"]').type('Ruan');
+    cy.get('input[name="sobrenome"]').type('silva');
+    cy.get('input[name="username"]').type(username); 
+    cy.get('input[name="senha"]').type(password);
+  
+    // Submeter o formulário
+    cy.get('button[type="submit"]').click();
+  
+    // Verificar mensagem de erro
+    cy.get('#alert-container')
+      .should('be.visible')
+      .and('contain.text', 'Nome de usuário já existe. Por favor, escolha outro nome de usuário.');
+  });
+  
+});
+```
+
+**Estrutura Geral**
+
+1. **`describe`**:
+    - Agrupa todos os testes relacionados ao mesmo tema: neste caso, os testes das páginas de **Cadastro** e **Login**.
+    - Torna a organização mais clara e melhora a legibilidade dos testes.
+2. **`beforeEach`**:
+    - Esse método é executado **antes de cada teste** individualmente.
+    - A lógica aqui é acessar a página de login (`cy.visit('http://127.0.0.1:8000/login')`) para garantir que todos os testes partam de um estado inicial comum e controlado.
+    
+
+**1º. Teste: Carregar a Página de Login**
+
+**Lógica**:
+
+- Verificar se a página carrega corretamente.
+- **Passos**:
+    1. Obtém o título da página (`cy.title()`).
+    2. Garante que o título contém a palavra "Controle de Frequência".
+    3. Localiza o elemento com a classe `.titulo` e verifica:
+        - Se está visível.
+        - Se contém o texto "Fazer Login".
+        
+
+**2º. Teste: Login Bem-Sucedido**
+
+**Lógica**:
+
+- Simula um login válido.
+- **Passos**:
+    1. Preenche o campo de **usuário** com `'admin'`.
+    2. Preenche o campo de **senha** com `'Senai502@TCC'`.
+    3. Clica no botão de **login**.
+    4. Verifica se a URL da página redirecionada contém `/cursos`, garantindo que o login foi bem-sucedido.
+    
+
+**3º. Teste: Abrir o Menu e Navegar para Cadastro**
+
+**Lógica**:
+
+- Após realizar o login, verifica a funcionalidade de navegação pelo menu offcanvas para acessar a página de cadastro.
+- **Passos**:
+    1. Realiza o login (passos do teste anterior).
+    2. Clica no botão do menu (`.navbar-toggler`).
+    3. Garante que o menu lateral (offcanvas) está visível.
+    4. Localiza o link "Cadastro" e clica nele.
+    5. Verifica se a URL redireciona para `/cadastro`.
+    
+
+**4º. Teste: Verificar Campos na Página de Cadastro**
+
+**Lógica**:
+
+- Verifica a presença dos campos necessários na página de cadastro.
+- **Passos**:
+    1. Após acessar a página de cadastro (lógica do teste anterior), verifica:
+        - Se os campos "Nome", "Sobrenome", "Username" e "Senha" existem.
+        - Se o botão de submissão contém o texto "Cadastrar".
+        
+
+**5º. Teste: Envio Bem-Sucedido do Formulário de Cadastro**
+
+**Lógica**:
+
+- Preenche o formulário com dados válidos e o envia, verificando se a criação do usuário é bem-sucedida.
+- **Diferencial**:
+    - O nome de usuário (**username**) é gerado dinamicamente utilizando o timestamp retornado pelo método `Date.now()`. Esse método fornece o timestamp atual em milissegundos desde 1º de janeiro de 1970 (Época Unix), criando um número único baseado no momento em que o código é executado. Como os testes são realizados em momentos diferentes, esse valor assegura que o nome de usuário seja sempre único.
+- **Passos**:
+    1. Preenche os campos do formulário.
+    2. Envia o formulário clicando no botão "Cadastrar".
+    3. Verifica se uma mensagem de sucesso aparece.
+    
+
+**6º. Teste: Exibição de Erro para Usuário Existente**
+
+**Lógica**:
+
+- Simula a tentativa de cadastrar um usuário com o mesmo nome de usuário já existente no sistema.
+- **Passos**:
+    1. Após acessar a página de cadastro, preenche os campos com dados onde o nome de usuário já é utilizado.
+    2. Envia o formulário.
+    3. Verifica se uma mensagem de erro aparece informando que o nome de usuário já existe.
+
+#### **Página Homepage + Formulário de Login**
+
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/teste_home.png" alt="Teste de Homepage" width="45%">
+  <img src="img/teste_login.png" alt="Teste de Login" width="45%">
+</p>
+
+***Homepage***
+
+```jsx
+describe('Testes da Página Inicial', () => {
+  beforeEach(() => {
+    // Ajuste a URL base conforme necessário para seu ambiente de desenvolvimento
+    cy.visit('http://127.0.0.1:8000/');
+  });
+
+  it('deve carregar a página inicial corretamente', () => {
+    // Verifica se o título da página contém o nome correto
+    cy.title().should('contain', 'Controle de Frequência');
+
+    // Resto do teste permanece o mesmo
+    cy.get('.titulo').should('be.visible');
+    cy.get('.titulo').should('have.text', 'Gestão de Atrasos');
+  });
+
+  it('deve ter um botão de login com os atributos corretos', () => {
+    // Verifica o botão de login
+    cy.get('a[href*="login"]').should('exist');
+    cy.get('a[href*="login"]').should('be.visible');
+    cy.get('a[href*="login"]').should('have.attr', 'aria-label', 'Entrar na conta');
+    cy.get('a[href*="login"]').should('have.attr', 'accesskey', 'l');
+  });
+
+  it('deve ter uma imagem de fundo', () => {
+    // Verifica a imagem de fundo
+    cy.get('.imag img').should('be.visible');
+    cy.get('.imag img')
+      .should('have.attr', 'src')
+      .and('include', 'img_home.webp');
+    
+    cy.get('.imag img')
+      .should('have.attr', 'width', '400')
+      .and('have.attr', 'height', '300');
+  });
+
+  it('deve navegar para a página de login ao clicar no botão de login', () => {
+    // Testa a navegação para a página de login
+    cy.get('a[href*="login"]').click();
+    cy.url().should('include', '/login');
+  });
+
+  it('deve ter as classes CSS corretas para animações', () => {
+    // Verifica as classes de animação
+    cy.get('.bg_Home').should('have.class', 'animate');
+    cy.get('.bg_Home').should('have.class', 'downUp-1');
+  });
+
+  it('deve carregar com o tema claro por padrão', () => {
+    // Verifica se o tema inicial é claro
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'light');
+    cy.get('#theme-icon').should('have.class', 'bi-sun-fill');
+  });
+
+  it('deve alternar para o tema escuro ao clicar no botão de alternância', () => {
+    // Clica no botão de alternância de tema
+    cy.get('#theme-toggle').click();
+    
+    // Verifica se o tema mudou para escuro
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    cy.get('#theme-icon').should('have.class', 'bi-moon-fill');
+  });
+
+  it('deve alternar de volta para o tema claro ao clicar no botão de alternância novamente', () => {
+    // Alterna para o tema escuro
+    cy.get('#theme-toggle').click();
+    
+    // Alterna de volta para o tema claro
+    cy.get('#theme-toggle').click();
+    
+    // Verifica se o tema voltou para claro
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'light');
+    cy.get('#theme-icon').should('have.class', 'bi-sun-fill');
+  });
+
+  it('deve lembrar a escolha do tema entre sessões', () => {
+    // Altera para o tema escuro e garante que a escolha seja salva
+    cy.get('#theme-toggle').click();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    cy.window().its('localStorage').invoke('getItem', 'theme').should('equal', 'dark');
+    
+    // Recarrega a página e verifica se o tema permanece escuro
+    cy.reload();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    cy.get('#theme-icon').should('have.class', 'bi-moon-fill');
+  });
+});
+
+```
+
+**Estrutura Geral**
+
+- **`describe`**: Agrupa todos os testes relacionados à página inicial.
+- **`beforeEach`**: Configurações comuns a todos os testes dentro do `describe`. Aqui, cada teste começa com o acesso à URL da página inicial.
+
+**1º. Teste: Carregar a página inicial corretamente**
+
+- **Objetivo**: Validar que a página carrega sem problemas e exibe as informações esperadas.
+- **Validações**:
+    - O título da aba do navegador contém "Controle de Frequência".
+    - Um elemento com a classe `.titulo` está visível e exibe o texto "Gestão de Atrasos".
+    
+
+**2º. Teste: Botão de login**
+
+- **Objetivo**: Verificar a existência e atributos do botão de login.
+- **Validações**:
+    - O botão de login existe, é visível e possui atributos específicos como:
+        - `aria-label`: Para acessibilidade.
+        - `accesskey`: Atalho de teclado para acessar o botão.
+        
+
+**3º. Teste: Imagem de fundo**
+
+- **Objetivo**: Verificar a presença e atributos de uma imagem na página inicial.
+- **Validações**:
+    - A imagem está visível.
+    - O atributo `src` contém o nome do arquivo `img_home.webp`.
+    - A imagem tem largura e altura definidas (`400` e `300`).
+    
+
+**4º. Teste: Navegação para a página de login**
+
+- **Objetivo**: Verificar a funcionalidade do botão de login.
+- **Validações**:
+    - Ao clicar no botão, o usuário é redirecionado para a URL `/login`.
+    
+
+**5º. Teste: Classes CSS de animações**
+
+- **Objetivo**: Verificar que elementos específicos têm classes CSS aplicadas corretamente para animações.
+- **Validações**:
+    - O elemento com a classe `.bg_Home` possui as classes `animate` e `downUp-1`.
+    
+
+**6º. Teste: Tema claro por padrão**
+
+- **Objetivo**: Garantir que o tema inicial da página seja **claro**.
+- **Validações**:
+    - O atributo `data-theme` no elemento raiz do documento está definido como `light`.
+    - O ícone do tema é representado pela classe `bi-sun-fill`.
+    
+
+**7º. Teste: Alternância para tema escuro**
+
+- **Objetivo**: Testar a funcionalidade de alternância para o tema escuro.
+- **Validações**:
+    - Ao clicar no botão de alternância, o tema muda para `dark`.
+    - O ícone do tema agora possui a classe `bi-moon-fill`.
+    
+
+**8º. Teste: Alternância de volta para tema claro**
+
+- **Objetivo**: Testar a alternância do tema escuro de volta para o tema claro.
+- **Validações**:
+    - O atributo `data-theme` retorna para `light`.
+    - O ícone do tema exibe `bi-sun-fill` novamente.
+    
+
+**9º. Teste: Persistência do tema entre sessões**
+
+- **Objetivo**: Garantir que o tema escolhido pelo usuário (ex.: escuro) é salvo no `localStorage` e carregado ao recarregar a página.
+- **Validações**:
+    - Após mudar para o tema escuro, a entrada no `localStorage` é "dark".
+    - Após recarregar a página, o tema ainda está definido como escuro.
+
+***Login***
+
+```jsx
+describe('Testes da Página de Login', () => {
+  
+  beforeEach(() => {
+    // Visita a página de login antes de cada teste
+    cy.visit('http://127.0.0.1:8000/login');
+  });
+
+  it('deve carregar a página de login corretamente', () => {
+    // Verifica o título da página
+    cy.title().should('include', 'Controle de Frequência');
+  
+    // Verifica se o título da página existe, independentemente da visibilidade
+    cy.get('.titulo').should('exist').and('have.text', 'Fazer Login');
+  });
+  
+
+  it('deve fazer login com credenciais válidas', () => {
+    cy.intercept('POST', 'http://127.0.0.1:8000/login').as('loginRequest');
+
+    // Preenche os campos de login
+    cy.get('input[name="username"]').type('teste');
+    cy.get('input[name="senha"]').type('teste@123');
+    cy.get('button[type="submit"]').click();
+
+    // Espera a resposta e verifica o código de status
+    cy.wait('@loginRequest').its('response.statusCode').should('be.oneOf', [200, 302]);
+
+    // Verifica se a URL mudou para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+
+  it('deve exibir mensagem de erro com credenciais inválidas', () => {
+    cy.intercept('POST', '/login').as('loginRequest');
+
+    // Preenche campos com credenciais inválidas
+    cy.get('input[name="username"]').type('usuario_invalido');
+    cy.get('input[name="senha"]').type('senha_invalida');
+    cy.get('button[type="submit"]').click();
+
+    // Espera a resposta e verifica a URL
+    cy.wait('@loginRequest').its('response.statusCode').should('eq', 302);
+    cy.url().should('include', '/login');
+
+    // Verifica se a mensagem de erro está visível
+    cy.get('#alert-container').should('be.visible').and('have.class', 'alert-warning');
+  });
+
+  it('deve alternar a visibilidade da senha', () => {
+    const passwordField = 'input[name="senha"]';
+
+    // Verifica se o tipo do campo de senha é password
+    cy.get(passwordField).should('have.attr', 'type', 'password');
+    cy.get('#btnSenha').click();
+    cy.get(passwordField).should('have.attr', 'type', 'text');
+    cy.get('#btnSenha').click();
+    cy.get(passwordField).should('have.attr', 'type', 'password');
+  });
+
+  it('deve redirecionar para a página de cursos após login bem-sucedido', () => {
+    cy.get('input[name="username"]').type('teste');
+    cy.get('input[name="senha"]').type('teste@123');
+    cy.get('button[type="submit"]').click();
+
+    cy.url().should('include', '/cursos');
+  });
+
+  it('deve carregar com o tema claro por padrão', () => {
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'light');
+    cy.get('#theme-icon').should('have.class', 'bi-sun-fill');
+  });
+
+  it('deve alternar para o tema escuro ao clicar no botão de alternância', () => {
+    cy.get('#theme-toggle').click();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    cy.get('#theme-icon').should('have.class', 'bi-moon-fill');
+  });
+
+  it('deve alternar de volta para o tema claro ao clicar novamente', () => {
+    cy.get('#theme-toggle').click();
+    cy.get('#theme-toggle').click();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'light');
+    cy.get('#theme-icon').should('have.class', 'bi-sun-fill');
+  });
+
+  it('deve lembrar a escolha do tema entre sessões', () => {
+    cy.get('#theme-toggle').click();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    
+    // Verifica se o tema foi salvo no localStorage
+    cy.window().its('localStorage').invoke('getItem', 'theme').should('equal', 'dark');
+
+    // Recarrega a página e verifica se o tema permanece
+    cy.reload();
+    cy.document().its('documentElement').should('have.attr', 'data-theme', 'dark');
+    cy.get('#theme-icon').should('have.class', 'bi-moon-fill');
+  });
+});
+```
+
+**Estrutura Geral**
+
+- **`describe`**: Agrupa os testes relacionados à página de login.
+- **`beforeEach`**: Configurações comuns a todos os testes dentro do `describe`. Antes de cada teste, a página de login é acessada (`cy.visit`).
+
+**1º. Teste: Carregar a página de login corretamente**
+
+- **Objetivo**: Garantir que a página de login carrega corretamente.
+- **Validações**:
+    - O título da aba do navegador contém "Controle de Frequência".
+    - O elemento com a classe `.titulo` existe e exibe o texto "Fazer Login".
+    
+
+**2º. Teste: Login com credenciais válidas**
+
+- **Objetivo**: Testar o fluxo de login com credenciais corretas.
+- **Validações**:
+    - Um `POST` é enviado para o endpoint de login.
+    - A resposta do servidor retorna status 200 ou 302 (redirecionamento).
+    - Após login bem-sucedido, a URL muda para `/cursos`.
+    
+
+**3º. Teste: Mensagem de erro com credenciais inválidas**
+
+- **Objetivo**: Testar o fluxo de login com credenciais incorretas.
+- **Validações**:
+    - A requisição `POST` retorna status 302 (redirecionando de volta para a página de login).
+    - A URL permanece `/login`.
+    - Um alerta de erro visível, com a classe `alert-warning`, aparece na página.
+    
+
+**4º. Teste: Alternância da visibilidade da senha**
+
+- **Objetivo**: Verificar o comportamento do botão de alternância da visibilidade da senha.
+- **Validações**:
+    - O campo de senha inicia com o atributo `type="password"`.
+    - Após clicar no botão, o atributo muda para `type="text"` (mostrando a senha).
+    - Outro clique no botão retorna o campo para `type="password"`.
+    
+
+**5º. Teste: Redirecionamento após login bem-sucedido**
+
+- **Objetivo**: Confirmar o redirecionamento correto após login válido.
+- **Validação**:
+    - Após o login, a URL é alterada para `/cursos`.
+    
+
+**6º. Teste: Tema claro por padrão**
+
+- **Objetivo**: Garantir que o tema inicial é **claro**.
+- **Validações**:
+    - O atributo `data-theme` do elemento raiz (`documentElement`) está definido como `light`.
+    - O ícone do tema é representado pela classe `bi-sun-fill`.
+    
+
+**7º. Teste: Alternância para tema escuro**
+
+- **Objetivo**: Testar a funcionalidade de alternância para o tema escuro.
+- **Validações**:
+    - O atributo `data-theme` muda para `dark`.
+    - O ícone do tema exibe a classe `bi-moon-fill`.
+    
+
+**8º. Teste: Alternância de volta para tema claro**
+
+- **Objetivo**: Testar a alternância do tema escuro de volta para claro.
+- **Validações**:
+    - O atributo `data-theme` retorna para `light`.
+    - O ícone do tema exibe `bi-sun-fill`.
+    
+
+**9º. Teste: Persistência do tema entre sessões**
+
+- **Objetivo**: Garantir que o tema escolhido pelo usuário é salvo e reaplicado após recarregar a página.
+- **Validações**:
+    - O tema "dark" é salvo no `localStorage`.
+    - Após recarregar, o tema permanece "dark".
+
+#### **Página Cursos + Exclusão de Curso**
+
+<p align="center" style="display: flex; justify-content: center; gap: 10px;">
+  <img src="img/teste_cursos.png" alt="Teste de Cursos" width="45%">
+</p>
+
+#### Página de Cursos + Alunos
+
+```jsx
+describe('Teste de login', () => {
+  beforeEach(() => {
+    // Acessa a página de login antes de cada teste
+    cy.visit('http://127.0.0.1:8000/login');
+  });
+
+  it('Deve preencher o formulário de login corretamente', () => {
+    // Verifica se o campo de nome de usuário está visível
+    cy.get('input[name="username"]').should('be.visible');
+    // Verifica se o campo de senha está visível
+    cy.get('input[name="senha"]').should('be.visible');
+  });
+
+  it('Deve realizar o login com sucesso', () => {
+    // Realiza o login
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+
+    // Verifica redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+});
+
+describe('Teste de acesso à página de relatórios', () => {
+  beforeEach(() => {
+    // Realiza o login antes de acessar as páginas
+    cy.visit('http://127.0.0.1:8000/login');
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+
+    // Verifica redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+
+  it('Deve acessar a página de relatórios', () => {
+    // Clica no ícone de relatórios
+    cy.get('a[href="/relatorio"]').click();
+
+    // Verifica se foi redirecionado corretamente
+    cy.url().should('include', '/relatorio');
+
+    // Valida se algum elemento específico da página de relatórios está visível
+    cy.get('h2').contains('Relatórios').should('be.visible');
+  });
+});
+
+describe('Teste de acesso à página de notificações', () => {
+  beforeEach(() => {
+    // Realiza o login antes de acessar as páginas
+    cy.visit('http://127.0.0.1:8000/login');
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+
+    // Verifica redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+
+  it('Deve acessar a página de notificações', () => {
+    // Clica no ícone de notificações
+    cy.get('a[href="/notificacoes"]').click();
+
+    // Verifica se foi redirecionado corretamente
+    cy.url().should('include', '/notificacoes');
+
+    // Valida se algum elemento específico da página de notificações está visível
+    cy.get('h2').contains('Notificações').should('be.visible');
+  });
+});
+
+// Descreve a navegação para a página de cursos após login
+describe('Teste de navegação para a página de cursos', () => {
+  beforeEach(() => {
+    // Realiza o login antes de acessar a página de cursos
+    cy.visit('http://127.0.0.1:8000/login');
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+
+    // Verifica redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+
+  it('Deve acessar a página de cursos após login', () => {
+    // Verifica se a URL contém "/cursos"
+    cy.url().should('include', '/cursos');
+  });
+
+  it('Deve exibir a lista de cursos', () => {
+    // Verifica se o container de cursos está visível
+    cy.get('#results-container').should('be.visible');
+    // Verifica se há cursos na lista
+    cy.get('#results-container .curso').should('exist');
+  });
+
+  it('Deve exibir mensagem apropriada quando nenhum curso é encontrado', () => {
+    // Abre o campo de pesquisa
+    cy.get('#search-icon').click();
+    
+    // Insere um termo que não corresponda a nenhum curso
+    cy.get('#search-container input').type('CursoInexistente');
+    
+    // Executa a pesquisa
+    cy.get('#search-container button').click();
+
+    // Verifica se a mensagem "Nenhum curso encontrado" aparece
+    cy.get('#results-container').should('contain', 'Nenhum curso encontrado');
+    
+    // Alternativamente, verifica se nenhum curso é listado
+    cy.get('#results-container .curso').should('not.exist');
+  });
+});
+
+describe('Teste de pesquisa e exclusão de curso', () => {
+  beforeEach(() => {
+    // Realiza o login antes de acessar a página de cursos
+    cy.visit('http://127.0.0.1:8000/login');
+    cy.get('input[name="username"]').type('admin');
+    cy.get('input[name="senha"]').type('Senai502@TCC');
+    cy.get('button[type="submit"]').click();
+
+    // Verifica redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+  });
+
+  it('Deve excluir um curso com sucesso e verificar mensagens', () => {
+    // Abre o campo de pesquisa
+    cy.get('#search-icon').click();
+    // Insere o termo "Teste" no campo de busca
+    cy.get('#search-container input').type('Teste');
+    // Executa a pesquisa
+    cy.get('#search-container button').click();
+
+    // Verifica se cursos foram encontrados
+    cy.get('#results-container .curso').should('exist');
+
+    // Clica no primeiro curso encontrado
+    cy.get('#results-container .curso').first().click();
+
+    // Verifica se foi redirecionado para a página do aluno
+    cy.url().should('include', '/alunos');
+
+    // Clica no botão "Excluir Curso" para abrir o modal de confirmação
+    cy.get('button[data-bs-target="#excluirModal"]').click();
+
+    // Verifica se o modal está visível
+    cy.get('#excluirModal').should('be.visible');
+
+    // Confirma a exclusão do curso clicando no botão de confirmação dentro do modal
+    cy.get('#excluirModal form button[type="submit"]').click();
+
+    // Aguarda o redirecionamento para a página de cursos
+    cy.url().should('include', '/cursos');
+
+    // Verifica se a mensagem de sucesso foi exibida na página de cursos
+    cy.get('#alert-container', { timeout: 10000 })  // Aumentando o timeout
+      .should('contain', 'Curso e alunos associados excluídos com sucesso.');
+
+  });
+});
+```
+
+**Estrutura Geral**
+
+1. **`describe`**:
+    - Agrupa testes relacionados sob um mesmo "contexto" ou funcionalidade, como login, acesso a páginas ou ações específicas (ex.: exclusão de cursos).
+2. **`beforeEach`**:
+    - Executa comandos repetitivos antes de cada teste dentro de um `describe`. Aqui, normalmente acessa a página de login e realiza o login automático.
+3. **`it`**:
+    - Representa um **caso de teste específico**. Cada `it` contém uma descrição e os passos necessários para verificar uma funcionalidade.
+4. **Comandos Cypress**:
+    - Cypress utiliza comandos encadeados para realizar interações com a interface e validações, como `cy.visit`, `cy.get`, `cy.url`, entre outros.
+    
+
+**1º. Testes de Login**
+
+Os testes dentro do primeiro `describe` verificam o funcionamento básico do login.
+
+- **Verificação de campos visíveis**:
+    - `cy.get('input[name="username"]').should('be.visible');`
+    - Garante que os campos de username e senha estejam visíveis na página.
+- **Teste de login bem-sucedido**:
+    - Preenche os campos com credenciais válidas (`admin` e `Senai502@TCC`), clica no botão de login e verifica se o redirecionamento para a página `/cursos` ocorre.
+    
+
+**2º. Teste de Acesso à Página de Relatórios**
+
+Este `describe` foca em validar o acesso à página de relatórios após o login.
+
+- **Login Automático no `beforeEach`**:
+    - Antes de cada teste, o sistema faz login para garantir que o usuário está autenticado.
+- **Acesso à Página de Relatórios**:
+    - O teste clica no link que leva à página de relatórios (`a[href="/relatorio"]`).
+    - Valida que a URL muda para `/relatorio` e verifica se um elemento da página de relatórios, como um título, está visível.
+    
+
+**3º. Teste de Acesso à Página de Notificações**
+
+Semelhante ao teste anterior, mas foca na página de notificações.
+
+- **Verifica elementos da página de notificações**:
+    - Após clicar no link de notificações (`a[href="/notificacoes"]`), o teste garante que o título "Notificações" está visível e que a URL foi atualizada corretamente.
+    
+
+**4º. Teste de Navegação para a Página de Cursos**
+
+Estes testes validam o funcionamento da página de cursos:
+
+- **Verificar URL e conteúdo**:
+    - Garante que, após o login, a página `/cursos` é carregada.
+    - Valida que a lista de cursos (identificada pelo ID `results-container`) está visível.
+- **Testar funcionalidade de busca**:
+    - Simula a pesquisa por cursos, verifica resultados e exibe mensagens apropriadas se nenhum curso for encontrado (ex.: "Nenhum curso encontrado").
+    
+
+**5º. Teste de Pesquisa e Exclusão de Curso**
+
+Este `describe` testa a funcionalidade de excluir um curso específico.
+
+- **Fluxo da exclusão**:
+    - Simula a pesquisa de um curso com o termo "Teste" ( “Teste” e um curso criado apenas para o teste desta função de exclusão ).
+    - Após encontrar um curso, clica no curso listado e verifica o redirecionamento para `/alunos`.
+    - Clica no botão de exclusão, abre um modal de confirmação, e confirma a exclusão.
+    - Verifica se o curso foi removido e se a mensagem de sucesso é exibida.
+- **Detalhes importantes**:
+    - **Aumento de timeout**:
+        - No comando `cy.get('#alert-container', { timeout: 10000 })`, o timeout é aumentado para lidar com eventuais atrasos no carregamento da página ou na exibição da mensagem de sucesso.
+
+
+#### <span style="color: #AC58FA;">Testes Unitários</span>
+
+#### **Geração de Relatório**
+
+```python
+from io import BytesIO
+from django.test import TestCase
+from web.views import gerar_relatorio_pdf
+
+class GerarRelatorioPdfTestCase(TestCase):
+
+    def test_geracao_pdf(self):
+        # Mock dos dados para o relatório
+        relatorio = [
+            {"categoria": "Top Atrasos", "nome": "João Silva", "turma": "DS101", "total_atrasos": 5, "total_faltas": 2},
+            {"categoria": "Baixa Frequência", "nome": "Maria Souza", "turma": "DS102", "total_atrasos": 3, "total_faltas": 10},
+        ]
+
+        pdf_buffer = gerar_relatorio_pdf(relatorio)
+
+        # Validações
+        self.assertIsInstance(pdf_buffer, BytesIO)  # Certifica-se de que o retorno é um BytesIO
+        self.assertGreater(len(pdf_buffer.getvalue()), 0)  # Verifica se o PDF não está vazio
+```
+
+**Resultado**
+
+```python
+Found 1 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.077s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+O teste executado foi bem-sucedido, conforme o resultado:
+
+- **Resumo:**
+    - Foi encontrado **1 teste** (`Found 1 test(s).`).
+    - O banco de dados de teste foi criado e utilizado sem problemas.
+    - O sistema identificou que não há problemas estruturais com o projeto (`System check identified no issues`).
+    - O teste foi **concluído com sucesso** (`Ran 1 test in 0.077s` e `OK`).
+    
+
+Isso significa que a função `gerar_relatorio_pdf` está funcionando conforme esperado. O retorno do PDF está sendo gerado corretamente como um objeto `BytesIO` e possui conteúdo, atendendo às validações feitas no teste.
+
+#### <span style="color: #AC58FA;">Testes Manuais</span>
+
+Os testes realizados no sistema de Controle de Frequência foram conduzidos, além disso, de forma manual, onde foi acessado o site diretamente para verificar o funcionamento das funcionalidades implementadas. Durante o processo de testes, exploramos diversas áreas, páginas e funções do sistema, realizando as interações como um usuário comum faria, sem a utilização de ferramentas automáticas de testes.
+
+Esses testes manuais consistiram em navegar pelas páginas do site, preencher formulários, verificar a integridade dos dados exibidos e validar os comportamentos esperados para as funcionalidades, como o registro de entradas e saídas, a exibição de informações dos alunos, o cálculo da frequência, adição e exclusão de cursos ou alunos, etc.
+
+A abordagem manual nos permitiu verificar certos pontos do nosso projeto:
+
+- Usabilidade do sistema;
+- Identificação de possíveis falhas na interface;
+- Garantir interações com o banco de dados (inserção de dados, recuperação de informações);
+
+Embora os testes manuais possam ser mais lentos e suscetíveis a erros humanos, foram fundamentais para garantir que as funcionalidades mais críticas do sistema estivessem funcionando conforme o esperado antes da implementação de testes automatizados.
+
+Após a execução dos testes, os resultados mostraram que os testes manuais foram bem-sucedidos no uso do sistema. Não foram encontrados erros críticos, e o sistema funcionou conforme o esperado, com a navegação fluindo de forma intuitiva e as funcionalidades respondendo de maneira adequada às interações dos usuários.
 
 ---
 
